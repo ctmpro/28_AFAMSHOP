@@ -1,0 +1,10 @@
+node_modules/
+dist/
+00_UTILITAIRES/
+02_SAVE_PROD/
+100_TMP/
+01_PROD/utilitaires
+.env.example
+.env
+*.log
+.DS_Store
