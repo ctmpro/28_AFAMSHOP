@@ -75,8 +75,6 @@
       });
       if (found) {
         try { sessionStorage.setItem(key, id); } catch (err) { /* stockage indisponible */ }
-        var hidden = $('input[name="active_tab"]');
-        if (hidden) hidden.value = id;
       }
       return found;
     }

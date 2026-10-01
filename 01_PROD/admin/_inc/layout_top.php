@@ -3,6 +3,12 @@
  * En-tête commun du back-office : barre latérale (modules autorisés), barre supérieure, messages flash.
  * Variables attendues : $pageTitle (string), $pageActions (HTML optionnel, boutons à droite du titre).
  */
+// Inclusion uniquement (pas d'accès direct)
+if (!defined('ROOT_PATH')) {
+    http_response_code(404);
+    exit;
+}
+
 $__admin = AdminAuth::user();
 $__active = admin_active_file();
 $__primary = setting('color_primary', '#0b4f8a');

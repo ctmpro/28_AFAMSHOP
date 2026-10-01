@@ -52,6 +52,7 @@ if (is_post()) {
         }
     }
     if ($errors) {
+        admin_files_rollback();
         $form = array_merge($form, $in);
         $action = $brand ? 'edit' : 'new';
     } else {
@@ -61,6 +62,7 @@ if (is_post()) {
         } else {
             $id = DB::insert('brands', $in);
         }
+        admin_files_commit();
         AdminAuth::log($brand ? 'brand_update' : 'brand_create', 'brand', $id, $in['name']);
         flash('success', $brand ? 'Marque enregistrée.' : 'Marque créée.');
         redirect(admin_url('brands.php'));

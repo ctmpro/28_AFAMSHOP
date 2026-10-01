@@ -3,6 +3,12 @@
  * Fonctions utilitaires propres au back-office :
  * menu, champs de formulaire, tri, graphiques SVG, conversions de saisie.
  */
+// Inclusion uniquement (pas d'accès direct)
+if (!defined('ROOT_PATH')) {
+    http_response_code(404);
+    exit;
+}
+
 
 // ---------------------------------------------------------------------
 // Menu du back-office (module => fichier, libellé, icône)
@@ -201,22 +207,39 @@ function admin_safe_return(?string $to): string
 // ---------------------------------------------------------------------
 /**
  * Traite un champ fichier d'un formulaire d'édition.
- * - nouveau fichier envoyé : remplace l'ancien (supprimé du disque)
- * - case "<champ>_remove" cochée : supprime le fichier
+ * - nouveau fichier envoyé : remplace l'ancien
+ * - case "<champ>_remove" cochée : retire le fichier
  * Retourne le chemin à enregistrer. Lève RuntimeException en cas d'erreur.
+ * Les suppressions physiques sont différées : appeler admin_files_commit() après
+ * l'enregistrement en base, ou admin_files_rollback() si le formulaire est refusé.
  */
-function admin_process_file(string $field, string $subdir, ?string $current, array $types = UPLOAD_IMAGE_TYPES): ?string
+function admin_process_file(string $field, string $subdir, ?string $current, array $types = UPLOAD_IMAGE_TYPES, ?int $maxSize = null): ?string
 {
-    $new = handle_upload($_FILES[$field] ?? null, $subdir, $types);
+    $new = handle_upload($_FILES[$field] ?? null, $subdir, $types, $maxSize);
     if ($new) {
-        delete_upload($current);
+        $GLOBALS['__admin_files']['new'][] = $new;
+        if ($current) $GLOBALS['__admin_files']['old'][] = $current;
         return $new;
     }
     if (!empty($_POST[$field . '_remove'])) {
-        delete_upload($current);
+        if ($current) $GLOBALS['__admin_files']['old'][] = $current;
         return null;
     }
     return $current ?: null;
+}
+
+/** Supprime les anciens fichiers remplacés (après enregistrement réussi). */
+function admin_files_commit(): void
+{
+    foreach ($GLOBALS['__admin_files']['old'] ?? [] as $p) delete_upload($p);
+    $GLOBALS['__admin_files'] = [];
+}
+
+/** Supprime les fichiers fraîchement envoyés (formulaire refusé). */
+function admin_files_rollback(): void
+{
+    foreach ($GLOBALS['__admin_files']['new'] ?? [] as $p) delete_upload($p);
+    $GLOBALS['__admin_files'] = [];
 }
 
 // ---------------------------------------------------------------------
@@ -257,7 +280,7 @@ function field_textarea(string $name, string $label, $value = '', array $opt = [
         $html .= html_toolbar($id);
         $a['class'] = trim(($a['class'] ?? '') . ' code');
     }
-    $html .= '<textarea' . attrs($a) . '>' . e($value) . '</textarea>';
+    $html .= '<textarea' . attrs($a) . ">\n" . e($value) . '</textarea>'; // le saut de ligne initial est ignoré par le navigateur
     if (!empty($opt['help'])) $html .= '<small class="help">' . e($opt['help']) . '</small>';
     return $html . '</div>';
 }
@@ -403,7 +426,7 @@ function admin_money($amount): string
 }
 
 /** Condition SQL d'une commande comptée dans le chiffre d'affaires. */
-const ADMIN_REVENUE_SQL = "(o.payment_status = 'paid' OR o.status = 'delivered')";
+const ADMIN_REVENUE_SQL = "((o.payment_status = 'paid' OR o.status = 'delivered') AND o.status NOT IN ('cancelled', 'refunded'))";
 
 // ---------------------------------------------------------------------
 // Export CSV générique

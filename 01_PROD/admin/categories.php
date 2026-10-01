@@ -70,6 +70,7 @@ if (is_post()) {
         }
     }
     if ($errors) {
+        admin_files_rollback();
         $form = array_merge($form, $in);
         $action = $cat ? 'edit' : 'new';
     } else {
@@ -79,6 +80,7 @@ if (is_post()) {
         } else {
             $id = DB::insert('categories', $in);
         }
+        admin_files_commit();
         AdminAuth::log($cat ? 'category_update' : 'category_create', 'category', $id, $in['name']);
         flash('success', $cat ? 'Catégorie enregistrée.' : 'Catégorie créée.');
         redirect(admin_url('categories.php'));

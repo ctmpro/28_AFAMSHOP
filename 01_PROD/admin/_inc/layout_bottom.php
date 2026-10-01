@@ -2,6 +2,12 @@
 /**
  * Pied commun du back-office.
  */
+// Inclusion uniquement (pas d'accès direct)
+if (!defined('ROOT_PATH')) {
+    http_response_code(404);
+    exit;
+}
+
 clear_old();
 ?>
     </main>
