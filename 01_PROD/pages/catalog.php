@@ -6,8 +6,9 @@ $route = $params['route'];
 $filters = [
     'q' => mb_substr((string)query_param('q'), 0, 100),
     'brand' => array_filter(array_map('intval', (array)($_GET['marque'] ?? []))),
-    'price_min' => is_numeric(query_param('prix_min')) ? query_param('prix_min') : '',
-    'price_max' => is_numeric(query_param('prix_max')) ? query_param('prix_max') : '',
+    // Prix saisis dans la devise affichée, convertis dans la devise de base pour la recherche
+    'price_min' => is_numeric(query_param('prix_min')) ? to_base_currency((float)query_param('prix_min')) : '',
+    'price_max' => is_numeric(query_param('prix_max')) ? to_base_currency((float)query_param('prix_max')) : '',
     'availability' => in_array(query_param('dispo'), ['in_stock', 'on_order'], true) ? query_param('dispo') : '',
     'type' => array_filter(array_map('strval', (array)($_GET['type'] ?? []))),
     'color' => array_filter(array_map('strval', (array)($_GET['couleur'] ?? []))),
@@ -116,11 +117,11 @@ $baseUrl = strtok(current_url(), '?');
         <?php endif; ?>
 
         <fieldset class="filter-group">
-          <legend><?= e(__('price')) ?> (<?= e(currencies()[base_currency()]['symbol']) ?>)</legend>
+          <legend><?= e(__('price')) ?> (<?= e(currencies()[display_currency()]['symbol']) ?>)</legend>
           <div class="price-range">
-            <input type="number" name="prix_min" min="0" step="1" value="<?= e($filters['price_min']) ?>" placeholder="<?= e(__('price_min')) ?> <?= (int)$facets['price_min'] ?>" aria-label="<?= e(__('price_min')) ?>">
+            <input type="number" name="prix_min" min="0" step="any" value="<?= e(query_param('prix_min')) ?>" placeholder="<?= e(__('price_min')) ?> <?= (int)floor(to_display_currency($facets['price_min'])) ?>" aria-label="<?= e(__('price_min')) ?>">
             <span>–</span>
-            <input type="number" name="prix_max" min="0" step="1" value="<?= e($filters['price_max']) ?>" placeholder="<?= e(__('price_max')) ?> <?= (int)ceil($facets['price_max']) ?>" aria-label="<?= e(__('price_max')) ?>">
+            <input type="number" name="prix_max" min="0" step="any" value="<?= e(query_param('prix_max')) ?>" placeholder="<?= e(__('price_max')) ?> <?= (int)ceil(to_display_currency($facets['price_max'])) ?>" aria-label="<?= e(__('price_max')) ?>">
           </div>
         </fieldset>
 

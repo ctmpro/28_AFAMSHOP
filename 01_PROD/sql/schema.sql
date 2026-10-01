@@ -23,7 +23,7 @@ CREATE TABLE currencies (
   code        CHAR(3) NOT NULL PRIMARY KEY,
   name        VARCHAR(50) NOT NULL,
   symbol      VARCHAR(10) NOT NULL,
-  rate        DECIMAL(14,6) NOT NULL DEFAULT 1, -- 1 unité de devise de base = rate unités de cette devise
+  rate        DECIMAL(20,10) NOT NULL DEFAULT 1, -- 1 unité de devise de base = rate unités de cette devise
   decimals    TINYINT NOT NULL DEFAULT 0,
   symbol_after TINYINT(1) NOT NULL DEFAULT 1,
   is_default  TINYINT(1) NOT NULL DEFAULT 0,

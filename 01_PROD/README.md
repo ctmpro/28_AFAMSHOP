@@ -75,8 +75,18 @@ Mots de passe `password_hash()`, requêtes préparées PDO, jeton CSRF sur tous 
 
 **Sauvegardes** : planifier une sauvegarde quotidienne de la base (`mysqldump`) et du dossier `uploads/` via l'hébergeur ou une tâche cron.
 
+## Images de contenu
+
+Le dossier `assets/img/contenus/` contient des illustrations prêtes à l'emploi (logo, bannière d'accueil, blocs pro / location / maintenance / Sharp, catégories, services, bannières promotionnelles, diaporama). Elles sont utilisées par défaut et se remplacent depuis l'admin (*Contenus du site*, *Catégories*, *Services*, *Bannières*) en envoyant votre propre fichier. Le script `sql/generer-images.js` (Node + Playwright) permet de les régénérer, par exemple après un changement de couleurs.
+
+Formats recommandés : bannière d'accueil 1920×860, blocs d'accueil 1200×750, catégories 800×500, services 800×450, bannières promo 1000×420, diaporama 1280×360, logo PNG transparent 520×120.
+
+## Mise à jour d'une installation existante
+
+Importer `sql/mise-a-jour-2026-10.sql` dans phpMyAdmin : active l'affichage en euros et applique les images par défaut là où aucune image n'est définie (aucune donnée existante n'est écrasée).
+
 ## Évolutivité
 
-- **Devises** : table `currencies` (FCFA par défaut, EUR et USD prêts à activer avec leur taux) — sélecteur de devise affiché automatiquement dès que plusieurs devises sont actives.
+- **Devises** : le visiteur choisit FCFA ou € dans la barre du haut (choix mémorisé 1 an). L'euro est converti à la parité fixe 1 € = 655,957 FCFA ; le paiement, les factures, les emails et le back-office restent en FCFA, et une mention l'indique au panier et à la commande. D'autres devises (USD…) s'activent dans *Admin › Livraison & devises*.
 - **Langues** : tous les textes d'interface passent par `__()` ; ajouter `lang/en.php` pour l'anglais.
 - **API REST / application mobile** : la logique métier est isolée dans `includes/classes/` et réutilisable par de nouveaux endpoints dans `api/`.

@@ -51,8 +51,8 @@ foreach ($currencies as [$code, $name, $symbol, $rate, $dec, $after, $default, $
 }
 
 $catIds = [];
-foreach ($categories as $i => [$name, $slug, $icon, $children]) {
-    $pid = DB::insert('categories', ['name' => $name, 'slug' => $slug, 'icon' => $icon, 'sort' => $i, 'description' => null]);
+foreach ($categories as $i => [$name, $slug, $icon, $image, $children]) {
+    $pid = DB::insert('categories', ['name' => $name, 'slug' => $slug, 'icon' => $icon, 'image' => $image, 'sort' => $i, 'description' => null]);
     $catIds[$slug] = $pid;
     foreach ($children as $j => $child) {
         $s = slugify($child);
@@ -78,11 +78,11 @@ foreach ($zones as [$name, $fee, $free, $delay, $sort]) {
 foreach ($pages as [$slug, $title, $content, $group, $sort]) {
     DB::insert('pages', ['slug' => $slug, 'title' => $title, 'content' => $content, 'footer_group' => $group, 'sort' => $sort]);
 }
-foreach ($services as [$slug, $title, $icon, $short, $content, $form, $sort]) {
-    DB::insert('services', ['slug' => $slug, 'title' => $title, 'icon' => $icon, 'short_desc' => $short, 'content' => $content, 'form_type' => $form, 'sort' => $sort]);
+foreach ($services as [$slug, $title, $icon, $short, $content, $form, $sort, $image]) {
+    DB::insert('services', ['slug' => $slug, 'title' => $title, 'icon' => $icon, 'short_desc' => $short, 'content' => $content, 'form_type' => $form, 'sort' => $sort, 'image' => $image]);
 }
-foreach ($banners as [$pos, $title, $sub, $btn, $link, $sort]) {
-    DB::insert('banners', ['position' => $pos, 'title' => $title, 'subtitle' => $sub, 'button_text' => $btn, 'link' => $link, 'sort' => $sort]);
+foreach ($banners as [$pos, $title, $sub, $btn, $link, $sort, $image]) {
+    DB::insert('banners', ['position' => $pos, 'title' => $title, 'subtitle' => $sub, 'button_text' => $btn, 'link' => $link, 'sort' => $sort, 'image_desktop' => $image]);
 }
 
 if (!isset($opts['no-demo'])) {

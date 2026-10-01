@@ -22,9 +22,9 @@ $settings = [
     ['opening_hours', "Lundi – Vendredi : 8h30 – 18h00\nSamedi : 9h00 – 13h00", 'general', 'Horaires', 'textarea'],
     ['admin_notification_email', 'commandes@afamshop.sn', 'general', 'Email des notifications admin', 'email'],
     ['map_embed', '', 'general', 'Carte (URL d\'intégration Google Maps)', 'url'],
-    ['logo', '', 'general', 'Logo', 'image'],
-    ['logo_footer', '', 'general', 'Logo (pied de page)', 'image'],
-    ['favicon', '', 'general', 'Favicon', 'image'],
+    ['logo', 'assets/img/contenus/logo.png', 'general', 'Logo', 'image'],
+    ['logo_footer', 'assets/img/contenus/logo-blanc.png', 'general', 'Logo (pied de page)', 'image'],
+    ['favicon', 'assets/img/contenus/favicon.png', 'general', 'Favicon', 'image'],
 
     // ---- Apparence
     ['color_primary', '#0b4f8a', 'appearance', 'Couleur principale', 'color'],
@@ -52,7 +52,7 @@ $settings = [
     ['hero_button_link', 'categorie/impression', 'home', 'Bannière : lien bouton 1', 'text'],
     ['hero_button2_text', 'Demander un devis', 'home', 'Bannière : bouton 2', 'text'],
     ['hero_button2_link', 'devis', 'home', 'Bannière : lien bouton 2', 'text'],
-    ['hero_image', '', 'home', 'Bannière : image de fond', 'image'],
+    ['hero_image', 'assets/img/contenus/hero.jpg', 'home', 'Bannière : image de fond', 'image'],
     ['hero_video', '', 'home', 'Bannière : vidéo de fond (MP4)', 'video'],
     ['reassurance_1', 'Livraison rapide|Dakar et régions', 'home', 'Réassurance 1 (titre|texte)', 'text'],
     ['reassurance_2', 'Paiement sécurisé|Carte, Wave, Orange Money', 'home', 'Réassurance 2 (titre|texte)', 'text'],
@@ -65,16 +65,16 @@ $settings = [
     ['home_finder_text', 'Choisissez la marque et le modèle de votre imprimante : nous affichons instantanément les toners, cartouches et tambours compatibles.', 'home', 'Texte : recherche par imprimante', 'textarea'],
     ['home_pro_title', 'Solutions professionnelles', 'home', 'Bloc pro : titre', 'text'],
     ['home_pro_text', 'Entreprises et administrations : bénéficiez d\'un accompagnement personnalisé, de tarifs adaptés et d\'un audit de votre parc d\'impression pour réduire vos coûts.', 'home', 'Bloc pro : texte', 'textarea'],
-    ['home_pro_image', '', 'home', 'Bloc pro : image', 'image'],
+    ['home_pro_image', 'assets/img/contenus/home-pro.jpg', 'home', 'Bloc pro : image', 'image'],
     ['home_rental_title', 'Location d\'imprimantes', 'home', 'Bloc location : titre', 'text'],
     ['home_rental_text', 'Des multifonctions Sharp performantes en location clé en main : matériel, consommables et maintenance inclus dans un loyer maîtrisé.', 'home', 'Bloc location : texte', 'textarea'],
-    ['home_rental_image', '', 'home', 'Bloc location : image', 'image'],
+    ['home_rental_image', 'assets/img/contenus/home-location.jpg', 'home', 'Bloc location : image', 'image'],
     ['home_maintenance_title', 'Maintenance & assistance', 'home', 'Bloc maintenance : titre', 'text'],
     ['home_maintenance_text', 'Maintenance préventive et corrective, remplacement de pièces et intervention rapide de nos techniciens certifiés.', 'home', 'Bloc maintenance : texte', 'textarea'],
-    ['home_maintenance_image', '', 'home', 'Bloc maintenance : image', 'image'],
+    ['home_maintenance_image', 'assets/img/contenus/home-maintenance.jpg', 'home', 'Bloc maintenance : image', 'image'],
     ['home_sharp_title', 'AFAM, représentant exclusif Sharp au Sénégal', 'home', 'Bloc Sharp : titre', 'text'],
     ['home_sharp_text', 'Performance, économies et respect de l\'environnement : découvrez la gamme de multifonctions Sharp et nos offres clé en main.', 'home', 'Bloc Sharp : texte', 'textarea'],
-    ['home_sharp_image', '', 'home', 'Bloc Sharp : image', 'image'],
+    ['home_sharp_image', 'assets/img/contenus/home-sharp.jpg', 'home', 'Bloc Sharp : image', 'image'],
     ['home_brands_title', 'Nos marques', 'home', 'Titre : marques', 'text'],
     ['home_contact_title', 'Besoin d\'un conseil ?', 'home', 'Bloc contact : titre', 'text'],
     ['home_contact_text', 'Notre équipe commerciale vous répond par téléphone, email ou WhatsApp.', 'home', 'Bloc contact : texte', 'textarea'],
@@ -150,16 +150,16 @@ $settings = [
 
 $currencies = [
     ['XOF', 'Franc CFA', 'FCFA', 1, 0, 1, 1, 1],
-    ['EUR', 'Euro', '€', 0.001524, 2, 1, 0, 0],
+    ['EUR', 'Euro', '€', 0.0015244902, 2, 1, 0, 1], // parité fixe : 1 € = 655,957 FCFA
     ['USD', 'Dollar US', '$', 0.00165, 2, 0, 0, 0],
 ];
 
-// [nom, slug, parent_slug, icon, enfants...]
+// [nom, slug, icône, image, sous-catégories]
 $categories = [
-    ['Impression', 'impression', 'printer', ['Imprimantes laser', 'Imprimantes jet d\'encre', 'Multifonctions', 'Copieurs', 'Imprimantes professionnelles', 'Imprimantes couleur', 'Imprimantes monochromes', 'Traceurs']],
-    ['Consommables', 'consommables', 'drop', ['Toners', 'Cartouches d\'encre', 'Tambours', 'Kits de maintenance', 'Rubans', 'Encres', 'Consommables multifonctions']],
-    ['Informatique', 'informatique', 'laptop', ['Ordinateurs portables', 'Ordinateurs de bureau', 'Écrans', 'Claviers et souris', 'Onduleurs', 'Stockage', 'Clés USB', 'Réseau', 'Accessoires informatiques']],
-    ['Papeterie', 'papeterie', 'pen', ['Papier et ramettes', 'Enveloppes', 'Cahiers', 'Classeurs', 'Stylos et crayons', 'Agrafes et trombones', 'Fournitures de bureau']],
+    ['Impression', 'impression', 'printer', 'assets/img/contenus/cat-impression.jpg', ['Imprimantes laser', 'Imprimantes jet d\'encre', 'Multifonctions', 'Copieurs', 'Imprimantes professionnelles', 'Imprimantes couleur', 'Imprimantes monochromes', 'Traceurs']],
+    ['Consommables', 'consommables', 'drop', 'assets/img/contenus/cat-consommables.jpg', ['Toners', 'Cartouches d\'encre', 'Tambours', 'Kits de maintenance', 'Rubans', 'Encres', 'Consommables multifonctions']],
+    ['Informatique', 'informatique', 'laptop', 'assets/img/contenus/cat-informatique.jpg', ['Ordinateurs portables', 'Ordinateurs de bureau', 'Écrans', 'Claviers et souris', 'Onduleurs', 'Stockage', 'Clés USB', 'Réseau', 'Accessoires informatiques']],
+    ['Papeterie', 'papeterie', 'pen', 'assets/img/contenus/cat-papeterie.jpg', ['Papier et ramettes', 'Enveloppes', 'Cahiers', 'Classeurs', 'Stylos et crayons', 'Agrafes et trombones', 'Fournitures de bureau']],
 ];
 
 $brands = [
@@ -240,13 +240,15 @@ $pages = [
 ];
 
 $services = [
-    ['location', 'Location d\'imprimantes', 'key', 'Des multifonctions en location clé en main, maintenance et consommables inclus.', '<h2>La location clé en main</h2><p>Équipez vos bureaux avec des multifonctions Sharp récentes sans investissement initial.</p><h3>Avantages</h3><ul><li>Aucun investissement : un loyer mensuel maîtrisé</li><li>Maintenance et consommables inclus</li><li>Matériel récent et évolutif</li><li>Interventions rapides de techniciens certifiés</li></ul><h3>Maintenance associée</h3><p>Chaque contrat comprend la maintenance préventive et corrective ainsi que le remplacement des pièces d\'usure.</p>', 'rental', 1],
-    ['maintenance', 'Maintenance', 'wrench', 'Maintenance préventive et corrective, remplacement de pièces et assistance.', '<h2>Maintenance de votre parc d\'impression</h2><ul><li><strong>Maintenance préventive</strong> : visites planifiées pour éviter les pannes</li><li><strong>Maintenance corrective</strong> : diagnostic et réparation</li><li><strong>Intervention</strong> sur site à Dakar et en régions</li><li><strong>Remplacement de pièces</strong> d\'origine</li><li><strong>Assistance</strong> téléphonique et à distance</li></ul>', 'maintenance', 2],
-    ['solutions-impression', 'Solutions d\'impression', 'briefcase', 'Audit, gestion de parc et réduction des coûts d\'impression.', '<h2>Optimisez vos impressions</h2><p>Nous analysons vos volumes et usages pour proposer la solution la plus économique et écologique.</p>', 'quote', 3],
-    ['vente-materiel', 'Vente de matériel', 'printer', 'Imprimantes, copieurs, informatique et consommables d\'origine.', '<h2>Vente de matériel professionnel</h2><p>Un large choix de matériel des plus grandes marques avec installation et formation.</p>', 'quote', 4],
+    ['location', 'Location d\'imprimantes', 'key', 'Des multifonctions en location clé en main, maintenance et consommables inclus.', '<h2>La location clé en main</h2><p>Équipez vos bureaux avec des multifonctions Sharp récentes sans investissement initial.</p><h3>Avantages</h3><ul><li>Aucun investissement : un loyer mensuel maîtrisé</li><li>Maintenance et consommables inclus</li><li>Matériel récent et évolutif</li><li>Interventions rapides de techniciens certifiés</li></ul><h3>Maintenance associée</h3><p>Chaque contrat comprend la maintenance préventive et corrective ainsi que le remplacement des pièces d\'usure.</p>', 'rental', 1, 'assets/img/contenus/service-location.jpg'],
+    ['maintenance', 'Maintenance', 'wrench', 'Maintenance préventive et corrective, remplacement de pièces et assistance.', '<h2>Maintenance de votre parc d\'impression</h2><ul><li><strong>Maintenance préventive</strong> : visites planifiées pour éviter les pannes</li><li><strong>Maintenance corrective</strong> : diagnostic et réparation</li><li><strong>Intervention</strong> sur site à Dakar et en régions</li><li><strong>Remplacement de pièces</strong> d\'origine</li><li><strong>Assistance</strong> téléphonique et à distance</li></ul>', 'maintenance', 2, 'assets/img/contenus/service-maintenance.jpg'],
+    ['solutions-impression', 'Solutions d\'impression', 'briefcase', 'Audit, gestion de parc et réduction des coûts d\'impression.', '<h2>Optimisez vos impressions</h2><p>Nous analysons vos volumes et usages pour proposer la solution la plus économique et écologique.</p>', 'quote', 3, 'assets/img/contenus/service-solutions.jpg'],
+    ['vente-materiel', 'Vente de matériel', 'printer', 'Imprimantes, copieurs, informatique et consommables d\'origine.', '<h2>Vente de matériel professionnel</h2><p>Un large choix de matériel des plus grandes marques avec installation et formation.</p>', 'quote', 4, 'assets/img/contenus/service-vente.jpg'],
 ];
 
 $banners = [
-    ['home_promo', 'Jusqu\'à -15 % sur les toners Sharp', 'Consommables d\'origine, livraison rapide', 'J\'en profite', 'promotions', 1],
-    ['home_promo', 'Location de multifonctions', 'Maintenance et consommables inclus', 'Demander une étude', 'service/location', 2],
+    ['home_promo', 'Jusqu\'à -15 % sur les toners Sharp', 'Consommables d\'origine, livraison rapide', 'J\'en profite', 'promotions', 1, 'assets/img/contenus/promo-toners.jpg'],
+    ['home_promo', 'Location de multifonctions', 'Maintenance et consommables inclus', 'Demander une étude', 'service/location', 2, 'assets/img/contenus/promo-location.jpg'],
+    ['home_hero', 'Multifonctions Sharp', 'Performance, économies et respect de l\'environnement', 'Découvrir', 'marque/sharp', 1, 'assets/img/contenus/slide-sharp.jpg'],
+    ['home_hero', 'Informatique professionnelle', 'Ordinateurs, écrans, onduleurs et accessoires', 'Voir le catalogue', 'categorie/informatique', 2, 'assets/img/contenus/slide-informatique.jpg'],
 ];

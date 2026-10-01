@@ -51,19 +51,18 @@ $favicon = setting('favicon');
 <body class="<?= e($bodyClass ?? '') ?>" data-base="<?= e(APP_URL) ?>">
 <a class="skip-link" href="#main">Aller au contenu</a>
 
-<?php if (setting_bool('topbar_enabled', true) && setting('topbar_text')): ?>
+<?php $showTopText = setting_bool('topbar_enabled', true) && setting('topbar_text'); if ($showTopText || count(currencies()) > 1): ?>
 <div class="topbar">
   <div class="container topbar-inner">
-    <span><?= e(render_vars(setting('topbar_text'))) ?></span>
+    <span><?= $showTopText ? e(render_vars(setting('topbar_text'))) : '' ?></span>
     <span class="topbar-right">
       <?php if (setting('contact_phone')): ?><a href="tel:<?= e(preg_replace('/[^\d+]/', '', setting('contact_phone'))) ?>"><?= icon('phone', 'icon icon-sm') ?> <?= e(setting('contact_phone')) ?></a><?php endif; ?>
       <?php if (count(currencies()) > 1): ?>
-      <form method="get" class="currency-switch">
-        <label class="sr-only" for="currency"><?= e(__('currency')) ?></label>
-        <select id="currency" name="currency" onchange="this.form.submit()">
-          <?php foreach (currencies() as $code => $c): ?><option value="<?= e($code) ?>" <?= $code === display_currency() ? 'selected' : '' ?>><?= e($code) ?></option><?php endforeach; ?>
-        </select>
-      </form>
+      <nav class="currency-switch" aria-label="<?= e(__('currency')) ?>">
+        <?php foreach (currencies() as $code => $c): ?>
+          <a href="<?= e(currency_switch_url($code)) ?>" rel="nofollow" class="<?= $code === display_currency() ? 'active' : '' ?>" <?= $code === display_currency() ? 'aria-current="true"' : '' ?> title="<?= e($c['name']) ?>"><?= e($c['symbol']) ?></a>
+        <?php endforeach; ?>
+      </nav>
       <?php endif; ?>
     </span>
   </div>

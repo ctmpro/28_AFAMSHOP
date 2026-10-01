@@ -95,14 +95,16 @@ CREATE TABLE `banners` (
   `active` tinyint(1) NOT NULL DEFAULT 1,
   `sort` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `banners` WRITE;
 /*!40000 ALTER TABLE `banners` DISABLE KEYS */;
 INSERT INTO `banners` VALUES
-(1,'home_promo','Jusqu\'à -15 % sur les toners Sharp','Consommables d\'origine, livraison rapide','J\'en profite','promotions',NULL,NULL,NULL,NULL,1,1),
-(2,'home_promo','Location de multifonctions','Maintenance et consommables inclus','Demander une étude','service/location',NULL,NULL,NULL,NULL,1,2);
+(1,'home_promo','Jusqu\'à -15 % sur les toners Sharp','Consommables d\'origine, livraison rapide','J\'en profite','promotions','assets/img/contenus/promo-toners.jpg',NULL,NULL,NULL,1,1),
+(2,'home_promo','Location de multifonctions','Maintenance et consommables inclus','Demander une étude','service/location','assets/img/contenus/promo-location.jpg',NULL,NULL,NULL,1,2),
+(3,'home_hero','Multifonctions Sharp','Performance, économies et respect de l\'environnement','Découvrir','marque/sharp','assets/img/contenus/slide-sharp.jpg',NULL,NULL,NULL,1,1),
+(4,'home_hero','Informatique professionnelle','Ordinateurs, écrans, onduleurs et accessoires','Voir le catalogue','categorie/informatique','assets/img/contenus/slide-informatique.jpg',NULL,NULL,NULL,1,2);
 /*!40000 ALTER TABLE `banners` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `brands`;
@@ -163,7 +165,7 @@ CREATE TABLE `categories` (
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` VALUES
-(1,NULL,'Impression','impression',NULL,NULL,'printer',0,1,1),
+(1,NULL,'Impression','impression',NULL,'assets/img/contenus/cat-impression.jpg','printer',0,1,1),
 (2,1,'Imprimantes laser','imprimantes-laser',NULL,NULL,NULL,0,1,1),
 (3,1,'Imprimantes jet d\'encre','imprimantes-jet-d-encre',NULL,NULL,NULL,1,1,1),
 (4,1,'Multifonctions','multifonctions',NULL,NULL,NULL,2,1,1),
@@ -172,7 +174,7 @@ INSERT INTO `categories` VALUES
 (7,1,'Imprimantes couleur','imprimantes-couleur',NULL,NULL,NULL,5,1,1),
 (8,1,'Imprimantes monochromes','imprimantes-monochromes',NULL,NULL,NULL,6,1,1),
 (9,1,'Traceurs','traceurs',NULL,NULL,NULL,7,1,1),
-(10,NULL,'Consommables','consommables',NULL,NULL,'drop',1,1,1),
+(10,NULL,'Consommables','consommables',NULL,'assets/img/contenus/cat-consommables.jpg','drop',1,1,1),
 (11,10,'Toners','toners',NULL,NULL,NULL,0,1,1),
 (12,10,'Cartouches d\'encre','cartouches-d-encre',NULL,NULL,NULL,1,1,1),
 (13,10,'Tambours','tambours',NULL,NULL,NULL,2,1,1),
@@ -180,7 +182,7 @@ INSERT INTO `categories` VALUES
 (15,10,'Rubans','rubans',NULL,NULL,NULL,4,1,1),
 (16,10,'Encres','encres',NULL,NULL,NULL,5,1,1),
 (17,10,'Consommables multifonctions','consommables-multifonctions',NULL,NULL,NULL,6,1,1),
-(18,NULL,'Informatique','informatique',NULL,NULL,'laptop',2,1,1),
+(18,NULL,'Informatique','informatique',NULL,'assets/img/contenus/cat-informatique.jpg','laptop',2,1,1),
 (19,18,'Ordinateurs portables','ordinateurs-portables',NULL,NULL,NULL,0,1,1),
 (20,18,'Ordinateurs de bureau','ordinateurs-de-bureau',NULL,NULL,NULL,1,1,1),
 (21,18,'Écrans','ecrans',NULL,NULL,NULL,2,1,1),
@@ -190,7 +192,7 @@ INSERT INTO `categories` VALUES
 (25,18,'Clés USB','cles-usb',NULL,NULL,NULL,6,1,1),
 (26,18,'Réseau','reseau',NULL,NULL,NULL,7,1,1),
 (27,18,'Accessoires informatiques','accessoires-informatiques',NULL,NULL,NULL,8,1,1),
-(28,NULL,'Papeterie','papeterie',NULL,NULL,'pen',3,1,1),
+(28,NULL,'Papeterie','papeterie',NULL,'assets/img/contenus/cat-papeterie.jpg','pen',3,1,1),
 (29,28,'Papier et ramettes','papier-et-ramettes',NULL,NULL,NULL,0,1,1),
 (30,28,'Enveloppes','enveloppes',NULL,NULL,NULL,1,1,1),
 (31,28,'Cahiers','cahiers',NULL,NULL,NULL,2,1,1),
@@ -243,7 +245,7 @@ CREATE TABLE `coupons` (
 LOCK TABLES `coupons` WRITE;
 /*!40000 ALTER TABLE `coupons` DISABLE KEYS */;
 INSERT INTO `coupons` VALUES
-(1,'BIENVENUE10','percent',10.00,20000.00,NULL,0,1,NULL,NULL,1,'2026-10-01 00:50:24');
+(1,'BIENVENUE10','percent',10.00,20000.00,NULL,0,1,NULL,NULL,1,'2026-10-01 01:34:47');
 /*!40000 ALTER TABLE `coupons` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `currencies`;
@@ -253,7 +255,7 @@ CREATE TABLE `currencies` (
   `code` char(3) NOT NULL,
   `name` varchar(50) NOT NULL,
   `symbol` varchar(10) NOT NULL,
-  `rate` decimal(14,6) NOT NULL DEFAULT 1.000000,
+  `rate` decimal(20,10) NOT NULL DEFAULT 1.0000000000,
   `decimals` tinyint(4) NOT NULL DEFAULT 0,
   `symbol_after` tinyint(1) NOT NULL DEFAULT 1,
   `is_default` tinyint(1) NOT NULL DEFAULT 0,
@@ -265,9 +267,9 @@ CREATE TABLE `currencies` (
 LOCK TABLES `currencies` WRITE;
 /*!40000 ALTER TABLE `currencies` DISABLE KEYS */;
 INSERT INTO `currencies` VALUES
-('EUR','Euro','€',0.001524,2,1,0,0),
-('USD','Dollar US','$',0.001650,2,0,0,0),
-('XOF','Franc CFA','FCFA',1.000000,0,1,1,1);
+('EUR','Euro','€',0.0015244902,2,1,0,1),
+('USD','Dollar US','$',0.0016500000,2,0,0,0),
+('XOF','Franc CFA','FCFA',1.0000000000,0,1,1,1);
 /*!40000 ALTER TABLE `currencies` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `customers`;
@@ -490,16 +492,16 @@ CREATE TABLE `pages` (
 LOCK TABLES `pages` WRITE;
 /*!40000 ALTER TABLE `pages` DISABLE KEYS */;
 INSERT INTO `pages` VALUES
-(1,'a-propos','À propos','<h2>AFAM, votre partenaire impression au Sénégal</h2><p>AFAM est une entreprise sénégalaise spécialisée dans les solutions d\'impression professionnelles. Représentant exclusif de Sharp au Sénégal, AFAM propose des offres de location et de vente clé en main alliant performance, économies et respect de l\'environnement.</p><p>L\'entreprise propose également des services de maintenance et des solutions adaptées permettant de réduire les coûts d\'impression et d\'améliorer l\'efficacité.</p>',NULL,NULL,'company',1,1,'2026-10-01 00:50:24'),
-(2,'afam-sharp','AFAM × Sharp','<h2>Représentant exclusif Sharp au Sénégal</h2><p>Découvrez la gamme complète de multifonctions et solutions Sharp, avec l\'expertise locale d\'AFAM : installation, formation, consommables d\'origine et maintenance.</p>',NULL,NULL,'company',1,2,'2026-10-01 00:50:24'),
-(3,'solutions-professionnelles','Solutions professionnelles','<h2>Des solutions pour les entreprises et administrations</h2><p>Audit de parc, gestion des impressions, tarifs adaptés aux volumes, contrats de service : AFAM accompagne les organisations dans l\'optimisation de leurs coûts d\'impression.</p>',NULL,NULL,'company',1,3,'2026-10-01 00:50:24'),
-(4,'faq','FAQ','<h3>Comment trouver le consommable de mon imprimante ?</h3><p>Utilisez la recherche par imprimante : choisissez la marque puis le modèle.</p><h3>Quels sont les moyens de paiement ?</h3><p>Carte bancaire (Stripe), Wave, Orange Money (PayDunya) et paiement à la livraison selon disponibilité.</p><h3>Livrez-vous hors de Dakar ?</h3><p>Oui, dans toutes les régions du Sénégal. Les frais dépendent de la zone de livraison.</p>',NULL,NULL,'help',1,1,'2026-10-01 00:50:24'),
-(5,'livraison-retours','Politique de livraison et retours','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'help',1,2,'2026-10-01 00:50:24'),
-(6,'garantie','Garantie','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'help',1,3,'2026-10-01 00:50:24'),
-(7,'cgv','Conditions générales de vente','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'legal',1,1,'2026-10-01 00:50:24'),
-(8,'mentions-legales','Mentions légales','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'legal',1,2,'2026-10-01 00:50:24'),
-(9,'confidentialite','Politique de confidentialité','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'legal',1,3,'2026-10-01 00:50:24'),
-(10,'cookies','Politique de cookies','<p>Ce site utilise uniquement des cookies nécessaires à son fonctionnement (session, panier, sécurité) ainsi que, le cas échéant, des cookies de mesure d\'audience.</p>',NULL,NULL,'legal',1,4,'2026-10-01 00:50:24');
+(1,'a-propos','À propos','<h2>AFAM, votre partenaire impression au Sénégal</h2><p>AFAM est une entreprise sénégalaise spécialisée dans les solutions d\'impression professionnelles. Représentant exclusif de Sharp au Sénégal, AFAM propose des offres de location et de vente clé en main alliant performance, économies et respect de l\'environnement.</p><p>L\'entreprise propose également des services de maintenance et des solutions adaptées permettant de réduire les coûts d\'impression et d\'améliorer l\'efficacité.</p>',NULL,NULL,'company',1,1,'2026-10-01 01:34:47'),
+(2,'afam-sharp','AFAM × Sharp','<h2>Représentant exclusif Sharp au Sénégal</h2><p>Découvrez la gamme complète de multifonctions et solutions Sharp, avec l\'expertise locale d\'AFAM : installation, formation, consommables d\'origine et maintenance.</p>',NULL,NULL,'company',1,2,'2026-10-01 01:34:47'),
+(3,'solutions-professionnelles','Solutions professionnelles','<h2>Des solutions pour les entreprises et administrations</h2><p>Audit de parc, gestion des impressions, tarifs adaptés aux volumes, contrats de service : AFAM accompagne les organisations dans l\'optimisation de leurs coûts d\'impression.</p>',NULL,NULL,'company',1,3,'2026-10-01 01:34:47'),
+(4,'faq','FAQ','<h3>Comment trouver le consommable de mon imprimante ?</h3><p>Utilisez la recherche par imprimante : choisissez la marque puis le modèle.</p><h3>Quels sont les moyens de paiement ?</h3><p>Carte bancaire (Stripe), Wave, Orange Money (PayDunya) et paiement à la livraison selon disponibilité.</p><h3>Livrez-vous hors de Dakar ?</h3><p>Oui, dans toutes les régions du Sénégal. Les frais dépendent de la zone de livraison.</p>',NULL,NULL,'help',1,1,'2026-10-01 01:34:47'),
+(5,'livraison-retours','Politique de livraison et retours','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'help',1,2,'2026-10-01 01:34:47'),
+(6,'garantie','Garantie','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'help',1,3,'2026-10-01 01:34:47'),
+(7,'cgv','Conditions générales de vente','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'legal',1,1,'2026-10-01 01:34:47'),
+(8,'mentions-legales','Mentions légales','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'legal',1,2,'2026-10-01 01:34:47'),
+(9,'confidentialite','Politique de confidentialité','<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>',NULL,NULL,'legal',1,3,'2026-10-01 01:34:47'),
+(10,'cookies','Politique de cookies','<p>Ce site utilise uniquement des cookies nécessaires à son fonctionnement (session, panier, sécurité) ainsi que, le cas échéant, des cookies de mesure d\'audience.</p>',NULL,NULL,'legal',1,4,'2026-10-01 01:34:47');
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `payments`;
@@ -707,46 +709,46 @@ CREATE TABLE `products` (
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` VALUES
-(1,'AF-SH-MX61GTBA','MX-61GTBA','Toner Sharp MX-61GTBA noir','toner-sharp-mx-61gtba-noir',1,11,'Toner','Noir','Toner d\'origine Sharp noir, environ 40 000 pages.','<p>Toner d&#039;origine Sharp noir, environ 40 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GTBA\nCouleur: Noir\nType: Toner',38000.00,NULL,NULL,NULL,25,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,52,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(2,'AF-SH-MX61GTCA','MX-61GTCA','Toner Sharp MX-61GTCA cyan','toner-sharp-mx-61gtca-cyan',1,11,'Toner','Cyan','Toner d\'origine Sharp cyan, environ 24 000 pages.','<p>Toner d&#039;origine Sharp cyan, environ 24 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GTCA\nCouleur: Cyan\nType: Toner',62000.00,55000.00,NULL,NULL,12,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,41,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(3,'AF-SH-MX61GTMA','MX-61GTMA','Toner Sharp MX-61GTMA magenta','toner-sharp-mx-61gtma-magenta',1,11,'Toner','Magenta','Toner d\'origine Sharp magenta, environ 24 000 pages.','<p>Toner d&#039;origine Sharp magenta, environ 24 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GTMA\nCouleur: Magenta\nType: Toner',62000.00,NULL,NULL,NULL,9,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,29,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(4,'AF-SH-MX61GTYA','MX-61GTYA','Toner Sharp MX-61GTYA jaune','toner-sharp-mx-61gtya-jaune',1,11,'Toner','Jaune','Toner d\'origine Sharp jaune, environ 24 000 pages.','<p>Toner d&#039;origine Sharp jaune, environ 24 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GTYA\nCouleur: Jaune\nType: Toner',62000.00,NULL,NULL,NULL,3,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,60,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(5,'AF-SH-MX315GT','MX-315GT','Toner Sharp MX-315GT noir','toner-sharp-mx-315gt-noir',1,11,'Toner','Noir','Toner Sharp haute capacité pour multifonctions monochromes MX-M.','<p>Toner Sharp haute capacité pour multifonctions monochromes MX-M.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-315GT\nCouleur: Noir\nType: Toner',45000.00,NULL,NULL,NULL,18,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,9,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(6,'AF-SH-MX61DR','MX-61GRSA','Tambour Sharp MX-61GRSA','tambour-sharp-mx-61grsa',1,13,'Tambour','Noir','Kit tambour d\'origine Sharp.','<p>Kit tambour d&#039;origine Sharp.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GRSA\nCouleur: Noir\nType: Tambour',95000.00,NULL,NULL,NULL,4,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,41,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(7,'AF-SH-BPGT20BA','BP-GT20BA','Toner Sharp BP-GT20BA noir','toner-sharp-bp-gt20ba-noir',1,11,'Toner','Noir','Toner Sharp pour la gamme BP.','<p>Toner Sharp pour la gamme BP.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: BP-GT20BA\nCouleur: Noir\nType: Toner',41000.00,NULL,NULL,NULL,0,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,48,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(8,'AF-SH-AR020','AR-020LT','Toner Sharp AR-020LT noir','toner-sharp-ar-020lt-noir',1,11,'Toner','Noir','Toner pour copieurs Sharp AR-6020.','<p>Toner pour copieurs Sharp AR-6020.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: AR-020LT\nCouleur: Noir\nType: Toner',18500.00,16500.00,NULL,NULL,30,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,25,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(9,'AF-CA-CEXV33','C-EXV33','Toner Canon C-EXV33 noir','toner-canon-c-exv33-noir',2,11,'Toner','Noir','Toner d\'origine Canon, environ 14 600 pages.','<p>Toner d&#039;origine Canon, environ 14 600 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: C-EXV33\nCouleur: Noir\nType: Toner',29000.00,NULL,NULL,NULL,14,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,44,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(10,'AF-CA-CEXV49K','C-EXV49','Toner Canon C-EXV49 noir','toner-canon-c-exv49-noir',2,11,'Toner','Noir','Toner d\'origine Canon pour imageRUNNER ADVANCE couleur.','<p>Toner d&#039;origine Canon pour imageRUNNER ADVANCE couleur.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: C-EXV49\nCouleur: Noir\nType: Toner',52000.00,NULL,NULL,NULL,7,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,59,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(11,'AF-CA-CRG057','CRG-057','Cartouche toner Canon 057 noir','cartouche-toner-canon-057-noir',2,11,'Toner','Noir','Cartouche Canon 057, 3 100 pages.','<p>Cartouche Canon 057, 3 100 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: CRG-057\nCouleur: Noir\nType: Toner',64000.00,58000.00,NULL,NULL,10,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,21,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(12,'AF-CA-GI41BK','GI-41 BK','Bouteille d\'encre Canon GI-41 noir','bouteille-d-encre-canon-gi-41-noir',2,16,'Encre','Noir','Encre d\'origine pour imprimantes PIXMA G.','<p>Encre d&#039;origine pour imprimantes PIXMA G.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: GI-41 BK\nCouleur: Noir\nType: Encre',7500.00,NULL,NULL,NULL,40,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,10,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(13,'AF-HP-59A','CF259A','Toner HP 59A noir','toner-hp-59a-noir',3,11,'Toner','Noir','Toner HP LaserJet d\'origine, 3 000 pages.','<p>Toner HP LaserJet d&#039;origine, 3 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: CF259A\nCouleur: Noir\nType: Toner',98000.00,NULL,NULL,NULL,11,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,11,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(14,'AF-HP-135A','W1350A','Toner HP 135A noir','toner-hp-135a-noir',3,11,'Toner','Noir','Toner HP d\'origine, 1 100 pages.','<p>Toner HP d&#039;origine, 1 100 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: W1350A\nCouleur: Noir\nType: Toner',49000.00,NULL,NULL,NULL,2,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,30,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(15,'AF-HP-415A','W2030A','Toner HP 415A noir','toner-hp-415a-noir',3,11,'Toner','Noir','Toner HP Color LaserJet, 2 400 pages.','<p>Toner HP Color LaserJet, 2 400 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: W2030A\nCouleur: Noir\nType: Toner',89000.00,NULL,NULL,NULL,6,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,46,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(16,'AF-HP-963XL','3JA30AE','Cartouche HP 963XL noir','cartouche-hp-963xl-noir',3,12,'Cartouche','Noir','Cartouche d\'encre HP haute capacité.','<p>Cartouche d&#039;encre HP haute capacité.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: 3JA30AE\nCouleur: Noir\nType: Cartouche',39000.00,35000.00,NULL,NULL,15,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,27,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(17,'AF-HP-305','3YM61AE','Cartouche HP 305 noir','cartouche-hp-305-noir',3,12,'Cartouche','Noir','Cartouche d\'encre HP 305.','<p>Cartouche d&#039;encre HP 305.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: 3YM61AE\nCouleur: Noir\nType: Cartouche',9500.00,NULL,NULL,NULL,50,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,18,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(18,'AF-RI-842311','842311','Toner Ricoh IM 2702 noir','toner-ricoh-im-2702-noir',4,11,'Toner','Noir','Toner d\'origine Ricoh.','<p>Toner d&#039;origine Ricoh.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Ricoh\nRéférence: 842311\nCouleur: Noir\nType: Toner',33000.00,NULL,NULL,NULL,8,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,0,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(19,'AF-RI-SP230','408294','Toner Ricoh SP 230H noir','toner-ricoh-sp-230h-noir',4,11,'Toner','Noir','Toner Ricoh haute capacité.','<p>Toner Ricoh haute capacité.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Ricoh\nRéférence: 408294\nCouleur: Noir\nType: Toner',42000.00,NULL,NULL,NULL,0,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,51,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(20,'AF-SH-MX3061','MX-3061','Multifonction Sharp MX-3061 couleur A3','multifonction-sharp-mx-3061-couleur-a3',1,4,'Multifonction','Couleur','Multifonction couleur A3 30 ppm, écran tactile 10,1\", recto-verso, scan réseau.','<p>Multifonction couleur A3 30 ppm, écran tactile 10,1&quot;, recto-verso, scan réseau.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-3061\nCouleur: Couleur\nType: Multifonction',3450000.00,NULL,NULL,NULL,3,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,48,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(21,'AF-SH-MXM3071','MX-M3071','Multifonction Sharp MX-M3071 monochrome A3','multifonction-sharp-mx-m3071-monochrome-a3',1,4,'Multifonction','Monochrome','Multifonction monochrome A3 30 ppm pour bureaux exigeants.','<p>Multifonction monochrome A3 30 ppm pour bureaux exigeants.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-M3071\nCouleur: Monochrome\nType: Multifonction',2450000.00,2290000.00,NULL,NULL,2,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,48,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(22,'AF-SH-BP30M28','BP-30M28','Copieur Sharp BP-30M28 monochrome','copieur-sharp-bp-30m28-monochrome',1,5,'Copieur','Monochrome','Copieur multifonction A3 28 ppm.','<p>Copieur multifonction A3 28 ppm.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: BP-30M28\nCouleur: Monochrome\nType: Copieur',1850000.00,NULL,NULL,NULL,4,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,13,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(23,'AF-CA-MF445','MF445dw','Imprimante Canon i-SENSYS MF445dw','imprimante-canon-i-sensys-mf445dw',2,2,'Laser','Monochrome','Multifonction laser 4-en-1 Wi-Fi, 38 ppm.','<p>Multifonction laser 4-en-1 Wi-Fi, 38 ppm.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: MF445dw\nCouleur: Monochrome\nType: Laser',365000.00,NULL,NULL,NULL,6,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,19,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(24,'AF-CA-G3410','G3410','Imprimante Canon PIXMA G3410','imprimante-canon-pixma-g3410',2,3,'Jet d\'encre','Couleur','Imprimante à réservoirs rechargeables Wi-Fi.','<p>Imprimante à réservoirs rechargeables Wi-Fi.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: G3410\nCouleur: Couleur\nType: Jet d\'encre',125000.00,115000.00,NULL,NULL,9,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,38,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(25,'AF-HP-M404','W1A53A','Imprimante HP LaserJet Pro M404dn','imprimante-hp-laserjet-pro-m404dn',3,2,'Laser','Monochrome','Imprimante laser monochrome réseau, recto-verso.','<p>Imprimante laser monochrome réseau, recto-verso.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: W1A53A\nCouleur: Monochrome\nType: Laser',295000.00,NULL,NULL,NULL,5,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,24,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(26,'AF-HP-T230','5HB07A','Traceur HP DesignJet T230 24\"','traceur-hp-designjet-t230-24',3,9,'Traceur','Couleur','Traceur grand format 24 pouces Wi-Fi.','<p>Traceur grand format 24 pouces Wi-Fi.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: 5HB07A\nCouleur: Couleur\nType: Traceur',1150000.00,NULL,NULL,NULL,1,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,45,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(27,'AF-DE-LAT5440','LAT5440-I5','Ordinateur portable Dell Latitude 5440 i5 16 Go 512 Go','ordinateur-portable-dell-latitude-5440-i5-16-go-512-go',7,19,'Portable',NULL,'Portable professionnel 14\", Intel Core i5, 16 Go RAM, SSD 512 Go.','<p>Portable professionnel 14&quot;, Intel Core i5, 16 Go RAM, SSD 512 Go.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Dell\nRéférence: LAT5440-I5\nType: Portable',785000.00,NULL,NULL,NULL,7,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,28,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(28,'AF-HP-PB450','PB450G10','Ordinateur portable HP ProBook 450 G10','ordinateur-portable-hp-probook-450-g10',3,19,'Portable',NULL,'Portable 15,6\", Intel Core i5, 8 Go RAM, SSD 512 Go.','<p>Portable 15,6&quot;, Intel Core i5, 8 Go RAM, SSD 512 Go.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: PB450G10\nType: Portable',695000.00,649000.00,NULL,NULL,5,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,11,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(29,'AF-LE-M70Q','M70Q-G4','Ordinateur de bureau Lenovo ThinkCentre M70q','ordinateur-de-bureau-lenovo-thinkcentre-m70q',8,20,'Bureau',NULL,'Mini PC professionnel Intel Core i5.','<p>Mini PC professionnel Intel Core i5.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Lenovo\nRéférence: M70Q-G4\nType: Bureau',545000.00,NULL,NULL,NULL,4,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,23,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(30,'AF-DE-P2423','P2423','Écran Dell P2423 24\"','ecran-dell-p2423-24',7,21,'Écran',NULL,'Écran IPS 24\" WUXGA.','<p>Écran IPS 24&quot; WUXGA.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Dell\nRéférence: P2423\nType: Écran',165000.00,NULL,NULL,NULL,12,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,0,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(31,'AF-LO-MK270','MK270','Clavier + souris sans fil Logitech MK270','clavier-souris-sans-fil-logitech-mk270',10,22,'Clavier/Souris',NULL,'Ensemble sans fil AZERTY.','<p>Ensemble sans fil AZERTY.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Logitech\nRéférence: MK270\nType: Clavier/Souris',22000.00,NULL,NULL,NULL,35,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,7,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(32,'AF-AP-BX1200','BX1200MI','Onduleur APC Back-UPS 1200 VA','onduleur-apc-back-ups-1200-va',9,23,'Onduleur',NULL,'Onduleur line-interactive 1200 VA, 6 prises.','<p>Onduleur line-interactive 1200 VA, 6 prises.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: APC\nRéférence: BX1200MI\nType: Onduleur',98000.00,NULL,NULL,NULL,8,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,38,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(33,'AF-KI-DT64','DTX/64GB','Clé USB Kingston DataTraveler 64 Go','cle-usb-kingston-datatraveler-64-go',11,25,'Clé USB',NULL,'Clé USB 3.2 64 Go.','<p>Clé USB 3.2 64 Go.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Kingston\nRéférence: DTX/64GB\nType: Clé USB',6500.00,5500.00,NULL,NULL,80,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,37,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(34,'AF-KI-A400','SA400S37/480G','SSD Kingston A400 480 Go','ssd-kingston-a400-480-go',11,24,'SSD',NULL,'SSD SATA 2,5\" 480 Go.','<p>SSD SATA 2,5&quot; 480 Go.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Kingston\nRéférence: SA400S37/480G\nType: SSD',32000.00,NULL,NULL,NULL,20,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,59,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(35,'AF-NA-A480','NAV-A4-80','Ramette papier Navigator A4 80 g (500 feuilles)','ramette-papier-navigator-a4-80-g-500-feuilles',12,29,'Papier','Blanc','Papier premium A4 80 g/m².','<p>Papier premium A4 80 g/m².</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Navigator\nRéférence: NAV-A4-80\nCouleur: Blanc\nType: Papier',4500.00,NULL,NULL,NULL,300,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,57,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(36,'AF-NA-A4C5','NAV-A4-80-C5','Carton 5 ramettes Navigator A4 80 g','carton-5-ramettes-navigator-a4-80-g',12,29,'Papier','Blanc','Carton de 5 ramettes A4.','<p>Carton de 5 ramettes A4.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Navigator\nRéférence: NAV-A4-80-C5\nCouleur: Blanc\nType: Papier',21000.00,19500.00,NULL,NULL,60,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,56,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(37,'AF-BI-CRIST50','BIC-CR-50','Stylos Bic Cristal bleu (boîte de 50)','stylos-bic-cristal-bleu-boite-de-50',13,33,'Stylo','Bleu','Stylos bille pointe moyenne.','<p>Stylos bille pointe moyenne.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Bic\nRéférence: BIC-CR-50\nCouleur: Bleu\nType: Stylo',7500.00,NULL,NULL,NULL,45,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,28,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(38,'AF-FB-ENV-C4','ENV-C4-250','Enveloppes C4 kraft (boîte de 250)','enveloppes-c4-kraft-boite-de-250',NULL,30,'Enveloppe',NULL,'Enveloppes kraft 229 x 324 mm.','<p>Enveloppes kraft 229 x 324 mm.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Générique\nRéférence: ENV-C4-250\nType: Enveloppe',18000.00,NULL,NULL,NULL,15,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,51,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(39,'AF-FB-CLAS80','CLAS-A4-80','Classeur à levier A4 dos 80 mm','classeur-a-levier-a4-dos-80-mm',NULL,32,'Classeur',NULL,'Classeur carton à levier.','<p>Classeur carton à levier.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Générique\nRéférence: CLAS-A4-80\nType: Classeur',2200.00,NULL,NULL,NULL,120,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,26,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24'),
-(40,'AF-FB-AGR266','AGR-26-6','Agrafes 26/6 (boîte de 1000)','agrafes-26-6-boite-de-1000',NULL,34,'Agrafes',NULL,'Agrafes galvanisées standard.','<p>Agrafes galvanisées standard.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Générique\nRéférence: AGR-26-6\nType: Agrafes',600.00,NULL,NULL,NULL,200,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,10,0,NULL,NULL,'2026-10-01 00:50:24','2026-10-01 00:50:24');
+(1,'AF-SH-MX61GTBA','MX-61GTBA','Toner Sharp MX-61GTBA noir','toner-sharp-mx-61gtba-noir',1,11,'Toner','Noir','Toner d\'origine Sharp noir, environ 40 000 pages.','<p>Toner d&#039;origine Sharp noir, environ 40 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GTBA\nCouleur: Noir\nType: Toner',38000.00,NULL,NULL,NULL,25,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,24,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(2,'AF-SH-MX61GTCA','MX-61GTCA','Toner Sharp MX-61GTCA cyan','toner-sharp-mx-61gtca-cyan',1,11,'Toner','Cyan','Toner d\'origine Sharp cyan, environ 24 000 pages.','<p>Toner d&#039;origine Sharp cyan, environ 24 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GTCA\nCouleur: Cyan\nType: Toner',62000.00,55000.00,NULL,NULL,12,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,14,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(3,'AF-SH-MX61GTMA','MX-61GTMA','Toner Sharp MX-61GTMA magenta','toner-sharp-mx-61gtma-magenta',1,11,'Toner','Magenta','Toner d\'origine Sharp magenta, environ 24 000 pages.','<p>Toner d&#039;origine Sharp magenta, environ 24 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GTMA\nCouleur: Magenta\nType: Toner',62000.00,NULL,NULL,NULL,9,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,47,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(4,'AF-SH-MX61GTYA','MX-61GTYA','Toner Sharp MX-61GTYA jaune','toner-sharp-mx-61gtya-jaune',1,11,'Toner','Jaune','Toner d\'origine Sharp jaune, environ 24 000 pages.','<p>Toner d&#039;origine Sharp jaune, environ 24 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GTYA\nCouleur: Jaune\nType: Toner',62000.00,NULL,NULL,NULL,3,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,37,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(5,'AF-SH-MX315GT','MX-315GT','Toner Sharp MX-315GT noir','toner-sharp-mx-315gt-noir',1,11,'Toner','Noir','Toner Sharp haute capacité pour multifonctions monochromes MX-M.','<p>Toner Sharp haute capacité pour multifonctions monochromes MX-M.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-315GT\nCouleur: Noir\nType: Toner',45000.00,NULL,NULL,NULL,18,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,31,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(6,'AF-SH-MX61DR','MX-61GRSA','Tambour Sharp MX-61GRSA','tambour-sharp-mx-61grsa',1,13,'Tambour','Noir','Kit tambour d\'origine Sharp.','<p>Kit tambour d&#039;origine Sharp.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-61GRSA\nCouleur: Noir\nType: Tambour',95000.00,NULL,NULL,NULL,4,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,59,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(7,'AF-SH-BPGT20BA','BP-GT20BA','Toner Sharp BP-GT20BA noir','toner-sharp-bp-gt20ba-noir',1,11,'Toner','Noir','Toner Sharp pour la gamme BP.','<p>Toner Sharp pour la gamme BP.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: BP-GT20BA\nCouleur: Noir\nType: Toner',41000.00,NULL,NULL,NULL,0,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,59,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(8,'AF-SH-AR020','AR-020LT','Toner Sharp AR-020LT noir','toner-sharp-ar-020lt-noir',1,11,'Toner','Noir','Toner pour copieurs Sharp AR-6020.','<p>Toner pour copieurs Sharp AR-6020.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: AR-020LT\nCouleur: Noir\nType: Toner',18500.00,16500.00,NULL,NULL,30,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,58,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(9,'AF-CA-CEXV33','C-EXV33','Toner Canon C-EXV33 noir','toner-canon-c-exv33-noir',2,11,'Toner','Noir','Toner d\'origine Canon, environ 14 600 pages.','<p>Toner d&#039;origine Canon, environ 14 600 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: C-EXV33\nCouleur: Noir\nType: Toner',29000.00,NULL,NULL,NULL,14,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,37,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(10,'AF-CA-CEXV49K','C-EXV49','Toner Canon C-EXV49 noir','toner-canon-c-exv49-noir',2,11,'Toner','Noir','Toner d\'origine Canon pour imageRUNNER ADVANCE couleur.','<p>Toner d&#039;origine Canon pour imageRUNNER ADVANCE couleur.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: C-EXV49\nCouleur: Noir\nType: Toner',52000.00,NULL,NULL,NULL,7,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,4,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(11,'AF-CA-CRG057','CRG-057','Cartouche toner Canon 057 noir','cartouche-toner-canon-057-noir',2,11,'Toner','Noir','Cartouche Canon 057, 3 100 pages.','<p>Cartouche Canon 057, 3 100 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: CRG-057\nCouleur: Noir\nType: Toner',64000.00,58000.00,NULL,NULL,10,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,11,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(12,'AF-CA-GI41BK','GI-41 BK','Bouteille d\'encre Canon GI-41 noir','bouteille-d-encre-canon-gi-41-noir',2,16,'Encre','Noir','Encre d\'origine pour imprimantes PIXMA G.','<p>Encre d&#039;origine pour imprimantes PIXMA G.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: GI-41 BK\nCouleur: Noir\nType: Encre',7500.00,NULL,NULL,NULL,40,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,18,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(13,'AF-HP-59A','CF259A','Toner HP 59A noir','toner-hp-59a-noir',3,11,'Toner','Noir','Toner HP LaserJet d\'origine, 3 000 pages.','<p>Toner HP LaserJet d&#039;origine, 3 000 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: CF259A\nCouleur: Noir\nType: Toner',98000.00,NULL,NULL,NULL,11,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,42,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(14,'AF-HP-135A','W1350A','Toner HP 135A noir','toner-hp-135a-noir',3,11,'Toner','Noir','Toner HP d\'origine, 1 100 pages.','<p>Toner HP d&#039;origine, 1 100 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: W1350A\nCouleur: Noir\nType: Toner',49000.00,NULL,NULL,NULL,2,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,20,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(15,'AF-HP-415A','W2030A','Toner HP 415A noir','toner-hp-415a-noir',3,11,'Toner','Noir','Toner HP Color LaserJet, 2 400 pages.','<p>Toner HP Color LaserJet, 2 400 pages.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: W2030A\nCouleur: Noir\nType: Toner',89000.00,NULL,NULL,NULL,6,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,7,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(16,'AF-HP-963XL','3JA30AE','Cartouche HP 963XL noir','cartouche-hp-963xl-noir',3,12,'Cartouche','Noir','Cartouche d\'encre HP haute capacité.','<p>Cartouche d&#039;encre HP haute capacité.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: 3JA30AE\nCouleur: Noir\nType: Cartouche',39000.00,35000.00,NULL,NULL,15,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,55,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(17,'AF-HP-305','3YM61AE','Cartouche HP 305 noir','cartouche-hp-305-noir',3,12,'Cartouche','Noir','Cartouche d\'encre HP 305.','<p>Cartouche d&#039;encre HP 305.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: 3YM61AE\nCouleur: Noir\nType: Cartouche',9500.00,NULL,NULL,NULL,50,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,16,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(18,'AF-RI-842311','842311','Toner Ricoh IM 2702 noir','toner-ricoh-im-2702-noir',4,11,'Toner','Noir','Toner d\'origine Ricoh.','<p>Toner d&#039;origine Ricoh.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Ricoh\nRéférence: 842311\nCouleur: Noir\nType: Toner',33000.00,NULL,NULL,NULL,8,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,26,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(19,'AF-RI-SP230','408294','Toner Ricoh SP 230H noir','toner-ricoh-sp-230h-noir',4,11,'Toner','Noir','Toner Ricoh haute capacité.','<p>Toner Ricoh haute capacité.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Ricoh\nRéférence: 408294\nCouleur: Noir\nType: Toner',42000.00,NULL,NULL,NULL,0,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,44,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(20,'AF-SH-MX3061','MX-3061','Multifonction Sharp MX-3061 couleur A3','multifonction-sharp-mx-3061-couleur-a3',1,4,'Multifonction','Couleur','Multifonction couleur A3 30 ppm, écran tactile 10,1\", recto-verso, scan réseau.','<p>Multifonction couleur A3 30 ppm, écran tactile 10,1&quot;, recto-verso, scan réseau.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-3061\nCouleur: Couleur\nType: Multifonction',3450000.00,NULL,NULL,NULL,3,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,37,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(21,'AF-SH-MXM3071','MX-M3071','Multifonction Sharp MX-M3071 monochrome A3','multifonction-sharp-mx-m3071-monochrome-a3',1,4,'Multifonction','Monochrome','Multifonction monochrome A3 30 ppm pour bureaux exigeants.','<p>Multifonction monochrome A3 30 ppm pour bureaux exigeants.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: MX-M3071\nCouleur: Monochrome\nType: Multifonction',2450000.00,2290000.00,NULL,NULL,2,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,40,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(22,'AF-SH-BP30M28','BP-30M28','Copieur Sharp BP-30M28 monochrome','copieur-sharp-bp-30m28-monochrome',1,5,'Copieur','Monochrome','Copieur multifonction A3 28 ppm.','<p>Copieur multifonction A3 28 ppm.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Sharp\nRéférence: BP-30M28\nCouleur: Monochrome\nType: Copieur',1850000.00,NULL,NULL,NULL,4,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,42,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(23,'AF-CA-MF445','MF445dw','Imprimante Canon i-SENSYS MF445dw','imprimante-canon-i-sensys-mf445dw',2,2,'Laser','Monochrome','Multifonction laser 4-en-1 Wi-Fi, 38 ppm.','<p>Multifonction laser 4-en-1 Wi-Fi, 38 ppm.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: MF445dw\nCouleur: Monochrome\nType: Laser',365000.00,NULL,NULL,NULL,6,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,7,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(24,'AF-CA-G3410','G3410','Imprimante Canon PIXMA G3410','imprimante-canon-pixma-g3410',2,3,'Jet d\'encre','Couleur','Imprimante à réservoirs rechargeables Wi-Fi.','<p>Imprimante à réservoirs rechargeables Wi-Fi.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Canon\nRéférence: G3410\nCouleur: Couleur\nType: Jet d\'encre',125000.00,115000.00,NULL,NULL,9,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,49,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(25,'AF-HP-M404','W1A53A','Imprimante HP LaserJet Pro M404dn','imprimante-hp-laserjet-pro-m404dn',3,2,'Laser','Monochrome','Imprimante laser monochrome réseau, recto-verso.','<p>Imprimante laser monochrome réseau, recto-verso.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: W1A53A\nCouleur: Monochrome\nType: Laser',295000.00,NULL,NULL,NULL,5,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,19,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(26,'AF-HP-T230','5HB07A','Traceur HP DesignJet T230 24\"','traceur-hp-designjet-t230-24',3,9,'Traceur','Couleur','Traceur grand format 24 pouces Wi-Fi.','<p>Traceur grand format 24 pouces Wi-Fi.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: 5HB07A\nCouleur: Couleur\nType: Traceur',1150000.00,NULL,NULL,NULL,1,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,32,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(27,'AF-DE-LAT5440','LAT5440-I5','Ordinateur portable Dell Latitude 5440 i5 16 Go 512 Go','ordinateur-portable-dell-latitude-5440-i5-16-go-512-go',7,19,'Portable',NULL,'Portable professionnel 14\", Intel Core i5, 16 Go RAM, SSD 512 Go.','<p>Portable professionnel 14&quot;, Intel Core i5, 16 Go RAM, SSD 512 Go.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Dell\nRéférence: LAT5440-I5\nType: Portable',785000.00,NULL,NULL,NULL,7,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,57,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(28,'AF-HP-PB450','PB450G10','Ordinateur portable HP ProBook 450 G10','ordinateur-portable-hp-probook-450-g10',3,19,'Portable',NULL,'Portable 15,6\", Intel Core i5, 8 Go RAM, SSD 512 Go.','<p>Portable 15,6&quot;, Intel Core i5, 8 Go RAM, SSD 512 Go.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: HP\nRéférence: PB450G10\nType: Portable',695000.00,649000.00,NULL,NULL,5,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,44,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(29,'AF-LE-M70Q','M70Q-G4','Ordinateur de bureau Lenovo ThinkCentre M70q','ordinateur-de-bureau-lenovo-thinkcentre-m70q',8,20,'Bureau',NULL,'Mini PC professionnel Intel Core i5.','<p>Mini PC professionnel Intel Core i5.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Lenovo\nRéférence: M70Q-G4\nType: Bureau',545000.00,NULL,NULL,NULL,4,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,26,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(30,'AF-DE-P2423','P2423','Écran Dell P2423 24\"','ecran-dell-p2423-24',7,21,'Écran',NULL,'Écran IPS 24\" WUXGA.','<p>Écran IPS 24&quot; WUXGA.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Dell\nRéférence: P2423\nType: Écran',165000.00,NULL,NULL,NULL,12,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,43,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(31,'AF-LO-MK270','MK270','Clavier + souris sans fil Logitech MK270','clavier-souris-sans-fil-logitech-mk270',10,22,'Clavier/Souris',NULL,'Ensemble sans fil AZERTY.','<p>Ensemble sans fil AZERTY.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Logitech\nRéférence: MK270\nType: Clavier/Souris',22000.00,NULL,NULL,NULL,35,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,19,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(32,'AF-AP-BX1200','BX1200MI','Onduleur APC Back-UPS 1200 VA','onduleur-apc-back-ups-1200-va',9,23,'Onduleur',NULL,'Onduleur line-interactive 1200 VA, 6 prises.','<p>Onduleur line-interactive 1200 VA, 6 prises.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: APC\nRéférence: BX1200MI\nType: Onduleur',98000.00,NULL,NULL,NULL,8,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,42,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(33,'AF-KI-DT64','DTX/64GB','Clé USB Kingston DataTraveler 64 Go','cle-usb-kingston-datatraveler-64-go',11,25,'Clé USB',NULL,'Clé USB 3.2 64 Go.','<p>Clé USB 3.2 64 Go.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Kingston\nRéférence: DTX/64GB\nType: Clé USB',6500.00,5500.00,NULL,NULL,80,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,1,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(34,'AF-KI-A400','SA400S37/480G','SSD Kingston A400 480 Go','ssd-kingston-a400-480-go',11,24,'SSD',NULL,'SSD SATA 2,5\" 480 Go.','<p>SSD SATA 2,5&quot; 480 Go.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Kingston\nRéférence: SA400S37/480G\nType: SSD',32000.00,NULL,NULL,NULL,20,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,41,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(35,'AF-NA-A480','NAV-A4-80','Ramette papier Navigator A4 80 g (500 feuilles)','ramette-papier-navigator-a4-80-g-500-feuilles',12,29,'Papier','Blanc','Papier premium A4 80 g/m².','<p>Papier premium A4 80 g/m².</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Navigator\nRéférence: NAV-A4-80\nCouleur: Blanc\nType: Papier',4500.00,NULL,NULL,NULL,300,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',1,1,24,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(36,'AF-NA-A4C5','NAV-A4-80-C5','Carton 5 ramettes Navigator A4 80 g','carton-5-ramettes-navigator-a4-80-g',12,29,'Papier','Blanc','Carton de 5 ramettes A4.','<p>Carton de 5 ramettes A4.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Navigator\nRéférence: NAV-A4-80-C5\nCouleur: Blanc\nType: Papier',21000.00,19500.00,NULL,NULL,60,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,47,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(37,'AF-BI-CRIST50','BIC-CR-50','Stylos Bic Cristal bleu (boîte de 50)','stylos-bic-cristal-bleu-boite-de-50',13,33,'Stylo','Bleu','Stylos bille pointe moyenne.','<p>Stylos bille pointe moyenne.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Bic\nRéférence: BIC-CR-50\nCouleur: Bleu\nType: Stylo',7500.00,NULL,NULL,NULL,45,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,27,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(38,'AF-FB-ENV-C4','ENV-C4-250','Enveloppes C4 kraft (boîte de 250)','enveloppes-c4-kraft-boite-de-250',NULL,30,'Enveloppe',NULL,'Enveloppes kraft 229 x 324 mm.','<p>Enveloppes kraft 229 x 324 mm.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Générique\nRéférence: ENV-C4-250\nType: Enveloppe',18000.00,NULL,NULL,NULL,15,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,50,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(39,'AF-FB-CLAS80','CLAS-A4-80','Classeur à levier A4 dos 80 mm','classeur-a-levier-a4-dos-80-mm',NULL,32,'Classeur',NULL,'Classeur carton à levier.','<p>Classeur carton à levier.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Générique\nRéférence: CLAS-A4-80\nType: Classeur',2200.00,NULL,NULL,NULL,120,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,44,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47'),
+(40,'AF-FB-AGR266','AGR-26-6','Agrafes 26/6 (boîte de 1000)','agrafes-26-6-boite-de-1000',NULL,34,'Agrafes',NULL,'Agrafes galvanisées standard.','<p>Agrafes galvanisées standard.</p><p>Produit garanti, livré par AFAM. Contactez-nous pour un tarif professionnel ou un achat en volume.</p>','Marque: Générique\nRéférence: AGR-26-6\nType: Agrafes',600.00,NULL,NULL,NULL,200,NULL,0,NULL,NULL,'1 an','24 à 72 h à Dakar',0,1,6,0,NULL,NULL,'2026-10-01 01:34:47','2026-10-01 01:34:47');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `promotions`;
@@ -770,7 +772,7 @@ CREATE TABLE `promotions` (
 LOCK TABLES `promotions` WRITE;
 /*!40000 ALTER TABLE `promotions` DISABLE KEYS */;
 INSERT INTO `promotions` VALUES
-(1,'Promo papeterie','percent',5.00,'category',28,NULL,NULL,1,'2026-10-01 00:50:24');
+(1,'Promo papeterie','percent',5.00,'category',28,NULL,NULL,1,'2026-10-01 01:34:47');
 /*!40000 ALTER TABLE `promotions` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `requests`;
@@ -849,10 +851,10 @@ CREATE TABLE `services` (
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
 INSERT INTO `services` VALUES
-(1,'location','Location d\'imprimantes','key','Des multifonctions en location clé en main, maintenance et consommables inclus.','<h2>La location clé en main</h2><p>Équipez vos bureaux avec des multifonctions Sharp récentes sans investissement initial.</p><h3>Avantages</h3><ul><li>Aucun investissement : un loyer mensuel maîtrisé</li><li>Maintenance et consommables inclus</li><li>Matériel récent et évolutif</li><li>Interventions rapides de techniciens certifiés</li></ul><h3>Maintenance associée</h3><p>Chaque contrat comprend la maintenance préventive et corrective ainsi que le remplacement des pièces d\'usure.</p>',NULL,'rental',1,1),
-(2,'maintenance','Maintenance','wrench','Maintenance préventive et corrective, remplacement de pièces et assistance.','<h2>Maintenance de votre parc d\'impression</h2><ul><li><strong>Maintenance préventive</strong> : visites planifiées pour éviter les pannes</li><li><strong>Maintenance corrective</strong> : diagnostic et réparation</li><li><strong>Intervention</strong> sur site à Dakar et en régions</li><li><strong>Remplacement de pièces</strong> d\'origine</li><li><strong>Assistance</strong> téléphonique et à distance</li></ul>',NULL,'maintenance',2,1),
-(3,'solutions-impression','Solutions d\'impression','briefcase','Audit, gestion de parc et réduction des coûts d\'impression.','<h2>Optimisez vos impressions</h2><p>Nous analysons vos volumes et usages pour proposer la solution la plus économique et écologique.</p>',NULL,'quote',3,1),
-(4,'vente-materiel','Vente de matériel','printer','Imprimantes, copieurs, informatique et consommables d\'origine.','<h2>Vente de matériel professionnel</h2><p>Un large choix de matériel des plus grandes marques avec installation et formation.</p>',NULL,'quote',4,1);
+(1,'location','Location d\'imprimantes','key','Des multifonctions en location clé en main, maintenance et consommables inclus.','<h2>La location clé en main</h2><p>Équipez vos bureaux avec des multifonctions Sharp récentes sans investissement initial.</p><h3>Avantages</h3><ul><li>Aucun investissement : un loyer mensuel maîtrisé</li><li>Maintenance et consommables inclus</li><li>Matériel récent et évolutif</li><li>Interventions rapides de techniciens certifiés</li></ul><h3>Maintenance associée</h3><p>Chaque contrat comprend la maintenance préventive et corrective ainsi que le remplacement des pièces d\'usure.</p>','assets/img/contenus/service-location.jpg','rental',1,1),
+(2,'maintenance','Maintenance','wrench','Maintenance préventive et corrective, remplacement de pièces et assistance.','<h2>Maintenance de votre parc d\'impression</h2><ul><li><strong>Maintenance préventive</strong> : visites planifiées pour éviter les pannes</li><li><strong>Maintenance corrective</strong> : diagnostic et réparation</li><li><strong>Intervention</strong> sur site à Dakar et en régions</li><li><strong>Remplacement de pièces</strong> d\'origine</li><li><strong>Assistance</strong> téléphonique et à distance</li></ul>','assets/img/contenus/service-maintenance.jpg','maintenance',2,1),
+(3,'solutions-impression','Solutions d\'impression','briefcase','Audit, gestion de parc et réduction des coûts d\'impression.','<h2>Optimisez vos impressions</h2><p>Nous analysons vos volumes et usages pour proposer la solution la plus économique et écologique.</p>','assets/img/contenus/service-solutions.jpg','quote',3,1),
+(4,'vente-materiel','Vente de matériel','printer','Imprimantes, copieurs, informatique et consommables d\'origine.','<h2>Vente de matériel professionnel</h2><p>Un large choix de matériel des plus grandes marques avec installation et formation.</p>','assets/img/contenus/service-vente.jpg','quote',4,1);
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `settings`;
@@ -910,7 +912,7 @@ INSERT INTO `settings` VALUES
 ('email_request_ack_subject','Nous avons bien reçu votre demande','emails','Accusé de réception des demandes : sujet','text',122),
 ('email_welcome_body','Bonjour {first_name},\n\nVotre compte {site_name} a bien été créé. Vous pouvez dès maintenant suivre vos commandes, gérer vos adresses et vos favoris.\n\nÀ bientôt !','emails','Création de compte : contenu','textarea',105),
 ('email_welcome_subject','Bienvenue sur {site_name}','emails','Création de compte : sujet','text',104),
-('favicon','','general','Favicon','image',18),
+('favicon','assets/img/contenus/favicon.png','general','Favicon','image',18),
 ('footer_about','AFAM est une entreprise sénégalaise spécialisée dans les solutions d\'impression professionnelles : vente, location et maintenance.','footer','Texte de présentation','textarea',67),
 ('footer_copyright','© {year} {company_name} — {site_name}. Tous droits réservés.','footer','Copyright','text',73),
 ('free_shipping_threshold','100000','shop','Livraison gratuite à partir de (0 = désactivé)','number',80),
@@ -919,7 +921,7 @@ INSERT INTO `settings` VALUES
 ('hero_button_text','Découvrir le catalogue','home','Bannière : bouton 1','text',36),
 ('hero_button2_link','devis','home','Bannière : lien bouton 2','text',39),
 ('hero_button2_text','Demander un devis','home','Bannière : bouton 2','text',38),
-('hero_image','','home','Bannière : image de fond','image',40),
+('hero_image','assets/img/contenus/hero.jpg','home','Bannière : image de fond','image',40),
 ('hero_subtitle','Imprimantes, copieurs, consommables, informatique et fournitures de bureau. Vente, location et maintenance clé en main avec AFAM, représentant exclusif Sharp au Sénégal.','home','Bannière : sous-titre','textarea',35),
 ('hero_title','Des solutions d\'impression professionnelles adaptées à vos besoins','home','Bannière : titre','text',34),
 ('hero_video','','home','Bannière : vidéo de fond (MP4)','video',41),
@@ -929,27 +931,27 @@ INSERT INTO `settings` VALUES
 ('home_contact_title','Besoin d\'un conseil ?','home','Bloc contact : titre','text',64),
 ('home_finder_text','Choisissez la marque et le modèle de votre imprimante : nous affichons instantanément les toners, cartouches et tambours compatibles.','home','Texte : recherche par imprimante','textarea',50),
 ('home_finder_title','Trouvez le consommable de votre imprimante','home','Titre : recherche par imprimante','text',49),
-('home_maintenance_image','','home','Bloc maintenance : image','image',59),
+('home_maintenance_image','assets/img/contenus/home-maintenance.jpg','home','Bloc maintenance : image','image',59),
 ('home_maintenance_text','Maintenance préventive et corrective, remplacement de pièces et intervention rapide de nos techniciens certifiés.','home','Bloc maintenance : texte','textarea',58),
 ('home_maintenance_title','Maintenance & assistance','home','Bloc maintenance : titre','text',57),
 ('home_popular_count','8','home','Nombre de produits populaires','number',66),
 ('home_popular_title','Produits populaires','home','Titre : produits populaires','text',47),
-('home_pro_image','','home','Bloc pro : image','image',53),
+('home_pro_image','assets/img/contenus/home-pro.jpg','home','Bloc pro : image','image',53),
 ('home_pro_text','Entreprises et administrations : bénéficiez d\'un accompagnement personnalisé, de tarifs adaptés et d\'un audit de votre parc d\'impression pour réduire vos coûts.','home','Bloc pro : texte','textarea',52),
 ('home_pro_title','Solutions professionnelles','home','Bloc pro : titre','text',51),
 ('home_promo_title','Offres et promotions','home','Titre : promotions','text',48),
-('home_rental_image','','home','Bloc location : image','image',56),
+('home_rental_image','assets/img/contenus/home-location.jpg','home','Bloc location : image','image',56),
 ('home_rental_text','Des multifonctions Sharp performantes en location clé en main : matériel, consommables et maintenance inclus dans un loyer maîtrisé.','home','Bloc location : texte','textarea',55),
 ('home_rental_title','Location d\'imprimantes','home','Bloc location : titre','text',54),
-('home_sharp_image','','home','Bloc Sharp : image','image',62),
+('home_sharp_image','assets/img/contenus/home-sharp.jpg','home','Bloc Sharp : image','image',62),
 ('home_sharp_text','Performance, économies et respect de l\'environnement : découvrez la gamme de multifonctions Sharp et nos offres clé en main.','home','Bloc Sharp : texte','textarea',61),
 ('home_sharp_title','AFAM, représentant exclusif Sharp au Sénégal','home','Bloc Sharp : titre','text',60),
 ('invoice_counter','0','system','Compteur de factures','number',0),
 ('invoice_footer','{company_name} — {address} — {phone} — {email}. Merci pour votre confiance.','shop','Mentions en bas de facture','textarea',87),
 ('invoice_logo','','shop','Logo des factures (JPEG/PNG)','image',88),
 ('invoice_prefix','FAC','shop','Préfixe des numéros de facture','text',86),
-('logo','','general','Logo','image',16),
-('logo_footer','','general','Logo (pied de page)','image',17),
+('logo','assets/img/contenus/logo.png','general','Logo','image',16),
+('logo_footer','assets/img/contenus/logo-blanc.png','general','Logo (pied de page)','image',17),
 ('low_stock_threshold','5','shop','Seuil de stock faible (par défaut)','number',76),
 ('map_embed','','general','Carte (URL d\'intégration Google Maps)','url',15),
 ('menu_label_about','À propos','header','Menu : À propos','text',32),
@@ -1021,44 +1023,44 @@ CREATE TABLE `stock_movements` (
 LOCK TABLES `stock_movements` WRITE;
 /*!40000 ALTER TABLE `stock_movements` DISABLE KEYS */;
 INSERT INTO `stock_movements` VALUES
-(1,1,25,25,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(2,2,12,12,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(3,3,9,9,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(4,4,3,3,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(5,5,18,18,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(6,6,4,4,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(7,8,30,30,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(8,9,14,14,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(9,10,7,7,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(10,11,10,10,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(11,12,40,40,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(12,13,11,11,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(13,14,2,2,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(14,15,6,6,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(15,16,15,15,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(16,17,50,50,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(17,18,8,8,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(18,20,3,3,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(19,21,2,2,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(20,22,4,4,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(21,23,6,6,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(22,24,9,9,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(23,25,5,5,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(24,26,1,1,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(25,27,7,7,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(26,28,5,5,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(27,29,4,4,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(28,30,12,12,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(29,31,35,35,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(30,32,8,8,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(31,33,80,80,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(32,34,20,20,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(33,35,300,300,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(34,36,60,60,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(35,37,45,45,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(36,38,15,15,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(37,39,120,120,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24'),
-(38,40,200,200,'import',NULL,NULL,'Stock initial','2026-10-01 00:50:24');
+(1,1,25,25,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(2,2,12,12,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(3,3,9,9,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(4,4,3,3,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(5,5,18,18,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(6,6,4,4,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(7,8,30,30,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(8,9,14,14,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(9,10,7,7,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(10,11,10,10,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(11,12,40,40,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(12,13,11,11,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(13,14,2,2,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(14,15,6,6,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(15,16,15,15,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(16,17,50,50,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(17,18,8,8,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(18,20,3,3,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(19,21,2,2,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(20,22,4,4,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(21,23,6,6,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(22,24,9,9,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(23,25,5,5,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(24,26,1,1,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(25,27,7,7,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(26,28,5,5,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(27,29,4,4,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(28,30,12,12,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(29,31,35,35,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(30,32,8,8,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(31,33,80,80,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(32,34,20,20,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(33,35,300,300,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(34,36,60,60,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(35,37,45,45,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(36,38,15,15,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(37,39,120,120,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47'),
+(38,40,200,200,'import',NULL,NULL,'Stock initial','2026-10-01 01:34:47');
 /*!40000 ALTER TABLE `stock_movements` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

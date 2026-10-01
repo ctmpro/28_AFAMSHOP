@@ -152,13 +152,13 @@ $block = function (string $key, string $link, string $btn, string $iconName, boo
 <section class="section section-alt">
   <div class="container duo">
     <article class="duo-card">
-      <?= icon('key', 'icon icon-lg') ?>
+      <?php if (setting('home_rental_image')): ?><img class="duo-img" src="<?= e(media_url(setting('home_rental_image'))) ?>" alt="" loading="lazy"><?php else: ?><?= icon('key', 'icon icon-lg') ?><?php endif; ?>
       <h2><?= e(setting('home_rental_title')) ?></h2>
       <p><?= nl2br(e(render_vars(setting('home_rental_text')))) ?></p>
       <a class="btn btn-primary" href="<?= e(url('service/location')) ?>"><?= e(__('learn_more')) ?></a>
     </article>
     <article class="duo-card">
-      <?= icon('wrench', 'icon icon-lg') ?>
+      <?php if (setting('home_maintenance_image')): ?><img class="duo-img" src="<?= e(media_url(setting('home_maintenance_image'))) ?>" alt="" loading="lazy"><?php else: ?><?= icon('wrench', 'icon icon-lg') ?><?php endif; ?>
       <h2><?= e(setting('home_maintenance_title')) ?></h2>
       <p><?= nl2br(e(render_vars(setting('home_maintenance_text')))) ?></p>
       <a class="btn btn-primary" href="<?= e(url('service/maintenance')) ?>"><?= e(__('learn_more')) ?></a>

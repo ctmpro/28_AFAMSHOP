@@ -282,6 +282,7 @@ return [
     'whatsapp_chat' => 'Discuter sur WhatsApp',
     'secure_payment' => 'Paiement sécurisé',
     'currency' => 'Devise',
+    'currency_note' => 'Le paiement est effectué en :base. Les montants en :cur sont donnés à titre indicatif (1 :sym = :rate).',
     'cookie_text' => 'Ce site utilise des cookies nécessaires à son fonctionnement (panier, session).',
     'cookie_accept' => 'J\'ai compris',
     'learn_more' => 'En savoir plus',

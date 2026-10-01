@@ -217,6 +217,7 @@ require INCLUDES_PATH . '/layout/header.php';
         <li><span><?= (int)$it['qty'] ?> × <?= e($it['product']['name']) ?></span><strong><?= e(money($it['line_total'])) ?></strong></li>
         <?php endforeach; ?>
       </ul>
+      <?= currency_note() ?>
       <dl class="totals">
         <div><dt><?= e(__('subtotal')) ?></dt><dd><?= e(money($totals['subtotal'])) ?></dd></div>
         <?php if ($totals['discount'] > 0): ?><div class="discount"><dt><?= e(__('discount')) ?> (<?= e($totals['coupon']['code']) ?>)</dt><dd>-<?= e(money($totals['discount'])) ?></dd></div><?php endif; ?>

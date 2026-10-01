@@ -22,7 +22,8 @@ class Invoice
         // En-tête : logo + infos société
         $y = 40;
         $logo = setting('invoice_logo', setting('logo'));
-        $hasLogo = $logo && !preg_match('#^https?://#', $logo) && $pdf->image(UPLOADS_PATH . '/' . $logo, $L, $y, 120);
+        $logoFile = $logo && str_starts_with($logo, 'assets/') ? ROOT_PATH . '/' . $logo : UPLOADS_PATH . '/' . $logo;
+        $hasLogo = $logo && !preg_match('#^https?://#', $logo) && !str_contains($logo, '..') && $pdf->image($logoFile, $L, $y, 120);
         if (!$hasLogo) {
             $pdf->setFont(true, 20);
             $pdf->text($L, $y + 18, setting('company_name', 'AFAM'), $primary);

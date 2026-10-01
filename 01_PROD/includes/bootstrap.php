@@ -58,8 +58,19 @@ if (PHP_SAPI !== 'cli') {
     }
 
     // Changement de devise / langue
-    if (isset($_GET['currency']) && isset(currencies()[$_GET['currency']])) {
+    if (isset($_GET['currency']) && is_string($_GET['currency']) && isset(currencies()[$_GET['currency']])) {
         $_SESSION['currency'] = $_GET['currency'];
+        // Choix mémorisé 1 an pour les prochaines visites
+        setcookie('afam_currency', $_GET['currency'], [
+            'expires' => time() + 365 * 86400,
+            'path' => (parse_url(APP_URL, PHP_URL_PATH) ?: '') . '/',
+            'secure' => $isHttps,
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
+    } elseif (!isset($_SESSION['currency']) && isset($_COOKIE['afam_currency']) && is_string($_COOKIE['afam_currency'])
+        && isset(currencies()[$_COOKIE['afam_currency']])) {
+        $_SESSION['currency'] = $_COOKIE['afam_currency'];
     }
     if (isset($_GET['lang']) && preg_match('/^[a-z]{2}$/', $_GET['lang']) && is_file(LANG_PATH . '/' . $_GET['lang'] . '.php')) {
         $_SESSION['lang'] = $_GET['lang'];

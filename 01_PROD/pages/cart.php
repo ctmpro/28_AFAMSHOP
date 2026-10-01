@@ -71,6 +71,7 @@ $freeThreshold = (float)setting('free_shipping_threshold', 0);
           <button class="btn btn-outline"><?= e(__('apply')) ?></button>
         <?php endif; ?>
       </form>
+      <?= currency_note() ?>
       <dl class="totals">
         <div><dt><?= e(__('subtotal')) ?></dt><dd data-total="subtotal"><?= e(money($t['subtotal'])) ?></dd></div>
         <?php if ($t['discount'] > 0): ?><div class="discount"><dt><?= e(__('discount')) ?></dt><dd data-total="discount">-<?= e(money($t['discount'])) ?></dd></div><?php endif; ?>

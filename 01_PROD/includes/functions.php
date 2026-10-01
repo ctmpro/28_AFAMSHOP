@@ -299,6 +299,10 @@ function base_currency(): string
 
 function display_currency(): string
 {
+    // Le back-office, les emails et les factures restent toujours dans la devise de base
+    if (str_contains(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? ''), '/admin/') || PHP_SAPI === 'cli') {
+        return base_currency();
+    }
     $c = $_SESSION['currency'] ?? base_currency();
     return isset(currencies()[$c]) ? $c : base_currency();
 }
@@ -314,6 +318,51 @@ function money($amount, ?string $currency = null, bool $convert = true): string
     }
     $formatted = number_format($value, (int)$c['decimals'], ',', ' ');
     return $c['symbol_after'] ? $formatted . ' ' . $c['symbol'] : $c['symbol'] . ' ' . $formatted;
+}
+
+/** Convertit un montant saisi dans la devise d'affichage vers la devise de base. */
+function to_base_currency(float $amount): float
+{
+    $code = display_currency();
+    if ($code === base_currency()) {
+        return $amount;
+    }
+    $rate = (float)(currencies()[$code]['rate'] ?? 1);
+    return $rate > 0 ? $amount / $rate : $amount;
+}
+
+/** Convertit un montant de la devise de base vers la devise d'affichage. */
+function to_display_currency(float $amount): float
+{
+    $code = display_currency();
+    return $code === base_currency() ? $amount : $amount * (float)(currencies()[$code]['rate'] ?? 1);
+}
+
+/** Mention affichée quand la devise d'affichage diffère de la devise de paiement. */
+function currency_note(): string
+{
+    $code = display_currency();
+    if ($code === base_currency()) {
+        return '';
+    }
+    $cur = currencies()[$code];
+    $rate = (float)$cur['rate'] > 0 ? 1 / (float)$cur['rate'] : 0;
+    $base = currencies()[base_currency()];
+    return '<p class="currency-note">' . e(__('currency_note', [
+        'base' => $base['name'] . ' (' . $base['symbol'] . ')',
+        'cur' => $cur['name'],
+        'sym' => $cur['symbol'],
+        'rate' => rtrim(rtrim(number_format($rate, 3, ',', ' '), '0'), ',') . ' ' . $base['symbol'],
+    ])) . '</p>';
+}
+
+/** URL de la page courante avec une autre devise. */
+function currency_switch_url(string $code): string
+{
+    $params = $_GET;
+    unset($params['_route'], $params['page']);
+    $params['currency'] = $code;
+    return strtok($_SERVER['REQUEST_URI'] ?? '/', '?') . '?' . http_build_query($params);
 }
 
 /** Arrondi selon la précision de la devise de base (0 décimale pour le FCFA). */
