@@ -1,0 +1,8 @@
+# Aucun script exécutable dans les fichiers envoyés
+Options -Indexes
+<FilesMatch "\.(php|phtml|phar|php\d)$">
+    Require all denied
+</FilesMatch>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>

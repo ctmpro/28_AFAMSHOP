@@ -1,0 +1,42 @@
+# AFAMSHOP — configuration Apache
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # RewriteBase /   (à adapter si le site est dans un sous-dossier)
+
+    # HTTPS obligatoire en production (décommenter)
+    # RewriteCond %{HTTPS} !=on
+    # RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Dossiers et fichiers non accessibles depuis le web
+    RewriteRule ^(config|includes|sql|lang|utilitaires|uploads/private)(/|$) - [F,L]
+    RewriteRule (^|/)\. - [F,L]
+
+    # Fichiers et dossiers existants servis tels quels
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    RewriteRule ^(.*)$ index.php?_route=$1 [QSA,L]
+</IfModule>
+
+<FilesMatch "^\.|\.(env|sql|log|md|ini|lock)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>

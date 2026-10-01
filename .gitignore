@@ -8,3 +8,7 @@ dist/
 .env
 *.log
 .DS_Store
+# Fichiers envoyés par les utilisateurs / générés
+01_PROD/uploads/*
+!01_PROD/uploads/.htaccess
+!01_PROD/uploads/.gitkeep
