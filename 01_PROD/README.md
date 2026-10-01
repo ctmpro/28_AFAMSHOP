@@ -81,9 +81,16 @@ Le dossier `assets/img/contenus/` contient des illustrations prêtes à l'emploi
 
 Formats recommandés : bannière d'accueil 1920×860, blocs d'accueil 1200×750, catégories 800×500, services 800×450, bannières promo 1000×420, diaporama 1280×360, logo PNG transparent 520×120.
 
-## Mise à jour d'une installation existante
+## Migrations de la base (Admin › Migration)
 
-Importer `sql/mise-a-jour-2026-10.sql` dans phpMyAdmin : active l'affichage en euros et applique les images par défaut là où aucune image n'est définie (aucune donnée existante n'est écrasée).
+Réservée au Super Admin. Deux façons de mettre à jour la base sans phpMyAdmin :
+
+- **Fichiers** : déposer un script `.sql` dans `sql/migrations/` (nom préfixé par la date, ex. `2026-11-15_nouvelle-zone.sql`), puis cliquer sur **Migrer**. Chaque fichier n'est exécuté qu'une fois ; un fichier déjà passé à la main peut être « marqué exécuté ».
+- **SQL libre** : coller des requêtes (ou envoyer un fichier `.sql`) et cliquer sur **Migrer**. Les requêtes de lecture (`SELECT`, `SHOW`) affichent leur résultat.
+
+Une sauvegarde complète de la base (`.sql.gz`, téléchargeable depuis la page, 20 dernières conservées) est faite avant chaque migration ; l'exécution s'arrête à la première erreur et tout est historisé. La page peut être désactivée avec `MIGRATIONS_ENABLED=false` dans `.env`.
+
+Migrations fournies : `2026-10-01_images-et-devises.sql` (affichage en euros, images par défaut) et `2026-10-02_pages-legales.sql` (CGV, mentions légales, politique de confidentialité, crédit Neosen). Le texte source des pages légales est dans `sql/contenus/`.
 
 ## Évolutivité
 

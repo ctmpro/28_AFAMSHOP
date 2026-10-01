@@ -4,7 +4,7 @@
  */
 class AdminAuth
 {
-    /** Modules accessibles par rôle. super_admin a accès à tout. */
+    /** Modules accessibles par rôle. super_admin a accès à tout (dont admins, logs, settings, migrations). */
     public const PERMISSIONS = [
         'manager' => ['dashboard', 'products', 'categories', 'brands', 'compatibility', 'stock', 'orders', 'payments', 'import', 'promotions', 'coupons', 'reviews', 'delivery', 'stats'],
         'sales'   => ['dashboard', 'customers', 'requests', 'orders', 'payments', 'coupons', 'stats'],

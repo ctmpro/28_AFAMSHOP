@@ -12,3 +12,6 @@ dist/
 01_PROD/uploads/*
 !01_PROD/uploads/.htaccess
 !01_PROD/uploads/.gitkeep
+!01_PROD/uploads/private/
+01_PROD/uploads/private/*
+!01_PROD/uploads/private/.htaccess

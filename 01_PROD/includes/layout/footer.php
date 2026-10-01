@@ -70,7 +70,9 @@ $socials = array_filter([
   </div>
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
-      <span><?= e(render_vars(setting('footer_copyright', '© {year} {company_name}'))) ?></span>
+      <span><?= e(render_vars(setting('footer_copyright', '© {year} {company_name}'))) ?>
+        <?php if (setting('footer_credit')): ?> · <?php if (preg_match('#^https?://#', setting('footer_credit_url'))): ?><a href="<?= e(setting('footer_credit_url')) ?>" target="_blank" rel="noopener"><?= e(setting('footer_credit')) ?></a><?php else: ?><?= e(setting('footer_credit')) ?><?php endif; ?><?php endif; ?>
+      </span>
       <nav class="legal-links">
         <?php foreach ($groups['legal'] as $p): ?><a href="<?= e(url($p['slug'])) ?>"><?= e($p['title']) ?></a><?php endforeach; ?>
       </nav>

@@ -119,6 +119,11 @@ if (!isset($opts['no-demo'])) {
     DB::insert('promotions', ['name' => 'Promo papeterie', 'discount_type' => 'percent', 'value' => 5, 'scope' => 'category', 'target_id' => $catIds['papeterie']]);
 }
 
+// Une installation neuve intègre déjà le contenu des migrations existantes
+foreach (Migrator::files() as $name => $file) {
+    Migrator::markApplied($name);
+}
+
 if (!empty($opts['admin']) && !empty($opts['password'])) {
     DB::insert('admins', [
         'name' => 'Super Admin',

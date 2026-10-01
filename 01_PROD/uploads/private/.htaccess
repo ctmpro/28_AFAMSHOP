@@ -1,0 +1,2 @@
+# Fichiers privés : jamais servis directement (téléchargement via scripts admin protégés)
+Require all denied

@@ -21,6 +21,8 @@ $settings = [
     ['whatsapp_enabled', '1', 'general', 'Afficher le bouton WhatsApp flottant', 'bool'],
     ['opening_hours', "Lundi – Vendredi : 8h30 – 18h00\nSamedi : 9h00 – 13h00", 'general', 'Horaires', 'textarea'],
     ['admin_notification_email', 'commandes@afamshop.sn', 'general', 'Email des notifications admin', 'email'],
+    ['legal_representative', 'Le gérant de AFAM', 'general', 'Directeur de la publication / représentant légal (pages légales)', 'text'],
+    ['host_info', "Nom de l'hébergeur — adresse — téléphone (à compléter)", 'general', 'Hébergeur du site (mentions légales)', 'textarea'],
     ['map_embed', '', 'general', 'Carte (URL d\'intégration Google Maps)', 'url'],
     ['logo', 'assets/img/contenus/logo.png', 'general', 'Logo', 'image'],
     ['logo_footer', 'assets/img/contenus/logo-blanc.png', 'general', 'Logo (pied de page)', 'image'],
@@ -88,6 +90,8 @@ $settings = [
     ['social_youtube', '', 'footer', 'YouTube (URL)', 'url'],
     ['social_tiktok', '', 'footer', 'TikTok (URL)', 'url'],
     ['footer_copyright', '© {year} {company_name} — {site_name}. Tous droits réservés.', 'footer', 'Copyright', 'text'],
+    ['footer_credit', 'Site réalisé par Neosen', 'footer', 'Crédit du concepteur (pied de page)', 'text'],
+    ['footer_credit_url', 'https://neosen.tech', 'footer', 'Lien du crédit', 'url'],
     ['cookie_banner_enabled', '1', 'footer', 'Afficher le bandeau cookies', 'bool'],
 
     // ---- Boutique
@@ -233,9 +237,9 @@ $pages = [
     ['faq', 'FAQ', '<h3>Comment trouver le consommable de mon imprimante ?</h3><p>Utilisez la recherche par imprimante : choisissez la marque puis le modèle.</p><h3>Quels sont les moyens de paiement ?</h3><p>Carte bancaire (Stripe), Wave, Orange Money (PayDunya) et paiement à la livraison selon disponibilité.</p><h3>Livrez-vous hors de Dakar ?</h3><p>Oui, dans toutes les régions du Sénégal. Les frais dépendent de la zone de livraison.</p>', 'help', 1],
     ['livraison-retours', 'Politique de livraison et retours', $lorem, 'help', 2],
     ['garantie', 'Garantie', $lorem, 'help', 3],
-    ['cgv', 'Conditions générales de vente', $lorem, 'legal', 1],
-    ['mentions-legales', 'Mentions légales', $lorem, 'legal', 2],
-    ['confidentialite', 'Politique de confidentialité', $lorem, 'legal', 3],
+    ['cgv', 'Conditions générales de vente', file_get_contents(__DIR__ . '/contenus/cgv.html'), 'legal', 1],
+    ['mentions-legales', 'Mentions légales', file_get_contents(__DIR__ . '/contenus/mentions-legales.html'), 'legal', 2],
+    ['confidentialite', 'Politique de confidentialité', file_get_contents(__DIR__ . '/contenus/confidentialite.html'), 'legal', 3],
     ['cookies', 'Politique de cookies', '<p>Ce site utilise uniquement des cookies nécessaires à son fonctionnement (session, panier, sécurité) ainsi que, le cas échéant, des cookies de mesure d\'audience.</p>', 'legal', 4],
 ];
 

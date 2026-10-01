@@ -2,7 +2,7 @@
 -- AFAMSHOP — mise à jour d'une base déjà installée (octobre 2026)
 --  * Active l'affichage des prix en euros (parité fixe 1 € = 655,957 FCFA)
 --  * Met en place les images par défaut (uniquement là où aucune image n'est définie)
--- À importer une fois dans phpMyAdmin (onglet « Importer »). Sans risque si relancé.
+-- Exécutée depuis Admin › Migration (ou importée dans phpMyAdmin). Sans risque si relancée.
 -- =====================================================================
 SET NAMES utf8mb4;
 

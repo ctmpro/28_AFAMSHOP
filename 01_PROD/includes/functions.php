@@ -513,9 +513,14 @@ function render_vars(?string $text): string
         '{company_name}' => setting('company_name', 'AFAM'),
         '{phone}' => setting('contact_phone'),
         '{email}' => setting('contact_email'),
-        '{address}' => setting('contact_address'),
+        '{address}' => implode(', ', array_filter(array_map('trim', preg_split('/\R/', (string)setting('company_address'))))),
         '{domain}' => setting('site_domain'),
         '{year}' => date('Y'),
+        '{site_url}' => APP_URL,
+        '{company_legal_name}' => setting('company_legal_name', setting('company_name', 'AFAM')),
+        '{company_ids}' => implode(', ', array_filter(array_map('trim', preg_split('/\R/', (string)setting('company_ids'))))),
+        '{legal_representative}' => setting('legal_representative', 'le représentant légal de ' . setting('company_name', 'AFAM')),
+        '{host_info}' => implode(', ', array_filter(array_map('trim', preg_split('/\R/', (string)setting('host_info'))))),
     ];
     return strtr((string)$text, $vars);
 }

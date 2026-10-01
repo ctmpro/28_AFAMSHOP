@@ -472,4 +472,21 @@ CREATE TABLE media (
   created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+DROP TABLE IF EXISTS migrations;
+CREATE TABLE migrations (
+  id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name         VARCHAR(190) NOT NULL,
+  source       ENUM('file','manual') NOT NULL DEFAULT 'file',
+  checksum     CHAR(64) NULL,
+  sql_content  MEDIUMTEXT NULL,
+  status       ENUM('success','error','marked') NOT NULL,
+  statements   INT NOT NULL DEFAULT 0,
+  error        TEXT NULL,
+  duration_ms  INT NOT NULL DEFAULT 0,
+  backup_file  VARCHAR(190) NULL,
+  admin_id     INT UNSIGNED NULL,
+  executed_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 SET FOREIGN_KEY_CHECKS = 1;

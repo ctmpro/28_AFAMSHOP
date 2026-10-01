@@ -362,6 +362,9 @@ legend { font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
 .rich-text ul { padding-left: 20px; }
 .rich-text img { border-radius: var(--radius-sm); }
 .rich-text iframe { max-width: 100%; }
+.rich-text table { width: 100%; border-collapse: collapse; margin: 0 0 1.2em; font-size: .92rem; display: block; overflow-x: auto; }
+.rich-text th, .rich-text td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+.rich-text th { background: var(--bg); color: var(--secondary); }
 
 /* Panier & commande */
 .cart-layout, .checkout-layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
