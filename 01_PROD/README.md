@@ -69,6 +69,14 @@ Le paiement à la livraison et le virement bancaire peuvent être activés en co
 
 Dans *Admin › Contenus* : nom de la plateforme, domaine, coordonnées, logo, couleurs, textes et images de la page d'accueil (bannière, vidéo, blocs pro / location / maintenance / Sharp…), libellés du menu, pied de page, réseaux sociaux, WhatsApp, TVA, préfixes de commande et de facture, moyens de paiement, SEO, modèles d'emails. Les pages institutionnelles, services, bannières, catégories, marques et produits sont gérés dans leurs modules respectifs. Les variables `{site_name}`, `{company_name}`, `{phone}`, `{email}`, `{address}`, `{domain}`, `{year}` sont remplacées automatiquement dans les contenus.
 
+## Paiement par carte bancaire
+
+La carte bancaire est proposée via **Stripe** dès que les clés `STRIPE_*` sont renseignées dans `.env`. Tant que Stripe n'est pas configuré, elle est proposée via **PayDunya** (canal carte) si PayDunya est actif — option désactivable dans *Admin › Contenus › Paiement*.
+
+## Prix sur devis
+
+Un produit dont le prix est à 0 s'affiche « Prix sur devis » : il ne peut pas être ajouté au panier et propose une demande de devis (ou de démonstration pour un logiciel). C'est le cas de la fiche du logiciel de gestion de parc AFAM.
+
 ## Sécurité
 
 Mots de passe `password_hash()`, requêtes préparées PDO, jeton CSRF sur tous les formulaires et appels AJAX, échappement systématique des sorties (XSS) et nettoyage du HTML administrable, validation serveur, uploads contrôlés (type MIME réel, taille, nom aléatoire, exécution PHP interdite dans `uploads/`), limitation des tentatives de connexion, sessions sécurisées (HttpOnly, SameSite, Secure en HTTPS, régénération d'identifiant), permissions vérifiées côté serveur par rôle (Super Admin, Gestionnaire, Commercial, Éditeur), journal des actions administratives, secrets uniquement dans `.env`, en-têtes de sécurité HTTP.
@@ -90,7 +98,7 @@ Réservée au Super Admin. Deux façons de mettre à jour la base sans phpMyAdmi
 
 Une sauvegarde complète de la base (`.sql.gz`, téléchargeable depuis la page, 20 dernières conservées) est faite avant chaque migration ; l'exécution s'arrête à la première erreur et tout est historisé. La page peut être désactivée avec `MIGRATIONS_ENABLED=false` dans `.env`.
 
-Migrations fournies : `2026-10-01_images-et-devises.sql` (affichage en euros, images par défaut) et `2026-10-02_pages-legales.sql` (CGV, mentions légales, politique de confidentialité, crédit Neosen). Le texte source des pages légales est dans `sql/contenus/`.
+Migrations fournies : `2026-10-01_images-et-devises.sql` (affichage en euros, images par défaut), `2026-10-02_pages-legales.sql` (CGV, mentions légales, politique de confidentialité, crédit Neosen) et `2026-10-15_retours-client.sql` (retour client du 01/10/2026 : retrait des mentions Sharp, logiciel de gestion de parc AFAM, impression multisupport, page À propos enrichie, kits de maintenance, carte bancaire via PayDunya). La dernière requête de cette migration liste les éventuelles mentions de Sharp restant dans des textes personnalisés. Le texte source des pages légales est dans `sql/contenus/`.
 
 ## Évolutivité
 

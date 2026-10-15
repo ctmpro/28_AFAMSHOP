@@ -12,7 +12,7 @@ $items = Orders::items((int)$order['id']);
 $history = Orders::history((int)$order['id']);
 $back = ['n' => $order['order_number'], 't' => $order['access_token']];
 $isNew = ($_SESSION['last_order'] ?? null) === $order['order_number'];
-$canRetry = in_array($order['payment_method'], ['stripe', 'paydunya'], true)
+$canRetry = in_array($order['payment_method'], ['stripe', 'paydunya', 'paydunya_card'], true)
     && in_array($order['payment_status'], ['pending', 'failed', 'cancelled'], true)
     && !in_array($order['status'], ['cancelled', 'refunded'], true);
 

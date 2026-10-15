@@ -88,7 +88,7 @@ $baseUrl = strtok(current_url(), '?');
 
   <header class="catalog-head">
     <h1><?= e($title) ?></h1>
-    <?php if ($intro): ?><div class="catalog-intro"><?= clean_html($intro) ?></div><?php endif; ?>
+    <?php if ($intro): ?><div class="catalog-intro"><?= clean_html(render_vars($intro)) ?></div><?php endif; ?>
     <?php if ($subcats): ?>
     <div class="chips">
       <?php foreach ($subcats as $sc): ?><a class="chip" href="<?= e(url('categorie/' . $sc['slug'])) ?>"><?= e($sc['name']) ?></a><?php endforeach; ?>

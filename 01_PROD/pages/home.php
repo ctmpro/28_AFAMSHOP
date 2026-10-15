@@ -11,7 +11,7 @@ $popular = Catalog::featured((int)setting('home_popular_count', 8));
 $onSale = Catalog::onSale(8);
 $brands = Catalog::brands();
 $printerBrands = Catalog::printerBrands();
-$services = DB::all('SELECT * FROM services WHERE active = 1 ORDER BY sort LIMIT 4');
+$services = DB::all('SELECT * FROM services WHERE active = 1 ORDER BY sort LIMIT 6');
 $favoriteIds = Auth::id() ? array_map('intval', DB::col('SELECT product_id FROM favorites WHERE customer_id = :c', ['c' => Auth::id()])) : [];
 
 $heroImage = setting('hero_image');
@@ -166,7 +166,7 @@ $block = function (string $key, string $link, string $btn, string $iconName, boo
   </div>
 </section>
 
-<?php $block('sharp', 'marque/sharp', 'Découvrir Sharp', 'printer', true); ?>
+<?php if (setting('home_software_title')) $block('software', setting('home_software_link', 'categorie/reseau'), setting('home_software_button', 'Découvrir le logiciel'), 'laptop', true); ?>
 
 <?php if ($services): ?>
 <section class="section">

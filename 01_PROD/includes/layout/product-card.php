@@ -15,11 +15,14 @@ $fav = $favoriteIds ?? [];
     <?php if ($p['brand_name']): ?><span class="pc-brand"><?= e($p['brand_name']) ?></span><?php endif; ?>
     <h3 class="pc-title"><a href="<?= e(url('produit/' . $p['slug'])) ?>"><?= e($p['name']) ?></a></h3>
     <span class="pc-ref"><?= e(__('manufacturer_ref')) ?> : <?= e($p['manufacturer_ref'] ?: '—') ?> · <?= e($p['sku']) ?></span>
-    <span class="stock stock-<?= e($p['stock_status']) ?>"><?= e(Catalog::stockLabel($p['stock_status'])) ?></span>
+    <?php if (!Catalog::onRequest($p)): ?><span class="stock stock-<?= e($p['stock_status']) ?>"><?= e(Catalog::stockText($p)) ?></span><?php endif; ?>
     <div class="pc-footer">
       <div class="price">
+        <?php if (Catalog::onRequest($p)): ?><strong class="price-request"><?= e(__('price_on_request')) ?></strong>
+        <?php else: ?>
         <?php if ($p['old_price']): ?><del><?= e(money($p['old_price'])) ?></del><?php endif; ?>
         <strong><?= e(money($p['final_price'])) ?></strong>
+        <?php endif; ?>
       </div>
       <?php if (Catalog::canBuy($p)): ?>
         <button class="btn btn-accent btn-icon" data-add-to-cart="<?= (int)$p['id'] ?>" aria-label="<?= e(__('add_to_cart')) ?>"><?= icon('cart', 'icon icon-sm') ?></button>

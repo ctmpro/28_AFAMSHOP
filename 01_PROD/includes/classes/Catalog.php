@@ -96,9 +96,25 @@ class Catalog
         return __('stock_' . $status);
     }
 
+    /** Produit sans prix (logiciel, solution sur mesure…) : affiché « Prix sur devis ». */
+    public static function onRequest(array $p): bool
+    {
+        return (float)$p['price'] <= 0;
+    }
+
+    /** Libellé de disponibilité détaillé (quantité restante si stock faible). */
+    public static function stockText(array $p): string
+    {
+        $label = self::stockLabel($p['stock_status']);
+        if ($p['stock_status'] === 'low_stock' && setting_bool('show_stock_qty', true)) {
+            $label .= ' — ' . __('low_stock_qty', ['n' => (int)$p['stock']]);
+        }
+        return $label;
+    }
+
     public static function canBuy(array $p, int $qty = 1): bool
     {
-        if (!$p['published']) {
+        if (!$p['published'] || self::onRequest($p)) {
             return false;
         }
         if ((int)$p['stock'] >= $qty) {
@@ -473,7 +489,7 @@ class Catalog
             'sku' => $p['sku'],
             'ref' => $p['manufacturer_ref'],
             'brand' => $p['brand_name'],
-            'price' => money($p['final_price']),
+            'price' => self::onRequest($p) ? __('price_on_request') : money($p['final_price']),
             'image' => media_url($p['main_image']),
             'url' => url('produit/' . $p['slug']),
         ], $res['items']);

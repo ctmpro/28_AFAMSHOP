@@ -712,6 +712,7 @@ function payment_method_label(string $m): string
     return [
         'stripe' => __('pm_stripe'),
         'paydunya' => __('pm_paydunya'),
+        'paydunya_card' => __('pm_paydunya_card'),
         'cod' => __('pm_cod'),
         'transfer' => __('pm_transfer'),
     ][$m] ?? $m;

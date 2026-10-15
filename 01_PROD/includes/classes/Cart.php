@@ -22,6 +22,9 @@ class Cart
         if (!$p) {
             return ['ok' => false, 'error' => __('product_not_found')];
         }
+        if (Catalog::onRequest($p)) {
+            return ['ok' => false, 'error' => __('price_on_request_msg')];
+        }
         $newQty = min(self::MAX_QTY, (self::raw()[$productId] ?? 0) + max(1, $qty));
         if (!Catalog::canBuy($p, $newQty)) {
             $newQty = max(0, (int)$p['stock']);

@@ -32,10 +32,10 @@ require INCLUDES_PATH . '/layout/header.php';
         <?php endforeach; ?>
       </tr></thead>
       <tbody>
-        <tr><th><?= e(__('price')) ?></th><?php foreach ($products as $p): ?><td><strong><?= e(money($p['final_price'])) ?></strong><?= $p['old_price'] ? ' <del>' . e(money($p['old_price'])) . '</del>' : '' ?></td><?php endforeach; ?></tr>
+        <tr><th><?= e(__('price')) ?></th><?php foreach ($products as $p): ?><td><?php if (Catalog::onRequest($p)): ?><strong><?= e(__('price_on_request')) ?></strong><?php else: ?><strong><?= e(money($p['final_price'])) ?></strong><?= $p['old_price'] ? ' <del>' . e(money($p['old_price'])) . '</del>' : '' ?><?php endif; ?></td><?php endforeach; ?></tr>
         <tr><th><?= e(__('brand')) ?></th><?php foreach ($products as $p): ?><td><?= e($p['brand_name']) ?></td><?php endforeach; ?></tr>
         <tr><th><?= e(__('manufacturer_ref')) ?></th><?php foreach ($products as $p): ?><td><?= e($p['manufacturer_ref']) ?></td><?php endforeach; ?></tr>
-        <tr><th><?= e(__('availability')) ?></th><?php foreach ($products as $p): ?><td><span class="stock stock-<?= e($p['stock_status']) ?>"><?= e(Catalog::stockLabel($p['stock_status'])) ?></span></td><?php endforeach; ?></tr>
+        <tr><th><?= e(__('availability')) ?></th><?php foreach ($products as $p): ?><td><span class="stock stock-<?= e($p['stock_status']) ?>"><?= e(Catalog::stockText($p)) ?></span></td><?php endforeach; ?></tr>
         <tr><th><?= e(__('type')) ?></th><?php foreach ($products as $p): ?><td><?= e($p['product_type']) ?></td><?php endforeach; ?></tr>
         <tr><th><?= e(__('color')) ?></th><?php foreach ($products as $p): ?><td><?= e($p['color']) ?></td><?php endforeach; ?></tr>
         <?php foreach (array_keys($keys) as $k): ?>

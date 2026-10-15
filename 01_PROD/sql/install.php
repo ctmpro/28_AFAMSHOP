@@ -85,6 +85,22 @@ foreach ($banners as [$pos, $title, $sub, $btn, $link, $sort, $image]) {
     DB::insert('banners', ['position' => $pos, 'title' => $title, 'subtitle' => $sub, 'button_text' => $btn, 'link' => $link, 'sort' => $sort, 'image_desktop' => $image]);
 }
 
+// Descriptions de catégories
+foreach ($categoryDescriptions as $slug => $html) {
+    DB::exec('UPDATE categories SET description = :d WHERE slug = :s', ['d' => $html, 's' => $slug]);
+}
+
+// Logiciel de gestion de parc AFAM (produit réel, installé même sans démonstration)
+$brandIds['AFAM'] = DB::insert('brands', ['name' => 'AFAM', 'slug' => 'afam', 'featured' => 0, 'sort' => 99]);
+$sp = $softwareProduct;
+$spId = DB::insert('products', [
+    'sku' => $sp['sku'], 'manufacturer_ref' => $sp['manufacturer_ref'], 'name' => $sp['name'], 'slug' => $sp['slug'],
+    'brand_id' => $brandIds['AFAM'], 'category_id' => $catIds[$sp['category']], 'product_type' => $sp['product_type'],
+    'short_description' => $sp['short_description'], 'description' => $sp['description'], 'specs' => $sp['specs'],
+    'price' => 0, 'stock' => 0, 'warranty' => $sp['warranty'], 'delivery_delay' => $sp['delivery_delay'], 'is_featured' => 1,
+]);
+DB::insert('product_images', ['product_id' => $spId, 'path' => $sp['image'], 'alt' => $sp['name'], 'is_main' => 1]);
+
 if (!isset($opts['no-demo'])) {
     echo "Catalogue de démonstration...\n";
     foreach ($products as $i => [$sku, $ref, $name, $brand, $cat, $type, $color, $price, $promo, $stock, $short, $compat, $featured]) {

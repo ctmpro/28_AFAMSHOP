@@ -10,13 +10,13 @@ if (!$order || !Orders::canView($order, (string)query_param('t'))) {
 }
 $back = ['n' => $order['order_number'], 't' => $order['access_token']];
 if ($order['payment_status'] === 'paid' || in_array($order['status'], ['cancelled', 'refunded'], true)
-    || !in_array($order['payment_method'], ['stripe', 'paydunya'], true)) {
+    || !in_array($order['payment_method'], ['stripe', 'paydunya', 'paydunya_card'], true)) {
     redirect(url('commande/confirmation', $back));
 }
 try {
     $payUrl = $order['payment_method'] === 'stripe'
         ? (StripeGateway::enabled() ? StripeGateway::createCheckout($order) : null)
-        : (PayDunyaGateway::enabled() ? PayDunyaGateway::createInvoice($order) : null);
+        : (PayDunyaGateway::enabled() ? PayDunyaGateway::createInvoice($order, $order['payment_method'] === 'paydunya_card') : null);
     if (!$payUrl) {
         throw new RuntimeException('gateway disabled');
     }

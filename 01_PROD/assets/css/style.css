@@ -327,6 +327,8 @@ legend { font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
 .product-refs dd { margin: 0; font-weight: 600; }
 .product-short { color: #475569; }
 .buy-box { border: 1px solid var(--border); box-shadow: none; }
+.price-request { font-size: .95rem !important; color: var(--primary) !important; }
+.stock-hint { font-size: .85rem; color: var(--muted); margin: -4px 0 8px; }
 .promo-end { color: var(--accent); font-weight: 600; font-size: .88rem; margin: 4px 0 0; }
 .buy-meta { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 6px; font-size: .88rem; color: #475569; }
 .buy-meta li { display: flex; align-items: center; gap: 8px; }
@@ -365,6 +367,18 @@ legend { font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
 .rich-text table { width: 100%; border-collapse: collapse; margin: 0 0 1.2em; font-size: .92rem; display: block; overflow-x: auto; }
 .rich-text th, .rich-text td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
 .rich-text th { background: var(--bg); color: var(--secondary); }
+.rich-text mark.todo { background: #fff3cd; color: #8a5a00; padding: 0 4px; border-radius: 3px; }
+.rich-text .lead { font-size: 1.1rem; color: #334155; }
+.about-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 0 0 1.4em; }
+.about-stats > div { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; text-align: center; }
+.about-stats strong { display: block; font-size: 1.8rem; font-weight: 800; color: var(--primary); line-height: 1.2; }
+.about-stats span { color: var(--muted); font-size: .9rem; }
+.about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 0 0 1.4em; }
+.about-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; border-top: 3px solid var(--primary); }
+.about-card h3 { margin: 0 0 6px; }
+.about-card p { margin: 0; color: #475569; font-size: .92rem; }
+.about-cta { background: color-mix(in srgb, var(--primary) 7%, #fff); border-radius: var(--radius); padding: 20px; margin-top: 1.5em; }
+.about-cta p:last-child { margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* Panier & commande */
 .cart-layout, .checkout-layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
@@ -455,7 +469,7 @@ legend { font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
 .duo-card .icon { color: var(--accent); margin-bottom: 12px; }
 .duo-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm); margin-bottom: 16px; }
 .duo-card p { color: #475569; }
-.service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
 .service-grid-lg { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 .service-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; display: flex; flex-direction: column; gap: 8px; color: var(--text); text-decoration: none !important; border: 1px solid transparent; }
 .service-card:hover { border-color: var(--primary); }

@@ -242,6 +242,70 @@ function mouse() {
   return `${shadow(26, 82, 26, 4, 0.15)}<rect x="0" y="0" width="52" height="80" rx="26" fill="#26364a"/><line x1="26" y1="4" x2="26" y2="30" stroke="#5a6b80" stroke-width="3"/>`;
 }
 
+
+// Tableau de bord du logiciel de gestion de parc (écran 520 x 340)
+function dashboard() {
+  const rows = [['#2fb36b', 82], ['#2fb36b', 64], [C.accent, 18], ['#2fb36b', 47], ['#d64545', 6]];
+  let list = '';
+  rows.forEach(([col, lvl], i) => {
+    const y = 104 + i * 34;
+    list += `<rect x="36" y="${y}" width="270" height="26" rx="6" fill="#ffffff" opacity=".08"/>
+      <circle cx="52" cy="${y + 13}" r="6" fill="${col}"/>
+      <rect x="66" y="${y + 9}" width="${80 + (i % 3) * 18}" height="7" rx="3.5" fill="#ffffff" opacity=".75"/>
+      <rect x="200" y="${y + 9}" width="90" height="8" rx="4" fill="#ffffff" opacity=".18"/>
+      <rect x="200" y="${y + 9}" width="${lvl * 0.9}" height="8" rx="4" fill="${col}"/>`;
+  });
+  const bars = [40, 62, 48, 80, 66, 92, 74].map((h, i) => `<rect x="${336 + i * 22}" y="${238 - h}" width="14" height="${h}" rx="3" fill="${i === 5 ? C.accent : '#5aa6e8'}"/>`).join('');
+  return `${shadow(260, 400, 150, 8, 0.2)}
+  <rect x="0" y="0" width="520" height="340" rx="14" fill="#1c2532"/>
+  <rect x="12" y="12" width="496" height="316" rx="6" fill="url(#screen2)"/>
+  <rect x="12" y="12" width="496" height="40" rx="6" fill="#0a1d30" opacity=".6"/>
+  <circle cx="34" cy="32" r="8" fill="${C.accent}"/><rect x="50" y="27" width="120" height="10" rx="5" fill="#ffffff" opacity=".9"/>
+  <rect x="380" y="25" width="110" height="14" rx="7" fill="#ffffff" opacity=".15"/>
+  ${[['12', '#2fb36b'], ['3', C.accent], ['1', '#d64545']].map(([n, c], i) => `<rect x="${36 + i * 92}" y="66" width="82" height="28" rx="6" fill="${c}" opacity=".9"/><text x="${50 + i * 92}" y="86" font-family="${FONT}" font-weight="700" font-size="16" fill="#fff">${n}</text><rect x="${72 + i * 92}" y="78" width="36" height="5" rx="2.5" fill="#fff" opacity=".7"/>`).join('')}
+  ${list}
+  <rect x="324" y="104" width="170" height="146" rx="8" fill="#ffffff" opacity=".08"/>${bars}
+  <rect x="336" y="262" width="150" height="7" rx="3.5" fill="#ffffff" opacity=".3"/>
+  <rect x="226" y="340" width="68" height="44" fill="#9aa8b8"/><rect x="170" y="380" width="180" height="14" rx="7" fill="#b4c0ce"/>`;
+}
+
+// Affiche (130 x 180)
+function poster(c1, c2) {
+  return `${shadow(65, 182, 60, 5, 0.12)}<rect width="130" height="180" rx="6" fill="#fff" stroke="#e1e7ee"/>
+  <rect x="10" y="10" width="110" height="90" rx="4" fill="${c1}"/><circle cx="90" cy="40" r="18" fill="${c2}"/><path d="M10 100 L50 56 L80 84 L100 66 L120 100 Z" fill="#ffffff" opacity=".35"/>
+  <rect x="14" y="114" width="80" height="9" rx="4" fill="${C.secondary}"/><rect x="14" y="132" width="100" height="5" rx="2.5" fill="#d3dbe5"/><rect x="14" y="144" width="86" height="5" rx="2.5" fill="#d3dbe5"/>
+  <rect x="14" y="158" width="40" height="12" rx="6" fill="${c2}"/>`;
+}
+// Roll-up / kakémono (110 x 300)
+function rollup() {
+  return `${shadow(55, 302, 60, 6, 0.18)}<rect x="50" y="270" width="10" height="24" fill="#8a97a8"/><rect x="5" y="290" width="100" height="12" rx="5" fill="#5a6b80"/>
+  <rect x="8" y="0" width="94" height="280" rx="3" fill="url(#bgDark)"/>
+  <circle cx="55" cy="70" r="30" fill="${C.accent}"/><rect x="20" y="124" width="70" height="10" rx="5" fill="#fff"/><rect x="20" y="142" width="54" height="6" rx="3" fill="#fff" opacity=".6"/>
+  <rect x="20" y="170" width="70" height="60" rx="5" fill="#fff" opacity=".15"/><rect x="0" y="0" width="110" height="8" rx="3" fill="#5a6b80"/>`;
+}
+// Cartes de visite (140 x 90)
+function cards() {
+  const card = (x, y, r, fill) => `<g transform="translate(${x} ${y}) rotate(${r})"><rect width="120" height="70" rx="6" fill="${fill}" stroke="#e1e7ee"/><rect x="12" y="14" width="50" height="8" rx="4" fill="${fill === '#fff' ? C.primary : '#fff'}"/><rect x="12" y="44" width="80" height="5" rx="2.5" fill="${fill === '#fff' ? '#d3dbe5' : '#ffffff'}" opacity=".7"/></g>`;
+  return `${shadow(70, 92, 66, 5, 0.12)}${card(4, 18, -8, C.secondary)}${card(14, 12, 4, '#fff')}`;
+}
+// Dépliants en éventail (170 x 130)
+function flyers() {
+  const f = (r, c) => `<g transform="translate(80 120) rotate(${r}) translate(-45 -118)"><rect width="90" height="120" rx="5" fill="#fff" stroke="#e1e7ee"/><rect x="8" y="8" width="74" height="50" rx="3" fill="${c}"/><rect x="8" y="68" width="60" height="6" rx="3" fill="#c3ccd8"/><rect x="8" y="80" width="70" height="4" rx="2" fill="#dbe3ec"/><rect x="8" y="90" width="50" height="4" rx="2" fill="#dbe3ec"/></g>`;
+  return `${shadow(85, 128, 76, 5, 0.12)}${f(-18, C.cyan)}${f(0, C.accent)}${f(18, C.primary)}`;
+}
+// Traceur grand format (360 x 200)
+function plotter() {
+  return `${shadow(180, 200, 170, 7, 0.2)}
+  <rect x="40" y="110" width="12" height="84" fill="#8a97a8"/><rect x="308" y="110" width="12" height="84" fill="#8a97a8"/>
+  <rect x="20" y="186" width="60" height="10" rx="5" fill="#5a6b80"/><rect x="280" y="186" width="60" height="10" rx="5" fill="#5a6b80"/>
+  <rect x="0" y="40" width="360" height="76" rx="14" fill="#f8fafc" stroke="#d3dce7"/>
+  <rect x="0" y="40" width="360" height="24" rx="12" fill="#e1e8f0"/>
+  <rect x="20" y="96" width="320" height="10" rx="4" fill="#26364a"/>
+  <path d="M40 106 L320 106 L300 168 L60 168 Z" fill="#ffffff" stroke="#dbe3ec"/>
+  <rect x="90" y="118" width="180" height="40" rx="3" fill="${C.accent}" opacity=".85"/><circle cx="240" cy="128" r="9" fill="#fff" opacity=".6"/>
+  <rect x="300" y="70" width="36" height="16" rx="4" fill="#1b2838"/><circle cx="24" cy="76" r="4" fill="#2fd27a"/>`;
+}
+
 // ---------------------------------------------------------------- fonds
 function defs() {
   return `<defs>
@@ -290,7 +354,7 @@ const scenes = {
     + g(820, 420, 0.95, laptop())
     + g(250, 470, 0.85, briefcase()) + g(1080, 470, 0.8, mug())],
 
-  'home-sharp': [1200, 750, (w, h) => lightBg(w, h, C.primary, '#2fb36b')
+  'home-multifonctions': [1200, 750, (w, h) => lightBg(w, h, C.primary, '#2fb36b')
     + g(390, 130, 1.55, mfp())
     + g(140, 120, 0.9, leaf()) + g(880, 160, 1.0, gauge())
     + g(900, 380, 0.85, toner(C.black)) + g(960, 390, 0.82, toner(C.cyan)) + g(1020, 400, 0.8, toner(C.yellow))
@@ -342,8 +406,22 @@ const scenes = {
   'service-vente': [800, 450, (w, h) => lightBg(w, h)
     + g(90, 100, 0.95, mfp()) + g(440, 210, 0.75, laptop()) + g(690, 200, 0.6, toner(C.black)) + g(730, 205, 0.58, toner(C.cyan))],
 
+
+  'home-logiciel': [1200, 750, (w, h) => lightBg(w, h)
+    + g(330, 120, 1.05, dashboard())
+    + g(110, 330, 0.75, mfp()) + g(930, 380, 0.7, mfp({ accent: '#2fb36b' }))
+    + g(120, 120, 0.8, gear(56, C.primary)) + g(1010, 170, 0.8, gauge())],
+  'logiciel-produit': [1000, 1000, (w, h) => lightBg(w, h)
+    + g(160, 200, 1.32, dashboard())
+    + g(70, 640, 0.62, mfp()) + g(760, 660, 0.58, mfp({ accent: '#2fb36b' }))],
+  'service-multisupport': [800, 450, (w, h) => lightBg(w, h, C.accent, C.cyan)
+    + g(40, 110, 1.0, rollup()) + g(170, 226, 0.62, plotter())
+    + g(430, 130, 1.0, poster(C.primary, C.accent)) + g(580, 200, 0.9, flyers()) + g(560, 330, 0.7, cards())],
+  'home-multisupport': [1200, 750, (w, h) => lightBg(w, h, C.accent, C.cyan)
+    + g(90, 170, 1.55, rollup()) + g(330, 396, 0.95, plotter())
+    + g(760, 150, 1.4, poster(C.primary, C.accent)) + g(950, 300, 1.2, flyers()) + g(780, 470, 0.9, cards())],
   // Diaporama d'accueil (sous la bannière)
-  'slide-sharp': [1280, 360, (w, h) => darkBg(w, h)
+  'slide-multifonctions': [1280, 360, (w, h) => darkBg(w, h)
     + g(760, 40, 0.88, mfp()) + g(1060, 150, 0.6, toner(C.black)) + g(1110, 155, 0.58, toner(C.cyan)) + g(600, 120, 0.9, leaf())],
   'slide-informatique': [1280, 360, (w, h) => darkBg(w, h)
     + g(720, 110, 0.9, laptop()) + g(1020, 120, 0.8, monitor()) + g(600, 260, 0.6, mouse())],

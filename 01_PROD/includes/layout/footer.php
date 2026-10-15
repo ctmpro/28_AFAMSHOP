@@ -62,7 +62,7 @@ $socials = array_filter([
         <?php if (setting('opening_hours')): ?><li><?= icon('clock', 'icon icon-sm') ?> <span><?= nl2br(e(setting('opening_hours'))) ?></span></li><?php endif; ?>
       </ul>
       <div class="pay-badges" aria-label="<?= e(__('secure_payment')) ?>">
-        <?php if (StripeGateway::enabled()): ?><span>Visa</span><span>Mastercard</span><?php endif; ?>
+        <?php if (StripeGateway::enabled() || PayDunyaGateway::cardEnabled()): ?><span>Visa</span><span>Mastercard</span><?php endif; ?>
         <?php if (PayDunyaGateway::enabled()): ?><span>Wave</span><span>Orange Money</span><?php endif; ?>
         <?php if (setting_bool('payment_cod_enabled')): ?><span>À la livraison</span><?php endif; ?>
       </div>

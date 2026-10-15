@@ -87,17 +87,27 @@ $crumbs = $p['category_id'] ? Catalog::breadcrumb((int)$p['category_id']) : [];
 
       <div class="buy-box card">
         <div class="price price-lg">
+          <?php if (Catalog::onRequest($p)): ?>
+          <strong><?= e(__('price_on_request')) ?></strong>
+          <?php else: ?>
           <?php if ($p['old_price']): ?><del><?= e(money($p['old_price'])) ?></del><?php endif; ?>
           <strong><?= e(money($p['final_price'])) ?></strong>
           <small><?= setting_bool('prices_include_tax', true) ? 'TTC' : 'HT' ?></small>
+          <?php endif; ?>
         </div>
         <?php if ($p['old_price'] && $p['promo_end'] && (float)$p['promo_price'] === (float)$p['final_price']): ?>
           <p class="promo-end"><?= e(__('promo')) ?> jusqu'au <?= e(format_date($p['promo_end'])) ?></p>
         <?php endif; ?>
+        <?php if (Catalog::onRequest($p)): ?>
+        <p class="muted"><?= e(__('price_on_request_msg')) ?></p>
+        <?php else: ?>
         <p class="stock stock-<?= e($p['stock_status']) ?>">
           <?= e(Catalog::stockLabel($p['stock_status'])) ?>
-          <?php if (setting_bool('show_stock_qty', true) && $p['stock'] > 0): ?> — <?= e(__('in_stock_qty', ['n' => (int)$p['stock']])) ?><?php endif; ?>
+          <?php if (setting_bool('show_stock_qty', true) && $p['stock'] > 0): ?> — <?= e(__($p['stock_status'] === 'low_stock' ? 'low_stock_qty' : 'in_stock_qty', ['n' => (int)$p['stock']])) ?><?php endif; ?>
         </p>
+        <?php if ($p['stock_status'] === 'out_of_stock'): ?><p class="stock-hint"><?= e(__('out_of_stock_hint')) ?></p><?php endif; ?>
+        <?php if ($p['stock_status'] === 'on_order'): ?><p class="stock-hint"><?= e(__('on_order_hint')) ?></p><?php endif; ?>
+        <?php endif; ?>
         <ul class="buy-meta">
           <li><?= icon('truck', 'icon icon-sm') ?> <?= e(__('delivery_delay')) ?> : <?= e($p['delivery_delay'] ?: setting('default_delivery_delay')) ?></li>
           <li><?= icon('shield', 'icon icon-sm') ?> <?= e(__('warranty')) ?> : <?= e($p['warranty'] ?: setting('default_warranty')) ?></li>
@@ -117,7 +127,7 @@ $crumbs = $p['category_id'] ? Catalog::breadcrumb((int)$p['category_id']) : [];
         </form>
         <?php endif; ?>
         <div class="buy-secondary">
-          <a class="btn btn-outline" href="<?= e(url('devis', ['produit' => $p['id']])) ?>"><?= icon('file', 'icon icon-sm') ?> <?= e(__('request_quote')) ?></a>
+          <a class="btn <?= $canBuy ? 'btn-outline' : 'btn-accent' ?>" href="<?= e(url('devis', ['produit' => $p['id']])) ?>"><?= icon('file', 'icon icon-sm') ?> <?= e(__(Catalog::onRequest($p) && $p['product_type'] === 'Logiciel' ? 'request_demo' : 'request_quote')) ?></a>
           <button class="btn btn-outline <?= $isFav ? 'active' : '' ?>" data-favorite="<?= (int)$p['id'] ?>"><?= icon('heart', 'icon icon-sm') ?> <span><?= e($isFav ? __('remove_from_favorites') : __('add_to_favorites')) ?></span></button>
           <label class="btn btn-outline"><input type="checkbox" data-compare="<?= (int)$p['id'] ?>" <?= in_array((int)$p['id'], $_SESSION['compare'] ?? [], true) ? 'checked' : '' ?>> <?= e(__('compare')) ?></label>
         </div>
@@ -136,7 +146,7 @@ $crumbs = $p['category_id'] ? Catalog::breadcrumb((int)$p['category_id']) : [];
       <?php if (setting_bool('reviews_enabled', true)): ?><button role="tab" data-tab="reviews" id="avis"><?= e(__('reviews')) ?> (<?= $rating['count'] ?>)</button><?php endif; ?>
     </div>
     <section class="tab-panel active rich-text" data-panel="desc">
-      <?= $p['description'] ? clean_html($p['description']) : '<p>' . nl2br(e($p['short_description'])) . '</p>' ?>
+      <?= $p['description'] ? clean_html(render_vars($p['description'])) : '<p>' . nl2br(e($p['short_description'])) . '</p>' ?>
     </section>
     <?php if ($specs || $p['weight'] || $p['dimensions']): ?>
     <section class="tab-panel" data-panel="specs">

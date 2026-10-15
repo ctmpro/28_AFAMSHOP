@@ -36,7 +36,7 @@ $settings = [
 
     // ---- En-tête
     ['topbar_enabled', '1', 'header', 'Afficher la barre d\'information', 'bool'],
-    ['topbar_text', 'Livraison rapide à Dakar • Représentant exclusif Sharp au Sénégal', 'header', 'Texte de la barre d\'information', 'text'],
+    ['topbar_text', 'Livraison rapide à Dakar et en régions • Paiement par carte, Wave et Orange Money', 'header', 'Texte de la barre d\'information', 'text'],
     ['menu_label_printing', 'Impression', 'header', 'Menu : Impression', 'text'],
     ['menu_label_consumables', 'Consommables', 'header', 'Menu : Consommables', 'text'],
     ['menu_label_it', 'Informatique', 'header', 'Menu : Informatique', 'text'],
@@ -49,7 +49,7 @@ $settings = [
 
     // ---- Page d'accueil
     ['hero_title', 'Des solutions d\'impression professionnelles adaptées à vos besoins', 'home', 'Bannière : titre', 'text'],
-    ['hero_subtitle', 'Imprimantes, copieurs, consommables, informatique et fournitures de bureau. Vente, location et maintenance clé en main avec AFAM, représentant exclusif Sharp au Sénégal.', 'home', 'Bannière : sous-titre', 'textarea'],
+    ['hero_subtitle', 'Imprimantes, copieurs, consommables, informatique et fournitures de bureau. Vente, location, maintenance et impression multisupport clé en main avec AFAM.', 'home', 'Bannière : sous-titre', 'textarea'],
     ['hero_button_text', 'Découvrir le catalogue', 'home', 'Bannière : bouton 1', 'text'],
     ['hero_button_link', 'categorie/impression', 'home', 'Bannière : lien bouton 1', 'text'],
     ['hero_button2_text', 'Demander un devis', 'home', 'Bannière : bouton 2', 'text'],
@@ -69,14 +69,16 @@ $settings = [
     ['home_pro_text', 'Entreprises et administrations : bénéficiez d\'un accompagnement personnalisé, de tarifs adaptés et d\'un audit de votre parc d\'impression pour réduire vos coûts.', 'home', 'Bloc pro : texte', 'textarea'],
     ['home_pro_image', 'assets/img/contenus/home-pro.jpg', 'home', 'Bloc pro : image', 'image'],
     ['home_rental_title', 'Location d\'imprimantes', 'home', 'Bloc location : titre', 'text'],
-    ['home_rental_text', 'Des multifonctions Sharp performantes en location clé en main : matériel, consommables et maintenance inclus dans un loyer maîtrisé.', 'home', 'Bloc location : texte', 'textarea'],
+    ['home_rental_text', 'Des multifonctions performantes en location clé en main : matériel, consommables et maintenance inclus dans un loyer maîtrisé.', 'home', 'Bloc location : texte', 'textarea'],
     ['home_rental_image', 'assets/img/contenus/home-location.jpg', 'home', 'Bloc location : image', 'image'],
     ['home_maintenance_title', 'Maintenance & assistance', 'home', 'Bloc maintenance : titre', 'text'],
     ['home_maintenance_text', 'Maintenance préventive et corrective, remplacement de pièces et intervention rapide de nos techniciens certifiés.', 'home', 'Bloc maintenance : texte', 'textarea'],
     ['home_maintenance_image', 'assets/img/contenus/home-maintenance.jpg', 'home', 'Bloc maintenance : image', 'image'],
-    ['home_sharp_title', 'AFAM, représentant exclusif Sharp au Sénégal', 'home', 'Bloc Sharp : titre', 'text'],
-    ['home_sharp_text', 'Performance, économies et respect de l\'environnement : découvrez la gamme de multifonctions Sharp et nos offres clé en main.', 'home', 'Bloc Sharp : texte', 'textarea'],
-    ['home_sharp_image', 'assets/img/contenus/home-sharp.jpg', 'home', 'Bloc Sharp : image', 'image'],
+    ['home_software_title', 'Logiciel de gestion de parc d\'imprimantes AFAM', 'home', 'Bloc logiciel : titre', 'text'],
+    ['home_software_text', 'Supervisez toutes vos imprimantes depuis un seul tableau de bord : niveaux de toner, compteurs, alertes et rapports de coûts. Une solution développée par AFAM pour réduire vos coûts d\'impression.', 'home', 'Bloc logiciel : texte', 'textarea'],
+    ['home_software_button', 'Découvrir le logiciel', 'home', 'Bloc logiciel : texte du bouton', 'text'],
+    ['home_software_link', 'produit/logiciel-gestion-parc-imprimantes', 'home', 'Bloc logiciel : lien du bouton', 'text'],
+    ['home_software_image', 'assets/img/contenus/home-logiciel.jpg', 'home', 'Bloc logiciel : image', 'image'],
     ['home_brands_title', 'Nos marques', 'home', 'Titre : marques', 'text'],
     ['home_contact_title', 'Besoin d\'un conseil ?', 'home', 'Bloc contact : titre', 'text'],
     ['home_contact_text', 'Notre équipe commerciale vous répond par téléphone, email ou WhatsApp.', 'home', 'Bloc contact : texte', 'textarea'],
@@ -117,6 +119,7 @@ $settings = [
     // ---- Paiement
     ['payment_stripe_enabled', '1', 'payment', 'Activer Stripe (carte bancaire)', 'bool'],
     ['payment_paydunya_enabled', '1', 'payment', 'Activer PayDunya (Wave, Orange Money...)', 'bool'],
+    ['payment_paydunya_card_enabled', '1', 'payment', 'Proposer la carte bancaire via PayDunya (si Stripe n\'est pas configuré)', 'bool'],
     ['paydunya_channels', '', 'payment', 'Canaux PayDunya (ex : wave-senegal,orange-money-senegal,card) — vide = tous', 'text'],
     ['payment_cod_enabled', '1', 'payment', 'Activer le paiement à la livraison', 'bool'],
     ['payment_transfer_enabled', '0', 'payment', 'Activer le virement bancaire', 'bool'],
@@ -124,7 +127,7 @@ $settings = [
 
     // ---- SEO
     ['meta_title', 'AFAMSHOP — Impression, consommables et informatique au Sénégal', 'seo', 'Titre SEO par défaut', 'text'],
-    ['meta_description', 'Imprimantes, copieurs Sharp, toners, cartouches, informatique et fournitures de bureau au Sénégal. Vente, location et maintenance.', 'seo', 'Description SEO par défaut', 'textarea'],
+    ['meta_description', 'Imprimantes, copieurs, toners, cartouches, informatique, fournitures de bureau et impression multisupport au Sénégal. Vente, location et maintenance.', 'seo', 'Description SEO par défaut', 'textarea'],
     ['google_analytics_id', '', 'seo', 'Google Analytics (ID G-XXXX)', 'text'],
     ['recaptcha_enabled', '1', 'seo', 'Activer reCAPTCHA sur les formulaires (clés dans .env)', 'bool'],
 
@@ -231,8 +234,7 @@ $zones = [
 
 $lorem = '<p>Contenu à personnaliser depuis le back-office (Contenus &gt; Pages).</p>';
 $pages = [
-    ['a-propos', 'À propos', '<h2>AFAM, votre partenaire impression au Sénégal</h2><p>AFAM est une entreprise sénégalaise spécialisée dans les solutions d\'impression professionnelles. Représentant exclusif de Sharp au Sénégal, AFAM propose des offres de location et de vente clé en main alliant performance, économies et respect de l\'environnement.</p><p>L\'entreprise propose également des services de maintenance et des solutions adaptées permettant de réduire les coûts d\'impression et d\'améliorer l\'efficacité.</p>', 'company', 1],
-    ['afam-sharp', 'AFAM × Sharp', '<h2>Représentant exclusif Sharp au Sénégal</h2><p>Découvrez la gamme complète de multifonctions et solutions Sharp, avec l\'expertise locale d\'AFAM : installation, formation, consommables d\'origine et maintenance.</p>', 'company', 2],
+    ['a-propos', 'À propos', file_get_contents(__DIR__ . '/contenus/a-propos.html'), 'company', 1],
     ['solutions-professionnelles', 'Solutions professionnelles', '<h2>Des solutions pour les entreprises et administrations</h2><p>Audit de parc, gestion des impressions, tarifs adaptés aux volumes, contrats de service : AFAM accompagne les organisations dans l\'optimisation de leurs coûts d\'impression.</p>', 'company', 3],
     ['faq', 'FAQ', '<h3>Comment trouver le consommable de mon imprimante ?</h3><p>Utilisez la recherche par imprimante : choisissez la marque puis le modèle.</p><h3>Quels sont les moyens de paiement ?</h3><p>Carte bancaire (Stripe), Wave, Orange Money (PayDunya) et paiement à la livraison selon disponibilité.</p><h3>Livrez-vous hors de Dakar ?</h3><p>Oui, dans toutes les régions du Sénégal. Les frais dépendent de la zone de livraison.</p>', 'help', 1],
     ['livraison-retours', 'Politique de livraison et retours', $lorem, 'help', 2],
@@ -244,15 +246,39 @@ $pages = [
 ];
 
 $services = [
-    ['location', 'Location d\'imprimantes', 'key', 'Des multifonctions en location clé en main, maintenance et consommables inclus.', '<h2>La location clé en main</h2><p>Équipez vos bureaux avec des multifonctions Sharp récentes sans investissement initial.</p><h3>Avantages</h3><ul><li>Aucun investissement : un loyer mensuel maîtrisé</li><li>Maintenance et consommables inclus</li><li>Matériel récent et évolutif</li><li>Interventions rapides de techniciens certifiés</li></ul><h3>Maintenance associée</h3><p>Chaque contrat comprend la maintenance préventive et corrective ainsi que le remplacement des pièces d\'usure.</p>', 'rental', 1, 'assets/img/contenus/service-location.jpg'],
+    ['location', 'Location d\'imprimantes', 'key', 'Des multifonctions en location clé en main, maintenance et consommables inclus.', '<h2>La location clé en main</h2><p>Équipez vos bureaux avec des multifonctions récentes sans investissement initial.</p><h3>Avantages</h3><ul><li>Aucun investissement : un loyer mensuel maîtrisé</li><li>Maintenance et consommables inclus</li><li>Matériel récent et évolutif</li><li>Interventions rapides de techniciens certifiés</li></ul><h3>Maintenance associée</h3><p>Chaque contrat comprend la maintenance préventive et corrective ainsi que le remplacement des pièces d\'usure.</p>', 'rental', 1, 'assets/img/contenus/service-location.jpg'],
     ['maintenance', 'Maintenance', 'wrench', 'Maintenance préventive et corrective, remplacement de pièces et assistance.', '<h2>Maintenance de votre parc d\'impression</h2><ul><li><strong>Maintenance préventive</strong> : visites planifiées pour éviter les pannes</li><li><strong>Maintenance corrective</strong> : diagnostic et réparation</li><li><strong>Intervention</strong> sur site à Dakar et en régions</li><li><strong>Remplacement de pièces</strong> d\'origine</li><li><strong>Assistance</strong> téléphonique et à distance</li></ul>', 'maintenance', 2, 'assets/img/contenus/service-maintenance.jpg'],
-    ['solutions-impression', 'Solutions d\'impression', 'briefcase', 'Audit, gestion de parc et réduction des coûts d\'impression.', '<h2>Optimisez vos impressions</h2><p>Nous analysons vos volumes et usages pour proposer la solution la plus économique et écologique.</p>', 'quote', 3, 'assets/img/contenus/service-solutions.jpg'],
-    ['vente-materiel', 'Vente de matériel', 'printer', 'Imprimantes, copieurs, informatique et consommables d\'origine.', '<h2>Vente de matériel professionnel</h2><p>Un large choix de matériel des plus grandes marques avec installation et formation.</p>', 'quote', 4, 'assets/img/contenus/service-vente.jpg'],
+    ['impression-multisupport', 'Impression multisupport', 'printer', 'Documents, supports de communication, grand format, signalétique : tous vos imprimés professionnels.', file_get_contents(__DIR__ . '/contenus/service-impression-multisupport.html'), 'quote', 3, 'assets/img/contenus/service-multisupport.jpg'],
+    ['solutions-impression', 'Solutions d\'impression', 'briefcase', 'Audit, gestion de parc et réduction des coûts d\'impression.', '<h2>Optimisez vos impressions</h2><p>Nous analysons vos volumes et usages pour proposer la solution la plus économique et écologique.</p>', 'quote', 4, 'assets/img/contenus/service-solutions.jpg'],
+    ['vente-materiel', 'Vente de matériel', 'printer', 'Imprimantes, copieurs, informatique et consommables d\'origine.', '<h2>Vente de matériel professionnel</h2><p>Un large choix de matériel des plus grandes marques avec installation et formation.</p>', 'quote', 5, 'assets/img/contenus/service-vente.jpg'],
 ];
 
 $banners = [
-    ['home_promo', 'Jusqu\'à -15 % sur les toners Sharp', 'Consommables d\'origine, livraison rapide', 'J\'en profite', 'promotions', 1, 'assets/img/contenus/promo-toners.jpg'],
+    ['home_promo', 'Jusqu\'à -15 % sur les toners d\'origine', 'Consommables d\'origine, livraison rapide', 'J\'en profite', 'promotions', 1, 'assets/img/contenus/promo-toners.jpg'],
     ['home_promo', 'Location de multifonctions', 'Maintenance et consommables inclus', 'Demander une étude', 'service/location', 2, 'assets/img/contenus/promo-location.jpg'],
-    ['home_hero', 'Multifonctions Sharp', 'Performance, économies et respect de l\'environnement', 'Découvrir', 'marque/sharp', 1, 'assets/img/contenus/slide-sharp.jpg'],
+    ['home_hero', 'Multifonctions professionnelles', 'Performance, économies et respect de l\'environnement', 'Découvrir', 'categorie/multifonctions', 1, 'assets/img/contenus/slide-multifonctions.jpg'],
     ['home_hero', 'Informatique professionnelle', 'Ordinateurs, écrans, onduleurs et accessoires', 'Voir le catalogue', 'categorie/informatique', 2, 'assets/img/contenus/slide-informatique.jpg'],
+];
+
+// Descriptions de catégories (affichées en tête de liste)
+$categoryDescriptions = [
+    'kits-de-maintenance' => '<p>Les <strong>kits de maintenance</strong> regroupent les pièces d\'usure d\'origine à remplacer après un certain nombre de pages imprimées (unité de fusion, rouleaux d\'entraînement, unité de transfert, filtres…), selon les préconisations du constructeur. Ils prolongent la durée de vie de votre équipement et garantissent une qualité d\'impression constante.</p><p>Ces kits sont <strong>disponibles sur commande</strong> : indiquez-nous le modèle de votre imprimante, nous vous confirmons la référence, le prix et le délai. Leur installation peut être réalisée par nos techniciens dans le cadre d\'une <a href="{site_url}/service/maintenance">prestation de maintenance</a>.</p>',
+    'reseau' => '<p>Équipements réseau et solutions logicielles pour vos environnements d\'impression, dont le <a href="{site_url}/produit/logiciel-gestion-parc-imprimantes"><strong>logiciel de gestion de parc d\'imprimantes développé par AFAM</strong></a> : supervision de vos équipements, suivi des consommables et des coûts. Démonstration gratuite sur demande.</p>',
+];
+
+// Logiciel de gestion de parc développé par AFAM (fiche produit « prix sur devis »)
+$softwareProduct = [
+    'sku' => 'AF-LOG-PARC',
+    'manufacturer_ref' => 'AFAM-PARC',
+    'name' => 'Logiciel de gestion de parc d\'imprimantes AFAM',
+    'slug' => 'logiciel-gestion-parc-imprimantes',
+    'brand' => 'AFAM',
+    'category' => 'reseau',
+    'product_type' => 'Logiciel',
+    'short_description' => 'Supervisez toutes vos imprimantes depuis un tableau de bord unique : niveaux de consommables, compteurs, alertes et rapports de coûts. Solution multi-marques développée par AFAM.',
+    'description' => file_get_contents(__DIR__ . '/contenus/logiciel-gestion-parc.html'),
+    'specs' => "Type: Logiciel de supervision de parc d'impression\nÉditeur: AFAM\nCompatibilité: Multi-marques, multi-sites\nFonctions: Niveaux de consommables, compteurs, alertes, rapports\nDéploiement: Installation et paramétrage par AFAM\nFormation et support: Inclus\nTarif: Sur devis",
+    'warranty' => 'Support et mises à jour inclus',
+    'delivery_delay' => 'Mise en service sur rendez-vous',
+    'image' => 'assets/img/contenus/logiciel-produit.jpg',
 ];

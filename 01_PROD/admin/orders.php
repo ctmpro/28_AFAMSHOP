@@ -48,7 +48,7 @@ $rows = DB::all('SELECT o.*, (SELECT SUM(qty) FROM order_items oi WHERE oi.order
     . ' ORDER BY ' . $order . ', o.id DESC LIMIT ' . $pg['per_page'] . ' OFFSET ' . $pg['offset'], $params);
 
 $methods = [];
-foreach (array_unique(array_merge(['stripe', 'paydunya', 'cod', 'transfer'], DB::col('SELECT DISTINCT payment_method FROM orders'))) as $m) {
+foreach (array_unique(array_merge(['stripe', 'paydunya', 'paydunya_card', 'cod', 'transfer'], DB::col('SELECT DISTINCT payment_method FROM orders'))) as $m) {
     $methods[$m] = payment_method_label($m);
 }
 

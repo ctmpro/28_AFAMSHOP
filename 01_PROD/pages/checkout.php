@@ -12,7 +12,11 @@ $zones = Cart::zones();
 $pickupEnabled = setting_bool('pickup_enabled', true);
 
 $methods = [];
-if (StripeGateway::enabled()) $methods['stripe'] = __('pm_stripe');
+if (StripeGateway::enabled()) {
+    $methods['stripe'] = __('pm_stripe');
+} elseif (PayDunyaGateway::cardEnabled()) {
+    $methods['paydunya_card'] = __('pm_stripe'); // carte bancaire via PayDunya si Stripe n'est pas configuré
+}
 if (PayDunyaGateway::enabled()) $methods['paydunya'] = __('pm_paydunya');
 if (setting_bool('payment_cod_enabled', true)) $methods['cod'] = __('pm_cod');
 if (setting_bool('payment_transfer_enabled')) $methods['transfer'] = __('pm_transfer');
@@ -198,6 +202,7 @@ require INCLUDES_PATH . '/layout/header.php';
             <span><strong><?= e($label) ?></strong>
               <small><?= e(match ($code) {
                   'stripe' => 'Visa, Mastercard — paiement sécurisé par Stripe',
+                  'paydunya_card' => 'Visa, Mastercard — paiement sécurisé par PayDunya',
                   'paydunya' => 'Wave, Orange Money, Free Money… — paiement sécurisé par PayDunya',
                   'cod' => 'Réglez en espèces ou mobile money à la réception',
                   'transfer' => 'Les instructions vous seront communiquées après la commande',

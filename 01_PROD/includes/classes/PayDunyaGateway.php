@@ -44,8 +44,20 @@ class PayDunyaGateway
         return json_decode($res, true) ?: [];
     }
 
-    /** Crée une facture PayDunya et retourne l'URL de paiement. */
-    public static function createInvoice(array $order): string
+    /** Canal PayDunya utilisé pour le paiement par carte bancaire. */
+    public const CARD_CHANNEL = 'card';
+
+    /** Paiement par carte via PayDunya proposé (utile tant que Stripe n'est pas configuré). */
+    public static function cardEnabled(): bool
+    {
+        return self::enabled() && setting_bool('payment_paydunya_card_enabled', true);
+    }
+
+    /**
+     * Crée une facture PayDunya et retourne l'URL de paiement.
+     * $card = true : seule la carte bancaire est proposée sur la page PayDunya.
+     */
+    public static function createInvoice(array $order, bool $card = false): string
     {
         $back = ['n' => $order['order_number'], 't' => $order['access_token'], 'provider' => 'paydunya'];
         $items = [];
@@ -79,7 +91,11 @@ class PayDunyaGateway
         if ((float)$order['delivery_fee'] > 0) {
             $payload['invoice']['taxes']['tax_0'] = ['name' => __('delivery'), 'amount' => (int)round((float)$order['delivery_fee'])];
         }
-        $channels = array_filter(array_map('trim', explode(',', setting('paydunya_channels', ''))));
+        $channels = $card ? [self::CARD_CHANNEL] : array_filter(array_map('trim', explode(',', setting('paydunya_channels', ''))));
+        if (!$card) {
+            // Le paiement mobile money n'affiche pas le canal carte s'il est proposé séparément
+            $channels = array_values(array_diff($channels, self::cardEnabled() ? [self::CARD_CHANNEL] : []));
+        }
         if ($channels) {
             $payload['invoice']['channels'] = array_values($channels);
         }
