@@ -265,6 +265,7 @@ return [
     'printer_model' => 'Modèle d\'imprimante',
     'serial_number' => 'Numéro de série',
     'problem_description' => 'Description du problème',
+    'service_form_intro' => 'Décrivez votre besoin : notre équipe étudie votre projet et vous adresse une proposition adaptée, sans engagement.',
     'request_sent' => 'Votre demande a bien été envoyée. Notre équipe vous recontacte rapidement.',
     'req_quote' => 'Devis',
     'req_rental' => 'Location',

@@ -98,7 +98,7 @@ Réservée au Super Admin. Deux façons de mettre à jour la base sans phpMyAdmi
 
 Une sauvegarde complète de la base (`.sql.gz`, téléchargeable depuis la page, 20 dernières conservées) est faite avant chaque migration ; l'exécution s'arrête à la première erreur et tout est historisé. La page peut être désactivée avec `MIGRATIONS_ENABLED=false` dans `.env`.
 
-Migrations fournies : `2026-10-01_images-et-devises.sql` (affichage en euros, images par défaut), `2026-10-02_pages-legales.sql` (CGV, mentions légales, politique de confidentialité, crédit Neosen) et `2026-10-15_retours-client.sql` (retour client du 01/10/2026 : retrait des mentions Sharp, logiciel de gestion de parc AFAM, impression multisupport, page À propos enrichie, kits de maintenance, carte bancaire via PayDunya). La dernière requête de cette migration liste les éventuelles mentions de Sharp restant dans des textes personnalisés. Le texte source des pages légales est dans `sql/contenus/`.
+Migrations fournies : `2026-10-01_images-et-devises.sql` (affichage en euros, images par défaut), `2026-10-02_pages-legales.sql` (CGV, mentions légales, politique de confidentialité, crédit Neosen) et `2026-10-15_retours-client.sql` (retour client du 01/10/2026 : retrait des mentions Sharp, logiciel de gestion de parc AFAM, impression multisupport, page À propos enrichie, kits de maintenance, carte bancaire via PayDunya) et `2026-10-16_telecommunications.sql` (service et page Télécommunications, entrée de menu, coordonnées AFAM Print & Services). La dernière requête de la migration du 15/10 liste les éventuelles mentions de Sharp restant dans des textes personnalisés. Le texte source des pages légales est dans `sql/contenus/`.
 
 ## Évolutivité
 

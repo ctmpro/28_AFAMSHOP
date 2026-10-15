@@ -135,6 +135,9 @@ $favicon = setting('favicon');
           <?php endif; ?>
         </li>
         <?php endforeach; ?>
+        <?php if (setting('menu_label_telecom')): ?>
+        <li class="nav-item"><a class="nav-link" href="<?= e(url('service/telecommunications')) ?>"><?= icon('antenna', 'icon icon-sm') ?> <?= e(setting('menu_label_telecom')) ?></a></li>
+        <?php endif; ?>
         <li class="nav-item"><a class="nav-link nav-promo" href="<?= e(url('promotions')) ?>"><?= icon('tag', 'icon icon-sm') ?> <?= e(setting('menu_label_promotions', 'Promotions')) ?></a></li>
         <li class="nav-item"><a class="nav-link" href="<?= e(url('marques')) ?>"><?= e(setting('menu_label_brands', 'Marques')) ?></a></li>
         <li class="nav-item"><a class="nav-link" href="<?= e(url('services')) ?>"><?= e(setting('menu_label_services', 'Services')) ?></a></li>
