@@ -211,7 +211,7 @@ require INCLUDES_PATH . '/layout/header.php';
           <?php endforeach; ?>
         </div>
         <label><?= e(__('order_notes')) ?><textarea name="notes" rows="3" maxlength="2000"><?= e($form['notes']) ?></textarea></label>
-        <label class="check"><input type="checkbox" name="terms" value="1" required> <span><?= e(__('accept_terms')) ?> (<a href="<?= e(url('cgv')) ?>" target="_blank">CGV</a>)</span></label>
+        <label class="check"><input type="checkbox" name="terms" value="1" required> <span><?= e(__('accept_terms_prefix')) ?> <a href="<?= e(url('cgv')) ?>" target="_blank"><?= e(__('terms_of_sale')) ?></a></span></label>
       </section>
     </div>
 

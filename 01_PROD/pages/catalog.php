@@ -116,6 +116,7 @@ $baseUrl = strtok(current_url(), '?');
         </fieldset>
         <?php endif; ?>
 
+        <?php if ($facets['price_max'] > 0 || $filters['price_min'] !== '' || $filters['price_max'] !== ''): ?>
         <fieldset class="filter-group">
           <legend><?= e(__('price')) ?> (<?= e(currencies()[display_currency()]['symbol']) ?>)</legend>
           <div class="price-range">
@@ -124,6 +125,7 @@ $baseUrl = strtok(current_url(), '?');
             <input type="number" name="prix_max" min="0" step="any" value="<?= e(query_param('prix_max')) ?>" placeholder="<?= e(__('price_max')) ?> <?= (int)ceil(to_display_currency($facets['price_max'])) ?>" aria-label="<?= e(__('price_max')) ?>">
           </div>
         </fieldset>
+        <?php endif; ?>
 
         <fieldset class="filter-group">
           <legend><?= e(__('availability')) ?></legend>

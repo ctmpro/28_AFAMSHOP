@@ -14,9 +14,9 @@ $fav = $favoriteIds ?? [];
   <div class="pc-body">
     <?php if ($p['brand_name']): ?><span class="pc-brand"><?= e($p['brand_name']) ?></span><?php endif; ?>
     <h3 class="pc-title"><a href="<?= e(url('produit/' . $p['slug'])) ?>"><?= e($p['name']) ?></a></h3>
-    <span class="pc-ref"><?= e(__('manufacturer_ref')) ?> : <?= e($p['manufacturer_ref'] ?: '—') ?> · <?= e($p['sku']) ?></span>
+    <span class="pc-ref"><?php if ($p['manufacturer_ref']): ?><?= e(__('manufacturer_ref')) ?> : <?= e($p['manufacturer_ref']) ?> · <?php endif; ?><?= e($p['sku']) ?></span>
     <?php if (!Catalog::onRequest($p)): ?><span class="stock stock-<?= e($p['stock_status']) ?>"><?= e(Catalog::stockText($p)) ?></span><?php endif; ?>
-    <div class="pc-footer">
+    <div class="pc-footer<?= Catalog::onRequest($p) ? ' pc-footer-request' : '' ?>">
       <div class="price">
         <?php if (Catalog::onRequest($p)): ?><strong class="price-request"><?= e(__('price_on_request')) ?></strong>
         <?php else: ?>

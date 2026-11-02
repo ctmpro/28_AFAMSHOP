@@ -57,7 +57,7 @@ $socials = array_filter([
       <h3><?= e(__('contact')) ?></h3>
       <ul class="footer-contact">
         <?php if (setting('company_address')): ?><li><?= icon('pin', 'icon icon-sm') ?> <span><?= nl2br(e(setting('company_address'))) ?></span></li><?php endif; ?>
-        <?php if (setting('contact_phone')): ?><li><?= icon('phone', 'icon icon-sm') ?> <a href="tel:<?= e(preg_replace('/[^\d+]/', '', setting('contact_phone'))) ?>"><?= e(setting('contact_phone')) ?></a></li><?php endif; ?>
+        <?php if (contact_phones()): ?><li><?= icon('phone', 'icon icon-sm') ?> <span><?php foreach (contact_phones() as $i => [$num, $tel]): ?><?= $i ? '<br>' : '' ?><a href="<?= e($tel) ?>"><?= e($num) ?></a><?php endforeach; ?></span></li><?php endif; ?>
         <?php if (setting('contact_email')): ?><li><?= icon('mail', 'icon icon-sm') ?> <a href="mailto:<?= e(setting('contact_email')) ?>"><?= e(setting('contact_email')) ?></a></li><?php endif; ?>
         <?php if (setting('opening_hours')): ?><li><?= icon('clock', 'icon icon-sm') ?> <span><?= nl2br(e(setting('opening_hours'))) ?></span></li><?php endif; ?>
       </ul>

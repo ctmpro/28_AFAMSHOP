@@ -10,9 +10,9 @@ $settings = [
     ['site_tagline', 'Solutions d\'impression professionnelles au Sénégal', 'general', 'Slogan', 'text'],
     ['site_domain', 'afamshop.sn', 'general', 'Nom de domaine', 'text'],
     ['company_name', 'AFAM', 'general', 'Nom de l\'entreprise', 'text'],
-    ['company_legal_name', 'AFAM SARL', 'general', 'Raison sociale (factures)', 'text'],
-    ['company_address', "Dakar, Sénégal", 'general', 'Adresse', 'textarea'],
-    ['company_ids', "NINEA : à compléter\nRCCM : à compléter", 'general', 'Identifiants légaux (NINEA, RCCM...)', 'textarea'],
+    ['company_legal_name', 'AFAM PRINT SERVICE', 'general', 'Raison sociale (factures, pages légales)', 'text'],
+    ['company_address', "Hann Mariste, Dakar, Sénégal", 'general', 'Adresse du siège', 'textarea'],
+    ['company_ids', "NINEA : 007459086\nRCCM : SN.DKR.2021.M.27037", 'general', 'Identifiants légaux (NINEA, RCCM...)', 'textarea'],
     ['contact_email', 'afamprintservices@gmail.com', 'general', 'Email de contact', 'email'],
     ['contact_phone', '+221 78 353 22 03', 'general', 'Téléphone', 'text'],
     ['contact_phone2', '+221 33 827 51 41', 'general', 'Téléphone secondaire', 'text'],
@@ -22,7 +22,7 @@ $settings = [
     ['opening_hours', "Lundi – Vendredi : 8h30 – 18h00\nSamedi : 9h00 – 13h00", 'general', 'Horaires', 'textarea'],
     ['admin_notification_email', 'afamprintservices@gmail.com', 'general', 'Email des notifications admin', 'email'],
     ['legal_representative', 'Le gérant de AFAM', 'general', 'Directeur de la publication / représentant légal (pages légales)', 'text'],
-    ['host_info', "Nom de l'hébergeur — adresse — téléphone (à compléter)", 'general', 'Hébergeur du site (mentions légales)', 'textarea'],
+    ['host_info', "AFAM PRINT SERVICE — Mariste — téléphone : +221 78 353 22 03", 'general', 'Hébergeur du site (mentions légales)', 'textarea'],
     ['map_embed', '', 'general', 'Carte (URL d\'intégration Google Maps)', 'url'],
     ['logo', 'assets/img/contenus/logo.png', 'general', 'Logo', 'image'],
     ['logo_footer', 'assets/img/contenus/logo-blanc.png', 'general', 'Logo (pied de page)', 'image'],
@@ -41,6 +41,7 @@ $settings = [
     ['menu_label_consumables', 'Consommables', 'header', 'Menu : Consommables', 'text'],
     ['menu_label_it', 'Informatique', 'header', 'Menu : Informatique', 'text'],
     ['menu_label_stationery', 'Papeterie', 'header', 'Menu : Papeterie', 'text'],
+    ['menu_label_gifts', 'Cadeaux', 'header', 'Menu : Cadeaux de fin d\'année (libellé court)', 'text'],
     ['menu_label_telecom', 'Télécommunications', 'header', 'Menu : Télécommunications (vide = masqué)', 'text'],
     ['menu_label_promotions', 'Promotions', 'header', 'Menu : Promotions', 'text'],
     ['menu_label_brands', 'Marques', 'header', 'Menu : Marques', 'text'],
@@ -50,7 +51,7 @@ $settings = [
 
     // ---- Page d'accueil
     ['hero_title', 'Des solutions d\'impression professionnelles adaptées à vos besoins', 'home', 'Bannière : titre', 'text'],
-    ['hero_subtitle', 'Imprimantes, copieurs, consommables, informatique et fournitures de bureau. Vente, location, maintenance et impression multisupport clé en main avec AFAM.', 'home', 'Bannière : sous-titre', 'textarea'],
+    ['hero_subtitle', 'Retrouvez sur AFAM SHOP nos imprimantes, copieurs, consommables, équipements informatiques et fournitures de bureau. Profitez de nos services de vente, location et maintenance pour répondre à tous vos besoins professionnels.', 'home', 'Bannière : sous-titre', 'textarea'],
     ['hero_button_text', 'Découvrir le catalogue', 'home', 'Bannière : bouton 1', 'text'],
     ['hero_button_link', 'categorie/impression', 'home', 'Bannière : lien bouton 1', 'text'],
     ['hero_button2_text', 'Demander un devis', 'home', 'Bannière : bouton 2', 'text'],
@@ -168,10 +169,14 @@ $categories = [
     ['Consommables', 'consommables', 'drop', 'assets/img/contenus/cat-consommables.jpg', ['Toners', 'Cartouches d\'encre', 'Tambours', 'Kits de maintenance', 'Rubans', 'Encres', 'Consommables multifonctions']],
     ['Informatique', 'informatique', 'laptop', 'assets/img/contenus/cat-informatique.jpg', ['Ordinateurs portables', 'Ordinateurs de bureau', 'Écrans', 'Claviers et souris', 'Onduleurs', 'Stockage', 'Clés USB', 'Réseau', 'Accessoires informatiques']],
     ['Papeterie', 'papeterie', 'pen', 'assets/img/contenus/cat-papeterie.jpg', ['Papier et ramettes', 'Enveloppes', 'Cahiers', 'Classeurs', 'Stylos et crayons', 'Agrafes et trombones', 'Fournitures de bureau']],
+    ['Cadeaux de fin d\'année', 'cadeaux-fin-annee', 'gift', 'assets/img/contenus/cat-cadeaux.jpg', []],
 ];
 
 $brands = [
-    ['Sharp', 1], ['Canon', 1], ['HP', 1], ['Ricoh', 1], ['Epson', 0], ['Brother', 0], ['Dell', 0], ['Lenovo', 0], ['APC', 0], ['Logitech', 0], ['Kingston', 0], ['Navigator', 0], ['Bic', 0],
+    // Marques les plus connues en premier (mises en avant sur l'accueil et dans les menus)
+    ['HP', 1], ['Canon', 1], ['Epson', 1], ['Brother', 1], ['Samsung', 1], ['Xerox', 1], ['Kyocera', 1], ['Ricoh', 1],
+    ['Sharp', 1], ['Lexmark', 1], ['Dell', 1], ['Lenovo', 1],
+    ['APC', 0], ['Logitech', 0], ['Kingston', 0], ['Navigator', 0], ['Bic', 0],
 ];
 
 $printerModels = [
@@ -240,7 +245,7 @@ $pages = [
     ['faq', 'FAQ', '<h3>Comment trouver le consommable de mon imprimante ?</h3><p>Utilisez la recherche par imprimante : choisissez la marque puis le modèle.</p><h3>Quels sont les moyens de paiement ?</h3><p>Carte bancaire (Stripe), Wave, Orange Money (PayDunya) et paiement à la livraison selon disponibilité.</p><h3>Livrez-vous hors de Dakar ?</h3><p>Oui, dans toutes les régions du Sénégal. Les frais dépendent de la zone de livraison.</p>', 'help', 1],
     ['livraison-retours', 'Politique de livraison et retours', $lorem, 'help', 2],
     ['garantie', 'Garantie', $lorem, 'help', 3],
-    ['cgv', 'Conditions générales de vente', file_get_contents(__DIR__ . '/contenus/cgv.html'), 'legal', 1],
+    ['cgv', 'Conditions Générales de Vente', file_get_contents(__DIR__ . '/contenus/cgv.html'), 'legal', 1],
     ['mentions-legales', 'Mentions légales', file_get_contents(__DIR__ . '/contenus/mentions-legales.html'), 'legal', 2],
     ['confidentialite', 'Politique de confidentialité', file_get_contents(__DIR__ . '/contenus/confidentialite.html'), 'legal', 3],
     ['cookies', 'Politique de cookies', '<p>Ce site utilise uniquement des cookies nécessaires à son fonctionnement (session, panier, sécurité) ainsi que, le cas échéant, des cookies de mesure d\'audience.</p>', 'legal', 4],
@@ -256,6 +261,7 @@ $services = [
 ];
 
 $banners = [
+    ['home_promo', 'Cadeaux de fin d\'année', 'Mugs personnalisés, packs high-tech, coffrets gourmands', 'Découvrir', 'categorie/cadeaux-fin-annee', 0, 'assets/img/contenus/promo-cadeaux.jpg'],
     ['home_promo', 'Jusqu\'à -15 % sur les toners d\'origine', 'Consommables d\'origine, livraison rapide', 'J\'en profite', 'promotions', 1, 'assets/img/contenus/promo-toners.jpg'],
     ['home_promo', 'Location de multifonctions', 'Maintenance et consommables inclus', 'Demander une étude', 'service/location', 2, 'assets/img/contenus/promo-location.jpg'],
     ['home_hero', 'Multifonctions professionnelles', 'Performance, économies et respect de l\'environnement', 'Découvrir', 'categorie/multifonctions', 1, 'assets/img/contenus/slide-multifonctions.jpg'],
@@ -283,4 +289,30 @@ $softwareProduct = [
     'warranty' => 'Support et mises à jour inclus',
     'delivery_delay' => 'Mise en service sur rendez-vous',
     'image' => 'assets/img/contenus/logiciel-produit.jpg',
+];
+
+$categoryDescriptions['cadeaux-fin-annee'] = '<p>Faites plaisir à vos collaborateurs, clients et partenaires avec des <strong>cadeaux de fin d\'année utiles et personnalisés</strong> : mugs à votre logo, packs high-tech pour le bureau, la mobilité ou le télétravail, coffrets gourmands avec machine à café.</p><p>Chaque cadeau peut être <strong>personnalisé à vos couleurs</strong> (logo, message, emballage). Composition, quantités et tarifs <strong>sur devis</strong> : cliquez sur « Demander un devis » depuis le produit de votre choix.</p>';
+
+// Cadeaux de fin d'année (prix sur devis, personnalisables)
+$giftProducts = [
+    ['AF-CAD-MUG', 'Mugs personnalisés', 'Mug', 'assets/img/contenus/cadeau-mugs.jpg',
+        'Mugs en céramique personnalisés à votre logo ou avec votre message, livrables en boîte cadeau.',
+        "<p>Le cadeau d'entreprise incontournable : un mug utilisé au quotidien, qui porte votre image.</p><ul><li>Mug en céramique, impression haute définition résistante</li><li>Personnalisation : logo, message, prénom du destinataire</li><li>Plusieurs coloris disponibles</li><li>Emballage cadeau individuel en option</li></ul><p>Tarif dégressif selon les quantités : demandez votre devis.</p>",
+        "Personnalisation: Logo, message, prénom\nMatière: Céramique\nConditionnement: Boîte cadeau en option\nTarif: Sur devis selon quantité"],
+    ['AF-CAD-BUREAU', 'Pack Bureau Connecté', 'Pack cadeau', 'assets/img/contenus/cadeau-bureau-connecte.jpg',
+        'Un ensemble d\'accessoires high-tech pour un poste de travail moderne et efficace, personnalisable à vos couleurs.',
+        "<p>Offrez un bureau plus confortable et plus connecté.</p><p><strong>Composition indicative</strong> (adaptable à votre budget) :</p><ul><li>Clavier et souris sans fil</li><li>Casque ou écouteurs sans fil</li><li>Hub USB / station d'accueil</li><li>Accessoire personnalisé à votre logo</li></ul><p>Composition, marques et quantités sur devis.</p>",
+        "Contenu: Clavier, souris, casque, hub USB (indicatif)\nPersonnalisation: Logo, emballage\nTarif: Sur devis"],
+    ['AF-CAD-MOBILITE', 'Pack Mobilité Professionnel', 'Pack cadeau', 'assets/img/contenus/cadeau-mobilite.jpg',
+        'L\'essentiel pour travailler en déplacement : sacoche, batterie externe et accessoires, personnalisables.',
+        "<p>Pour vos collaborateurs toujours en mouvement.</p><p><strong>Composition indicative</strong> (adaptable à votre budget) :</p><ul><li>Sacoche ou sac à dos pour ordinateur portable</li><li>Batterie externe (powerbank)</li><li>Chargeur multiport et câbles</li><li>Clé USB personnalisée</li></ul><p>Composition, marques et quantités sur devis.</p>",
+        "Contenu: Sacoche, batterie externe, chargeur, clé USB (indicatif)\nPersonnalisation: Logo, emballage\nTarif: Sur devis"],
+    ['AF-CAD-TELETRAVAIL', 'Pack Télétravail', 'Pack cadeau', 'assets/img/contenus/cadeau-teletravail.jpg',
+        'Tout pour travailler confortablement à domicile : webcam, casque micro, support d\'ordinateur et accessoires.',
+        "<p>Un cadeau pratique pour le travail hybride.</p><p><strong>Composition indicative</strong> (adaptable à votre budget) :</p><ul><li>Webcam HD</li><li>Casque avec micro</li><li>Support d'ordinateur portable</li><li>Lampe de bureau LED ou tapis de souris ergonomique</li></ul><p>Composition, marques et quantités sur devis.</p>",
+        "Contenu: Webcam, casque micro, support d'ordinateur (indicatif)\nPersonnalisation: Logo, emballage\nTarif: Sur devis"],
+    ['AF-CAD-GOURMAND', 'Coffret Gourmand (machine à café)', 'Coffret', 'assets/img/contenus/cadeau-gourmand.jpg',
+        'Un coffret convivial avec machine à café, capsules, mugs personnalisés et douceurs.',
+        "<p>Le cadeau qui réunit les équipes autour d'un bon café.</p><p><strong>Composition indicative</strong> (adaptable à votre budget) :</p><ul><li>Machine à café</li><li>Assortiment de capsules ou de café</li><li>Mugs personnalisés à votre logo</li><li>Douceurs et emballage cadeau</li></ul><p>Composition et quantités sur devis.</p>",
+        "Contenu: Machine à café, café, mugs personnalisés (indicatif)\nPersonnalisation: Logo, message, emballage\nTarif: Sur devis"],
 ];

@@ -90,6 +90,16 @@ foreach ($categoryDescriptions as $slug => $html) {
     DB::exec('UPDATE categories SET description = :d WHERE slug = :s', ['d' => $html, 's' => $slug]);
 }
 
+// Cadeaux de fin d'année (prix sur devis)
+foreach ($giftProducts as $i => [$sku, $name, $type, $image, $short, $desc, $specs]) {
+    $gid = DB::insert('products', [
+        'sku' => $sku, 'name' => $name, 'slug' => unique_slug('products', $name), 'category_id' => $catIds['cadeaux-fin-annee'],
+        'product_type' => $type, 'short_description' => $short, 'description' => $desc, 'specs' => $specs,
+        'price' => 0, 'stock' => 0, 'delivery_delay' => 'Selon quantité et personnalisation', 'is_featured' => 0,
+    ]);
+    DB::insert('product_images', ['product_id' => $gid, 'path' => $image, 'alt' => $name, 'is_main' => 1]);
+}
+
 // Logiciel de gestion de parc AFAM (produit réel, installé même sans démonstration)
 $brandIds['AFAM'] = DB::insert('brands', ['name' => 'AFAM', 'slug' => 'afam', 'featured' => 0, 'sort' => 99]);
 $sp = $softwareProduct;

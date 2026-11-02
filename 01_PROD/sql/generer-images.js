@@ -306,6 +306,71 @@ function plotter() {
   <rect x="300" y="70" width="36" height="16" rx="4" fill="#1b2838"/><circle cx="24" cy="76" r="4" fill="#2fd27a"/>`;
 }
 
+
+// Coffret cadeau (160 x 150)
+function giftBox(color = C.accent, ribbon = '#ffffff') {
+  return `${shadow(80, 152, 76, 6, 0.18)}
+  <rect x="6" y="52" width="148" height="96" rx="6" fill="${color}"/>
+  <rect x="0" y="34" width="160" height="28" rx="6" fill="${color}"/><rect x="0" y="54" width="160" height="8" fill="#000" opacity=".12"/>
+  <rect x="70" y="34" width="20" height="114" fill="${ribbon}" opacity=".95"/>
+  <path d="M80 34 C60 6 30 10 40 28 C46 38 70 36 80 34 Z" fill="none" stroke="${ribbon}" stroke-width="9"/>
+  <path d="M80 34 C100 6 130 10 120 28 C114 38 90 36 80 34 Z" fill="none" stroke="${ribbon}" stroke-width="9"/>`;
+}
+// Mug personnalisé (110 x 120)
+function mugLogo(color = C.primary) {
+  return `${shadow(48, 120, 50, 6, 0.18)}
+  <path d="M86 40 a22 22 0 0 1 0 44" stroke="#e1e7ee" stroke-width="12" fill="none"/>
+  <rect x="0" y="16" width="92" height="102" rx="12" fill="#ffffff" stroke="#e1e7ee" stroke-width="2"/>
+  <ellipse cx="46" cy="18" rx="46" ry="8" fill="#f1f4f8" stroke="#e1e7ee" stroke-width="2"/>
+  <circle cx="46" cy="66" r="22" fill="${color}"/><path d="M36 66 l7 7 l13 -15" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+}
+// Casque audio (150 x 150)
+function headset() {
+  return `${shadow(75, 150, 60, 5, 0.15)}
+  <path d="M20 90 V70 a55 55 0 0 1 110 0 V90" stroke="#26364a" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <rect x="4" y="80" width="34" height="58" rx="14" fill="#26364a"/><rect x="112" y="80" width="34" height="58" rx="14" fill="#26364a"/>
+  <rect x="10" y="88" width="22" height="42" rx="10" fill="${C.primary}"/><rect x="118" y="88" width="22" height="42" rx="10" fill="${C.primary}"/>
+  <path d="M24 136 q10 18 40 14" stroke="#26364a" stroke-width="5" fill="none"/><circle cx="66" cy="150" r="6" fill="#26364a"/>`;
+}
+// Webcam (110 x 110)
+function webcam() {
+  return `${shadow(55, 110, 40, 4, 0.15)}<rect x="0" y="0" width="110" height="60" rx="30" fill="#26364a"/>
+  <circle cx="55" cy="30" r="20" fill="#0f1722"/><circle cx="55" cy="30" r="11" fill="${C.primary}"/><circle cx="51" cy="26" r="4" fill="#fff" opacity=".6"/>
+  <circle cx="92" cy="30" r="4" fill="#2fd27a"/><rect x="47" y="60" width="16" height="30" fill="#5a6b80"/><rect x="25" y="88" width="60" height="12" rx="6" fill="#5a6b80"/>`;
+}
+// Smartphone (70 x 140)
+function phone() {
+  return `${shadow(35, 140, 34, 4, 0.15)}<rect width="70" height="138" rx="12" fill="#1c2532"/><rect x="5" y="10" width="60" height="114" rx="5" fill="url(#screen)"/>
+  <rect x="12" y="22" width="34" height="6" rx="3" fill="#fff" opacity=".85"/><rect x="12" y="36" width="46" height="30" rx="4" fill="#fff" opacity=".2"/><rect x="12" y="72" width="46" height="30" rx="4" fill="${C.accent}" opacity=".85"/>
+  <rect x="26" y="128" width="18" height="4" rx="2" fill="#5a6b80"/>`;
+}
+// Batterie externe (100 x 60)
+function powerbank() {
+  return `${shadow(50, 62, 50, 4, 0.15)}<rect width="100" height="58" rx="12" fill="#cfd8e3"/><rect x="8" y="8" width="84" height="42" rx="8" fill="#e4eaf1"/>
+  ${[0, 1, 2, 3].map(i => `<rect x="${18 + i * 12}" y="25" width="8" height="8" rx="2" fill="${i < 3 ? '#2fb36b' : '#b8c4d2'}"/>`).join('')}<rect x="74" y="22" width="12" height="14" rx="3" fill="#26364a"/>`;
+}
+// Sacoche ordinateur (200 x 150)
+function laptopBag() {
+  return `${shadow(100, 152, 96, 6, 0.18)}<path d="M60 30 q40 -40 80 0" stroke="#26364a" stroke-width="10" fill="none"/>
+  <rect x="0" y="26" width="200" height="124" rx="16" fill="#26364a"/><rect x="14" y="40" width="172" height="96" rx="10" fill="#33465c"/>
+  <rect x="40" y="70" width="120" height="40" rx="8" fill="#26364a"/><rect x="88" y="66" width="24" height="10" rx="3" fill="${C.accent}"/>`;
+}
+// Machine à café (170 x 220)
+function coffeeMachine() {
+  return `${shadow(85, 220, 84, 7, 0.2)}
+  <rect x="10" y="0" width="150" height="40" rx="12" fill="#26364a"/><rect x="20" y="36" width="130" height="150" rx="10" fill="#33465c"/>
+  <rect x="34" y="50" width="102" height="34" rx="6" fill="#1c2532"/><circle cx="54" cy="67" r="7" fill="${C.accent}"/><circle cx="76" cy="67" r="7" fill="#2fd27a"/><rect x="92" y="62" width="34" height="10" rx="5" fill="#5a6b80"/>
+  <rect x="64" y="90" width="42" height="18" rx="4" fill="#1c2532"/><rect x="80" y="108" width="10" height="12" fill="#1c2532"/>
+  <path d="M85 122 v14" stroke="#7a4a22" stroke-width="4" stroke-linecap="round"/>
+  <rect x="58" y="140" width="54" height="42" rx="8" fill="#ffffff"/><rect x="58" y="150" width="54" height="10" fill="${C.primary}"/>
+  <rect x="0" y="186" width="170" height="30" rx="8" fill="#26364a"/>`;
+}
+// Boîte de capsules (130 x 80)
+function capsules() {
+  return `${shadow(65, 82, 62, 4, 0.15)}<rect width="130" height="78" rx="8" fill="#7a4a22"/><rect x="0" y="0" width="130" height="22" rx="8" fill="#5c3517"/>
+  ${[0, 1, 2, 3].map(i => `<circle cx="${22 + i * 29}" cy="50" r="11" fill="${[C.accent, '#c9a227', '#2fb36b', C.primary][i]}"/>`).join('')}`;
+}
+
 // ---------------------------------------------------------------- fonds
 function defs() {
   return `<defs>
@@ -420,6 +485,23 @@ const scenes = {
   'home-multisupport': [1200, 750, (w, h) => lightBg(w, h, C.accent, C.cyan)
     + g(90, 170, 1.55, rollup()) + g(330, 396, 0.95, plotter())
     + g(760, 150, 1.4, poster(C.primary, C.accent)) + g(950, 300, 1.2, flyers()) + g(780, 470, 0.9, cards())],
+
+  // Cadeaux de fin d'année (fiches produits carrées)
+  'cadeau-mugs': [800, 800, (w, h) => lightBg(w, h, C.accent, C.primary)
+    + g(110, 380, 1.5, mugLogo(C.primary)) + g(330, 340, 1.75, mugLogo(C.accent)) + g(580, 400, 1.4, mugLogo('#2fb36b'))
+    + g(560, 150, 1.0, giftBox(C.primary, '#f4c20d'))],
+  'cadeau-bureau-connecte': [800, 800, (w, h) => lightBg(w, h)
+    + g(110, 440, 1.6, keyboard()) + g(560, 470, 1.3, mouse()) + g(470, 180, 1.55, headset()) + g(120, 160, 1.2, giftBox(C.accent))],
+  'cadeau-mobilite': [800, 800, (w, h) => lightBg(w, h)
+    + g(80, 400, 1.6, laptopBag()) + g(470, 330, 1.5, phone()) + g(580, 500, 1.4, powerbank()) + g(520, 130, 1.0, giftBox(C.primary, '#f4c20d'))],
+  'cadeau-teletravail': [800, 800, (w, h) => lightBg(w, h, C.primary, '#2fb36b')
+    + g(90, 360, 1.5, laptop()) + g(560, 330, 1.3, headset()) + g(250, 130, 1.4, webcam()) + g(600, 120, 0.9, plant())],
+  'cadeau-gourmand': [800, 800, (w, h) => lightBg(w, h, C.accent, '#c9a227')
+    + g(90, 250, 1.75, coffeeMachine()) + g(430, 520, 1.35, capsules()) + g(470, 330, 1.2, mugLogo(C.accent)) + g(590, 160, 0.95, giftBox('#c0392b', '#f4c20d'))],
+  'cat-cadeaux': [800, 500, (w, h) => lightBg(w, h, C.accent, C.primary)
+    + g(90, 210, 1.1, giftBox(C.accent)) + g(290, 250, 1.0, mugLogo(C.primary)) + g(420, 140, 1.1, coffeeMachine()) + g(620, 230, 1.1, giftBox(C.primary, '#f4c20d'))],
+  'promo-cadeaux': [1000, 420, (w, h) => darkBg(w, h)
+    + g(560, 140, 1.25, giftBox(C.accent)) + g(760, 110, 1.45, giftBox('#c0392b', '#f4c20d')) + g(700, 260, 0.95, mugLogo(C.primary))],
   // Diaporama d'accueil (sous la bannière)
   'slide-multifonctions': [1280, 360, (w, h) => darkBg(w, h)
     + g(760, 40, 0.88, mfp()) + g(1060, 150, 0.6, toner(C.black)) + g(1110, 155, 0.58, toner(C.cyan)) + g(600, 120, 0.9, leaf())],

@@ -12,6 +12,7 @@ $menuMap = [
     'consommables' => setting('menu_label_consumables', 'Consommables'),
     'informatique' => setting('menu_label_it', 'Informatique'),
     'papeterie' => setting('menu_label_stationery', 'Papeterie'),
+    'cadeaux-fin-annee' => setting('menu_label_gifts', 'Cadeaux'),
 ];
 $menuCats = [];
 foreach ($tree as $c) {
@@ -56,7 +57,7 @@ $favicon = setting('favicon');
   <div class="container topbar-inner">
     <span><?= $showTopText ? e(render_vars(setting('topbar_text'))) : '' ?></span>
     <span class="topbar-right">
-      <?php if (setting('contact_phone')): ?><a href="tel:<?= e(preg_replace('/[^\d+]/', '', setting('contact_phone'))) ?>"><?= icon('phone', 'icon icon-sm') ?> <?= e(setting('contact_phone')) ?></a><?php endif; ?>
+      <?php foreach (contact_phones() as $i => [$num, $tel]): ?><a href="<?= e($tel) ?>" class="<?= $i ? 'hide-xs' : '' ?>"><?= icon('phone', 'icon icon-sm') ?> <?= e($num) ?></a><?php endforeach; ?>
       <?php if (count(currencies()) > 1): ?>
       <nav class="currency-switch" aria-label="<?= e(__('currency')) ?>">
         <?php foreach (currencies() as $code => $c): ?>
@@ -140,7 +141,23 @@ $favicon = setting('favicon');
         <?php endif; ?>
         <li class="nav-item"><a class="nav-link nav-promo" href="<?= e(url('promotions')) ?>"><?= icon('tag', 'icon icon-sm') ?> <?= e(setting('menu_label_promotions', 'Promotions')) ?></a></li>
         <li class="nav-item"><a class="nav-link" href="<?= e(url('marques')) ?>"><?= e(setting('menu_label_brands', 'Marques')) ?></a></li>
-        <li class="nav-item"><a class="nav-link" href="<?= e(url('services')) ?>"><?= e(setting('menu_label_services', 'Services')) ?></a></li>
+        <?php $menuServices = DB::all('SELECT slug, title, icon, short_desc FROM services WHERE active = 1 ORDER BY sort, title'); ?>
+        <li class="nav-item has-mega">
+          <a class="nav-link" href="<?= e(url('services')) ?>"><?= e(setting('menu_label_services', 'Services')) ?></a>
+          <?php if ($menuServices): ?>
+          <button class="sub-toggle" aria-label="Ouvrir" data-sub-toggle><?= icon('chevron', 'icon icon-sm') ?></button>
+          <div class="mega">
+            <div class="mega-inner container mega-services">
+              <?php foreach ($menuServices as $sv): ?>
+              <a class="mega-service" href="<?= e(url('service/' . $sv['slug'])) ?>">
+                <?= icon($sv['icon'] ?: 'briefcase', 'icon') ?>
+                <span><strong><?= e($sv['title']) ?></strong><small><?= e(truncate($sv['short_desc'], 90)) ?></small></span>
+              </a>
+              <?php endforeach; ?>
+            </div>
+          </div>
+          <?php endif; ?>
+        </li>
         <li class="nav-item"><a class="nav-link" href="<?= e(url('a-propos')) ?>"><?= e(setting('menu_label_about', 'À propos')) ?></a></li>
         <li class="nav-item"><a class="nav-link" href="<?= e(url('contact')) ?>"><?= e(setting('menu_label_contact', 'Contact')) ?></a></li>
         <li class="nav-item nav-cta"><a class="nav-link" href="<?= e(url('recherche-imprimante')) ?>"><?= icon('printer', 'icon icon-sm') ?> <?= e(__('printer_finder')) ?></a></li>

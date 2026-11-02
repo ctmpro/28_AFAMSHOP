@@ -9,7 +9,8 @@ $promoBanners = DB::all("SELECT * FROM banners WHERE position = 'home_promo' AND
 $categories = array_filter(Catalog::categoryTree(), fn($c) => $c['show_in_menu']);
 $popular = Catalog::featured((int)setting('home_popular_count', 8));
 $onSale = Catalog::onSale(8);
-$brands = Catalog::brands();
+// Marques mises en avant (les plus connues), sinon toutes
+$brands = array_values(array_filter(Catalog::brands(), fn($b) => $b['featured'])) ?: Catalog::brands();
 $printerBrands = Catalog::printerBrands();
 $services = DB::all('SELECT * FROM services WHERE active = 1 ORDER BY sort LIMIT 6');
 $favoriteIds = Auth::id() ? array_map('intval', DB::col('SELECT product_id FROM favorites WHERE customer_id = :c', ['c' => Auth::id()])) : [];
@@ -207,7 +208,7 @@ $block = function (string $key, string $link, string $btn, string $iconName, boo
       <p><?= e(render_vars(setting('home_contact_text'))) ?></p>
     </div>
     <div class="contact-cta-actions">
-      <?php if (setting('contact_phone')): ?><a class="btn btn-ghost" href="tel:<?= e(preg_replace('/[^\d+]/', '', setting('contact_phone'))) ?>"><?= icon('phone', 'icon icon-sm') ?> <?= e(setting('contact_phone')) ?></a><?php endif; ?>
+      <?php foreach (contact_phones() as [$num, $tel]): ?><a class="btn btn-ghost" href="<?= e($tel) ?>"><?= icon('phone', 'icon icon-sm') ?> <?= e($num) ?></a><?php endforeach; ?>
       <?php if (setting('whatsapp_number')): ?><a class="btn btn-whatsapp" href="<?= e(whatsapp_link(setting('whatsapp_message'))) ?>" target="_blank" rel="noopener"><?= icon('whatsapp', 'icon icon-sm') ?> WhatsApp</a><?php endif; ?>
       <a class="btn btn-accent" href="<?= e(url('contact')) ?>"><?= icon('mail', 'icon icon-sm') ?> <?= e(__('contact_us')) ?></a>
     </div>
