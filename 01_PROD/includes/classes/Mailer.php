@@ -92,8 +92,10 @@ class Mailer
             . '<body style="margin:0;background:#f3f5f8;font-family:Arial,Helvetica,sans-serif;color:#1f2937">'
             . '<table width="100%" cellpadding="0" cellspacing="0" style="background:#f3f5f8;padding:24px 0"><tr><td align="center">'
             . '<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fff;border-radius:8px;overflow:hidden">'
-            . '<tr><td style="background:' . e($color) . ';padding:18px 24px;color:#fff;font-size:20px;font-weight:bold">'
-            . ($logo ? '<img src="' . e($logo) . '" alt="' . $site . '" style="max-height:40px">' : $site) . '</td></tr>'
+            // En-tête blanc + filet de couleur : le logo (souvent en couleurs) reste lisible
+            . ($logo
+                ? '<tr><td style="background:#fff;padding:18px 24px;border-bottom:4px solid ' . e($color) . '"><img src="' . e($logo) . '" alt="' . $site . '" style="max-height:48px;display:block"></td></tr>'
+                : '<tr><td style="background:' . e($color) . ';padding:18px 24px;color:#fff;font-size:20px;font-weight:bold">' . $site . '</td></tr>')
             . '<tr><td style="padding:24px;font-size:15px;line-height:1.6">' . $content . '</td></tr>'
             . '<tr><td style="padding:16px 24px;background:#f9fafb;color:#6b7280;font-size:12px">' . $footer . '</td></tr>'
             . '</table></td></tr></table></body></html>';
@@ -175,10 +177,18 @@ class Mailer
             'new_review' => 'Nouvel avis à valider',
         ];
         $subject = self::fill($titles[$key] ?? $key, $vars, false);
+        $labels = [
+            'order_number' => 'N° de commande', 'customer' => 'Client', 'total' => 'Total', 'payment' => 'Paiement',
+            'type' => 'Type', 'name' => 'Nom', 'company' => 'Entreprise', 'phone' => 'Téléphone', 'email' => 'Email',
+            'product' => 'Produit', 'quantity' => 'Quantité', 'printer_model' => "Modèle d'imprimante",
+            'serial_number' => 'Numéro de série', 'message' => 'Message', 'sku' => 'SKU', 'stock' => 'Stock restant',
+            'rating' => 'Note',
+        ];
         $html = '<h2 style="margin-top:0">' . e($subject) . '</h2><table cellpadding="4">';
         foreach ($vars as $k => $v) {
             if ($k === 'link') continue;
-            $html .= '<tr><td style="color:#6b7280">' . e(ucfirst(str_replace('_', ' ', $k))) . '</td><td>' . nl2br(e($v)) . '</td></tr>';
+            $label = $labels[$k] ?? ucfirst(str_replace('_', ' ', $k));
+            $html .= '<tr><td style="color:#6b7280">' . e($label) . '</td><td>' . nl2br(e($v)) . '</td></tr>';
         }
         $html .= '</table>';
         if (!empty($vars['link'])) {
